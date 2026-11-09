@@ -1,84 +1,184 @@
-import { useCallback,useEffect,useState } from 'react';
-import { Search,Heart,Library,Archive,FlaskConical,ArrowUpRight,ArrowRight,Usb,ChevronDown,BookOpen,Wifi,WifiOff,X,KeyboardMusic,SlidersHorizontal,Clock3 } from 'lucide-react';
-import { catalog,primaryArtifact,artifactsFor } from './catalog';
-import type { Artifact,Model,Product } from './catalog/schema';
-import { settings,listHistory,saveHistory } from './storage/vault';
+import { useCallback, useEffect, useState } from 'react';
+import { Search, Heart, Library, Archive, FlaskConical, ArrowUpRight, ArrowRight, BookOpen, WifiOff, X, ChevronDown } from 'lucide-react';
+import { catalog, primaryArtifact, artifactsFor } from './catalog';
+import type { Artifact, Model, Product } from './catalog/schema';
+import { settings, listHistory, saveHistory } from './storage/vault';
 import { closeAllMidi } from './install/transport';
 import { messageOf } from './install/controller';
-import { Cartridge } from './components/Cartridge';
 import { Modal } from './components/Modal';
 import { InstallPanel } from './components/InstallPanel';
 import { BackupsPanel } from './components/BackupsPanel';
 import { PortingPanel } from './components/PortingPanel';
-type View='drawer'|'favorites'|'backups'|'porting';
 
-export default function App(){
-  const [view,setView]=useState<View>('drawer'),[model,setModel]=useState<Model>('SMK-37 Pro');
-  const [query,setQuery]=useState(''),[category,setCategory]=useState('전체'),[onlyAvailable,setOnlyAvailable]=useState(false);
-  const [favorites,setFavorites]=useState<string[]>([]),[recent,setRecent]=useState<string[]>([]);
-  const [selected,setSelected]=useState<Product|null>(null),[install,setInstall]=useState(false),[busy,setBusy]=useState(false);
-  const [error,setError]=useState(''),[online,setOnline]=useState(navigator.onLine),[help,setHelp]=useState(false);
-  const onError=useCallback((e:unknown)=>setError(messageOf(e)),[]);
-  const onBusy=useCallback((v:boolean)=>setBusy(v),[]);
-  async function reloadRecent(){const h=await listHistory();setRecent([...new Set(h.filter(r=>r.status==='completed'&&!r.simulated).map(r=>r.productId))].slice(0,4));}
-  useEffect(()=>{settings.get<string[]>('favorites',[]).then(setFavorites).catch(onError);void reloadRecent().catch(onError);
-    const network=()=>setOnline(navigator.onLine);window.addEventListener('online',network);window.addEventListener('offline',network);
-    return()=>{window.removeEventListener('online',network);window.removeEventListener('offline',network);};},[]);
-  async function favorite(id:string){const next=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];try{await settings.set('favorites',next);setFavorites(next);}catch(e){onError(e);}}
-  function show(p:Product){setSelected(p);setInstall(false);}
-  async function closeDetail(){if(busy)return;await closeAllMidi();setSelected(null);setInstall(false);void reloadRecent().catch(onError);}
-  async function external(a:Artifact){
-    if(busy)return;
-    const tab=window.open('about:blank','_blank');if(tab)tab.opener=null;
-    try{await closeAllMidi();await saveHistory({id:crypto.randomUUID(),startedAt:new Date().toISOString(),artifactId:a.id,productId:a.productId,sha256:a.sha256??'미확인',targetModel:a.targetModel,previousIdentity:'외부 이동 전 상태 미확인',status:'external-opened',simulated:false,browser:navigator.userAgent,note:'개발자 설치 페이지를 열었습니다. 설치 여부와 결과는 확인하지 않았습니다.'});
-      if(tab)tab.location.href=a.externalUrl;else throw new Error('브라우저가 새 창을 차단했습니다. 아래 개발자 설치기 링크를 새 탭에서 열어 주세요.');
-    }catch(e){tab?.close();onError(e);}
+type View = 'drawer' | 'favorites' | 'backups' | 'porting';
+const descriptions: Record<string, string> = {
+  'sloop-pro': '샘플과 신스로 만드는 4트랙 그루브박스',
+  'va': 'FM·가상 아날로그·8비트 음원을 한 건반에서',
+  'erik37': 'Salamander 샘플 기반의 그랜드 피아노',
+  'frodhes': '타건에 반응하는 물리 모델 일렉트릭 피아노',
+  'obervave': '아날로그 신스와 스트링, 실시간 이펙트',
+  'choralroot': '건반으로 만드는 코드와 아르페지오',
+  'sloopdx': '6오퍼레이터 FM 드럼과 SLOOP 시퀀서',
+};
+const viewNames: Record<View, string> = { drawer:'펌웨어 서랍', favorites:'즐겨찾기', backups:'백업과 이력', porting:'포팅 작업실' };
+
+export default function App() {
+  const [view, setView] = useState<View>('drawer');
+  const [model, setModel] = useState<Model>('SMK-37 Pro');
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('전체');
+  const [onlyAvailable, setOnlyAvailable] = useState(false);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [favoritesReady, setFavoritesReady] = useState(false);
+  const [savingFavorite, setSavingFavorite] = useState(false);
+  const [recent, setRecent] = useState<string[]>([]);
+  const [selected, setSelected] = useState<Product|null>(null);
+  const [install, setInstall] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [online, setOnline] = useState(navigator.onLine);
+  const [help, setHelp] = useState(false);
+  const onError = useCallback((e:unknown) => setError(messageOf(e)), []);
+  const onBusy = useCallback((value:boolean) => setBusy(value), []);
+
+  async function reloadRecent() {
+    const history = await listHistory();
+    setRecent([...new Set(history.filter(r => r.status==='completed' && !r.simulated).map(r => r.productId))].slice(0,4));
   }
-  const active=selected?primaryArtifact(selected.id,model):undefined;
-  const direct=catalog.products.filter(p=>primaryArtifact(p.id,model)?.method==='direct').length;
-  const visible=catalog.products.filter(p=>{
-    const a=primaryArtifact(p.id,model);return (view!=='favorites'||favorites.includes(p.id))&&
-      (!onlyAvailable||a?.status==='published')&&(category==='전체'||p.category===category)&&
-      `${p.name} ${p.description} ${p.category} ${p.features.join(' ')}`.toLowerCase().includes(query.toLowerCase());
+  useEffect(() => {
+    settings.get<string[]>('favorites', []).then(setFavorites).catch(onError).finally(() => setFavoritesReady(true));
+    void reloadRecent().catch(onError);
+    const network = () => setOnline(navigator.onLine);
+    window.addEventListener('online', network);
+    window.addEventListener('offline', network);
+    return () => { window.removeEventListener('online', network); window.removeEventListener('offline', network); };
+  }, []);
+  useEffect(() => { window.scrollTo({top:0, behavior:'instant'}); }, [view]);
+
+  async function favorite(id:string) {
+    if (!favoritesReady || savingFavorite) return;
+    setSavingFavorite(true);
+    const next = favorites.includes(id) ? favorites.filter(x => x!==id) : [...favorites,id];
+    try { await settings.set('favorites',next); setFavorites(next); }
+    catch (e) { onError(e); }
+    finally { setSavingFavorite(false); }
+  }
+  function show(product:Product) { setSelected(product); setInstall(false); }
+  function resetFilters() { setQuery(''); setCategory('전체'); setOnlyAvailable(false); }
+  async function closeDetail() {
+    if (busy) return;
+    await closeAllMidi(); setSelected(null); setInstall(false);
+    void reloadRecent().catch(onError);
+  }
+  async function external(artifact:Artifact) {
+    if (busy) return;
+    const tab = window.open('about:blank','_blank');
+    if (tab) tab.opener = null;
+    try {
+      await closeAllMidi();
+      await saveHistory({id:crypto.randomUUID(), startedAt:new Date().toISOString(), artifactId:artifact.id, productId:artifact.productId, sha256:artifact.sha256??'미확인', targetModel:artifact.targetModel, previousIdentity:'외부 이동 전 상태 미확인', status:'external-opened', simulated:false, browser:navigator.userAgent, note:'개발자 설치 페이지를 열었습니다. 설치 여부와 결과는 확인하지 않았습니다.'});
+      if (tab) tab.location.href = artifact.externalUrl;
+      else throw new Error('새 창이 차단되었습니다. 브라우저의 팝업 설정을 확인한 뒤 다시 눌러 주세요.');
+    } catch (e) { tab?.close(); onError(e); }
+  }
+  const active = selected ? primaryArtifact(selected.id,model) : undefined;
+  const visible = catalog.products.filter(product => {
+    const artifact = primaryArtifact(product.id,model);
+    return (view!=='favorites' || favorites.includes(product.id)) &&
+      (!onlyAvailable || artifact?.status==='published') && (category==='전체' || product.category===category) &&
+      `${product.name} ${product.description} ${product.category} ${product.features.join(' ')}`.toLowerCase().includes(query.trim().toLowerCase());
   });
+  const filtered = query.trim()!=='' || category!=='전체' || onlyAvailable;
+  const modelArtifacts = catalog.products.map(p => primaryArtifact(p.id,model));
+  const directCount = modelArtifacts.filter(a => a?.method==='direct').length;
+  const externalCount = modelArtifacts.filter(a => a?.method==='external').length;
+  const navigation = [
+    {id:'drawer' as const, label:'내 펌웨어 서랍', icon:Library, count:catalog.products.length},
+    {id:'favorites' as const, label:'즐겨찾기', icon:Heart, count:favorites.length},
+    {id:'backups' as const, label:'백업과 이력', icon:Archive},
+    {id:'porting' as const, label:'포팅 작업실', icon:FlaskConical},
+  ];
+
   return <div className="app-shell">
-    <aside className="sidebar"><button className="brand" onClick={()=>setView('drawer')} aria-label="서랍 홈"><span className="brand-mark"><Library size={23}/></span><span>SMK37<span className="brand-sub">FIRMWARE DRAWER</span></span></button>
-      <div className="side-section-label">MY COLLECTION</div><nav aria-label="주 메뉴">
-        <button className={view==='drawer'?'active':''} onClick={()=>setView('drawer')}><Library size={19}/>내 펌웨어 서랍 <span>{catalog.products.length}</span></button>
-        <button className={view==='favorites'?'active':''} onClick={()=>setView('favorites')}><Heart size={19}/>즐겨찾기 <span>{favorites.length}</span></button>
-        <button className={view==='backups'?'active':''} onClick={()=>setView('backups')}><Archive size={19}/>백업과 이력</button>
-        <button className={view==='porting'?'active':''} onClick={()=>setView('porting')}><FlaskConical size={19}/>포팅 작업실 <i className="nav-dot"/></button>
+    <a className="skip-link" href="#main-content">본문으로 이동</a>
+    <aside className="sidebar">
+      <button className="brand" aria-label="서랍 홈" onClick={() => { setView('drawer'); resetFilters(); window.scrollTo({top:0,behavior:'instant'}); }}>
+        <strong>SMK37</strong><span>Firmware drawer</span>
+      </button>
+      <nav aria-label="주 메뉴">
+        {navigation.map(({id,label,icon:Icon,count}) => <button key={id} className={view===id?'active':''} aria-label={label} aria-current={view===id?'page':undefined} onClick={() => setView(id)}>
+          <Icon aria-hidden="true"/><span className="nav-label">{label}</span>{count!==undefined && <span className="nav-count" aria-hidden="true">{count}</span>}
+        </button>)}
       </nav>
-      <div className="side-device"><div className="tiny-keyboard" aria-hidden="true">{Array.from({length:14},(_,i)=><i key={i}/>)}</div><span className="eyebrow">MY INSTRUMENT</span><strong>{model}</strong><span className="device-status"><i/>실제 기기 미확인</span><button className="text-button" onClick={()=>setHelp(true)}>연결·복구 안내 <ArrowUpRight size={14}/></button></div>
-      <div className="side-bottom"><button onClick={()=>setHelp(true)}><BookOpen size={17}/>사용 안내</button><p>당신의 건반에, 새로운 소리.</p><span>LOCAL FIRST · PERSONAL USE</span></div>
+      <div className="side-note"><span>개인 보관함</span><p>파일과 이력은<br/>이 브라우저에 저장됩니다</p></div>
+      <div className="side-bottom"><button onClick={() => setHelp(true)}><BookOpen aria-hidden="true"/>사용 안내</button><span>기기 연결은 설치 화면에서</span></div>
     </aside>
-    <div className="main-column"><header className="topbar"><span className="breadcrumb">내 작업실 <span>/</span> 펌웨어 라이브러리</span><span className={'network '+(!online?'offline':'')}>{online?<Wifi size={14}/>:<WifiOff size={14}/>} {online?'온라인':'오프라인'}</span><button className="top-help" onClick={()=>setHelp(true)}><BookOpen size={16}/><span>가이드</span></button><span className="avatar">나</span></header>
-      <main>
-        {(view==='drawer'||view==='favorites')&&<>
-          <div className="intro-line"><span className="eyebrow">A LITTLE DRAWER. A LOT OF SOUND.</span><span className="edition">개인 컬렉션 / 01</span></div>
-          <section className="hero"><div className="hero-copy"><h1>{view==='favorites'?<>자주 꺼내는<br/><em>나만의 소리.</em></>:<>오늘은, 어떤 악기가<br/><em>되어볼까요?</em></>}</h1><p>하나의 건반, 여러 가지 가능성.<br/>마음에 드는 펌웨어를 골라 나의 악기를 바꿔보세요.</p><div className="hero-meta"><span><b>{catalog.products.length}</b>개의 악기</span><i/><span><b>{direct}</b>종 직접 설치 어댑터</span><i/><span>실기 확인은 별도</span></div></div><div className="hero-art" aria-hidden="true"><span className="hero-orbit"/><div className="mini-cart mini-back"><span>PLAY SOMETHING NEW</span><b>+VA</b></div><div className="mini-cart mini-front"><span>SOUND / 001</span><b>SLOOP<br/>PRO</b><div className="mini-wave">▂▅▃▇▅▂▆▃▅▁</div><small>DRUMS · SYNTH · SAMPLES</small></div><span className="hero-caption">CHOOSE YOUR NEXT SOUND ↗</span></div></section>
-          <div className="device-bar"><div className="device-icon"><KeyboardMusic size={23}/></div><div><span className="eyebrow">선택한 실물 모델</span><label className="model-picker"><select aria-label="실물 모델" value={model} onChange={e=>setModel(e.target.value as Model)}><option>SMK-37 Pro</option><option>SMK-37 Elite</option><option>MKE-P37</option></select><ChevronDown size={15}/></label></div><span className="device-bar-note">연결 전에도 둘러볼 수 있어요.<br/>설치는 기기·파일 확인 후 시작합니다.</span><button className="button secondary" onClick={()=>setHelp(true)}><Usb size={16}/>연결 안내</button></div>
-          {recent.length>0&&<div className="recent"><Clock3 size={16}/><span>최근 응답 확인</span>{recent.map(id=><button key={id} onClick={()=>{const p=catalog.products.find(x=>x.id===id);if(p)show(p);}}>{catalog.products.find(p=>p.id===id)?.name}</button>)}</div>}
-          <section className="collection"><div className="collection-title"><h2>{view==='favorites'?'즐겨찾는 악기':'내 펌웨어 서랍'} <span>{visible.length}</span></h2><div className="search"><Search size={17}/><input aria-label="펌웨어 검색" value={query} onChange={e=>setQuery(e.target.value)} placeholder="이름, 소리, 기능 검색"/>{query&&<button aria-label="검색 지우기" onClick={()=>setQuery('')}><X size={15}/></button>}</div></div>
-          <div className="filters"><div className="category-pills" aria-label="용도 필터">{['전체',...new Set(catalog.products.map(p=>p.category))].map(c=><button key={c} className={category===c?'chosen':''} onClick={()=>setCategory(c)}>{c}</button>)}</div><label className="available-filter"><input type="checkbox" checked={onlyAvailable} onChange={e=>setOnlyAvailable(e.target.checked)}/><SlidersHorizontal size={15}/>SMK 패키지만</label></div>
-          <div className="card-grid">{visible.map(p=>{const a=primaryArtifact(p.id,model);return <article className="firmware-card" key={p.id}><div className="card-visual"><button className="art-button" aria-label={`${p.name} 상세 보기`} onClick={()=>show(p)}><Cartridge product={p} index={catalog.products.indexOf(p)}/></button><button className={'favorite '+(favorites.includes(p.id)?'saved':'')} aria-label={`${p.name} 즐겨찾기`} aria-pressed={favorites.includes(p.id)} onClick={()=>void favorite(p.id)}><Heart size={18} fill={favorites.includes(p.id)?'currentColor':'none'}/></button></div><div className="card-body"><div className="card-kicker"><span>{p.category}</span><span>{a?.version==='미정'?'PORTING':a?.version}</span></div><h3>{p.name}</h3><p className="card-description">{p.description}</p><div className="feature-tags">{p.features.slice(0,3).map(f=><span key={f}>{f}</span>)}</div><div className="card-foot"><span className={'status-label '+(a?.status==='port-required'?'pending':'')}><i/>{a?.status==='port-required'?'포팅 필요':a?.method==='direct'?'SMK37 패키지 있음':'개발자 페이지에서 설치'}</span><button className="icon-button" aria-label={`${p.name} 열기`} onClick={()=>show(p)}><ArrowUpRight size={19}/></button></div></div></article>;})}</div>
-          {!visible.length&&<div className="empty"><Search size={30}/><h3>{view==='favorites'?'마음에 드는 악기를 담아보세요':'찾는 악기가 없어요'}</h3><p>{view==='favorites'?'카드의 하트를 누르면 이곳에 모입니다.':'다른 검색어나 용도 필터를 사용해 보세요.'}</p></div>}
-          </section><div className="workbench-banner"><FlaskConical size={26}/><div><strong>아직 내 건반용이 없는 소리라면</strong><p>FM-1 펌웨어를 위한 포팅 작업을 파일로 준비하세요.</p></div><button className="text-button" onClick={()=>setView('porting')}>포팅 작업실 <ArrowRight size={17}/></button></div>
+    <div className="main-column">
+      <header className="topbar">
+        <span className="breadcrumb">{viewNames[view]}</span>
+        <label className="model-picker"><span>대상 모델</span><select aria-label="실물 모델" value={model} disabled={busy || selected!==null} onChange={e => setModel(e.target.value as Model)}><option>SMK-37 Pro</option><option>SMK-37 Elite</option><option>MKE-P37</option></select></label>
+        {!online && <span className="network offline"><WifiOff aria-hidden="true"/>오프라인</span>}
+        <button className="icon-button top-help" aria-label="연결 및 사용 안내" onClick={() => setHelp(true)}><BookOpen aria-hidden="true"/></button>
+      </header>
+      <main id="main-content" tabIndex={-1}>
+        {(view==='drawer' || view==='favorites') && <>
+          <div className="page-title library-title"><div><h1>{viewNames[view]}</h1><p>{view==='favorites'?'자주 사용하는 펌웨어를 모아두세요':'내 건반에 맞는 버전과 설치 경로를 확인하세요'}</p></div><span className="catalog-count">{visible.length}<small> / {catalog.products.length}</small></span></div>
+          <div className="library-context"><span><b>{model}</b> 기준 · 직접 설치 {directCount}종 / 외부 설치 {externalCount}종</span><button className="text-button" onClick={() => setView('backups')}>첫 설치 전 백업 준비 <ArrowRight aria-hidden="true"/></button></div>
+          {recent.length>0 && <div className="recent"><span>최근 응답 확인</span>{recent.map(id => <button key={id} onClick={() => { const p=catalog.products.find(x => x.id===id); if(p) show(p); }}>{catalog.products.find(p => p.id===id)?.name}</button>)}</div>}
+          <section className="collection" aria-label="펌웨어 목록">
+            <div className="library-toolbar">
+              <div className="search"><Search aria-hidden="true"/><input aria-label="펌웨어 검색" value={query} onChange={e => setQuery(e.target.value)} placeholder="이름, 소리, 기능 검색"/>{query && <button className="icon-button" aria-label="검색 지우기" onClick={() => setQuery('')}><X aria-hidden="true"/></button>}</div>
+              <label className="category-select"><span className="sr-only">용도</span><select aria-label="용도" value={category} onChange={e => setCategory(e.target.value)}><option value="전체">모든 용도</option>{[...new Set(catalog.products.map(p => p.category))].map(c => <option key={c}>{c}</option>)}</select></label>
+              <label className="available-filter"><input type="checkbox" checked={onlyAvailable} onChange={e => setOnlyAvailable(e.target.checked)}/>SMK 패키지만</label>
+            </div>
+            <div className="list-heading" aria-hidden="true"><span>펌웨어</span><span>모델별 버전</span><span>설치 경로</span><span/></div>
+            <div className="card-grid">
+              {visible.map(product => {
+                const artifact=primaryArtifact(product.id,model);
+                const pending=artifact?.status==='port-required';
+                return <article className={'firmware-card '+(pending?'pending-row':'')} key={product.id}>
+                  <span className="catalog-index" aria-hidden="true">{String(catalog.products.indexOf(product)+1).padStart(2,'0')}</span>
+                  <div className="firmware-info"><h2><button aria-label={`${product.name} 상세 보기`} onClick={() => show(product)}>{product.name}</button></h2><p>{descriptions[product.id] ?? product.description.split('.')[0]}</p><span className="row-category">{product.category}</span></div>
+                  <div className="firmware-version"><span className="mobile-label">버전</span><span>{pending?'SMK 포트 없음':artifact?.version}</span></div>
+                  <div className="firmware-route"><span className={'route-label '+(pending?'pending':artifact?.method==='direct'?'direct':'')}>{pending?'포팅 필요':artifact?.method==='direct'?'앱에서 설치':'개발자 설치기'}</span><span className="route-note">{pending?'작업 파일 만들기':artifact?.method==='direct'?'파일 검사 후 진행':'외부 페이지로 이동'}</span></div>
+                  <div className="row-actions"><button className="icon-button favorite" disabled={!favoritesReady || savingFavorite} aria-label={`${product.name} 즐겨찾기`} aria-pressed={favorites.includes(product.id)} onClick={() => void favorite(product.id)}><Heart fill={favorites.includes(product.id)?'currentColor':'none'} aria-hidden="true"/></button><button className="row-open" aria-label={`${product.name} 열기`} onClick={() => show(product)}>상세 보기 <ArrowRight aria-hidden="true"/></button></div>
+                </article>;
+              })}
+            </div>
+            {!visible.length && <div className="empty"><h2>{filtered?'조건에 맞는 펌웨어가 없습니다':'즐겨찾기가 비어 있습니다'}</h2><p>{filtered?'검색어나 용도를 바꾸거나 필터를 초기화하세요':'목록에서 하트를 누르면 여기에 모입니다'}</p><button className="button secondary" onClick={() => { resetFilters(); if(!filtered) setView('drawer'); }}>{filtered?'필터 초기화':'전체 펌웨어 보기'}</button></div>}
+            <p className="list-note">공개 패키지 여부와 실제 기기 검증은 다릅니다. 이 앱의 USB 실기 시험은 아직 하지 않았습니다.</p>
+          </section>
+          <div className="workbench-banner"><div><h2>아직 SMK37용이 없는 펌웨어</h2><p>FM-1 원본의 포팅 작업을 별도 파일로 준비할 수 있습니다</p></div><button className="text-button" onClick={() => setView('porting')}>포팅 작업실 <ArrowRight aria-hidden="true"/></button></div>
         </>}
-        {view==='backups'&&<BackupsPanel model={model} onError={onError}/>}
-        {view==='porting'&&<PortingPanel model={model} onError={onError} onSelect={show}/>}
-      </main><footer><span><Library size={15}/> SMK37 FIRMWARE DRAWER</span><span>출처 확인 2026.11.09 · 공개 패키지와 실기 검증은 다릅니다.</span></footer>
+        {view==='backups' && <BackupsPanel key={model} model={model} onError={onError}/>}
+        {view==='porting' && <PortingPanel model={model} onError={onError} onSelect={show}/>}
+      </main>
+      <footer><span>SMK37 · 개인용 펌웨어 도구</span><span>카탈로그 확인 2026.11.09</span></footer>
     </div>
-    {selected&&active&&<Modal title={selected.name} wide busy={busy} onClose={()=>void closeDetail().catch(onError)}><div className="detail-top"><div className="detail-art"><Cartridge product={selected} index={catalog.products.indexOf(selected)} small/></div><div><span className="pill muted">{selected.category}</span><p className="detail-description">{selected.description}</p><p className="hint">by {selected.author} · 출처 확인 {selected.verifiedAt}</p><div className="feature-tags">{selected.features.map(f=><span key={f}>{f}</span>)}</div></div></div>
-      {install&&active.method==='direct'?<InstallPanel key={active.id} artifact={active} model={model} onBusy={onBusy} onError={onError} onExternal={a=>void external(a)} onBackups={()=>{void closeDetail();setView('backups');}}/>:<>
-        <div className="detail-actions">{active.method==='direct'?<button className="button" onClick={()=>setInstall(true)}>파일 검사·설치 준비 <ArrowRight size={17}/></button>:active.method==='external'?<button className="button" onClick={()=>void external(active)}>개발자 설치 페이지 <ArrowUpRight size={17}/></button>:<button className="button" onClick={()=>{setSelected(null);setView('porting');}}>포팅 준비하기 <ArrowRight size={17}/></button>}<a className="button secondary" href={selected.manualUrl} target="_blank" rel="noreferrer"><BookOpen size={16}/>매뉴얼</a><a className="inline-link" href={selected.repository} target="_blank" rel="noreferrer">원본 소스·개발자 <ArrowUpRight size={14}/></a></div>
-        <p className="hint">{active.method==='external'?'온라인 필요 · 앱의 MIDI 포트를 닫고 외부 설치기로 이동합니다. 외부 설치 완료는 추측하지 않습니다.':active.method==='direct'?'원본 패키지는 직접 선택합니다. 파일 검증 이후에도 최종 설치 버튼을 눌러야 기록합니다.':'SMK37용 설치 대상이 없습니다. FM-1 파일을 변환해 즉시 설치하는 기능은 제공하지 않습니다.'}</p>
+    {selected && active && <Modal title={selected.name} wide busy={busy} onClose={() => void closeDetail().catch(onError)}>
+      <div className="detail-context"><span>{selected.category}</span><span>{model} · {active.version}</span></div>
+      {install && active.method==='direct' ? <InstallPanel key={active.id} artifact={active} model={model} onBusy={onBusy} onError={onError} onExternal={a => void external(a)} onBackups={() => { void closeDetail(); setView('backups'); }}/>:<>
+        <p className="detail-description">{selected.description}</p>
+        <div className="detail-actions">
+          {active.method==='direct'?<button className="button" onClick={() => setInstall(true)}>파일 검사·설치 준비 <ArrowRight aria-hidden="true"/></button>:active.method==='external'?<button className="button" onClick={() => void external(active)}>개발자 설치 페이지 <ArrowUpRight aria-hidden="true"/></button>:<button className="button" onClick={() => { setSelected(null); setView('porting'); }}>포팅 준비하기 <ArrowRight aria-hidden="true"/></button>}
+          <a className="button secondary" href={selected.manualUrl} target="_blank" rel="noreferrer">매뉴얼 <ArrowUpRight aria-hidden="true"/></a>
+        </div>
+        <p className="hint">{active.method==='external'?'온라인 필요 · 이 앱의 MIDI 포트를 해제하고 외부 설치기로 이동합니다.':active.method==='direct'?'패키지를 검사한 뒤, 별도의 최종 설치 버튼으로 기록을 시작합니다.':'SMK37 패키지는 아직 없습니다. FM-1 파일을 이 기기에 바로 설치할 수 없습니다.'}</p>
       </>}
-      <div className="detail-section"><h3>내 모델의 배포 버전</h3><p className="hint">실물 선택: {model} · 직접 설치 범위는 고정된 두 제품입니다. 원본 최신판과 포트 버전을 분리합니다.</p><div className="version-list">{artifactsFor(selected.id,model).map(a=><div className="version-row" key={a.id}><div><b>{a.version}</b><span>원본 {a.upstreamVersion??'미확인'} / SMK 포트 {a.portVersion??'해당 없음'}</span><code>{a.packageIdentity??'패키지 identity 미확인'}</code></div><span className="pill muted">{a.method==='direct'?'직접 어댑터':a.status==='port-required'?'포팅 필요':'외부 설치'}</span><a href={a.releaseUrl} target="_blank" rel="noreferrer" aria-label={`${a.version} 배포 출처`}><ArrowUpRight size={18}/></a></div>)}</div></div>
-      <div className="detail-section"><h3>패널과 데이터</h3><p>{selected.mapping}</p><p>{active.backup.scope}</p>{active.backup.editorUrl&&<a className="inline-link" href={active.backup.editorUrl} target="_blank" rel="noreferrer">개발자 백업·에디터 <ArrowUpRight size={14}/></a>}<p className="notice">{active.dataImpact}</p><ul className="limitations">{selected.limitations.map(l=><li key={l}>{l}</li>)}</ul><a className="inline-link" href={active.recoveryUrl} target="_blank" rel="noreferrer">공식 복귀·복구 안내 <ArrowUpRight size={14}/></a></div>
-      <details className="evidence"><summary>출처·라이선스·검증 근거</summary><p>{selected.license}</p><ul>{active.evidence.map((e,i)=><li key={i}><a href={e.url} target="_blank" rel="noreferrer">{e.kind}</a> — {e.note}</li>)}</ul><p>이 앱에서 수행한 USB 실기 기록은 없습니다. SHA-256은 무결성 확인이며 호환성 증명이 아닙니다.</p>{selected.sources.map(url=><a className="source-link" href={url} key={url} target="_blank" rel="noreferrer">{url}</a>)}</details>
+      <details className="detail-fold" open={!install}><summary>버전·기능·데이터 안내 <ChevronDown aria-hidden="true"/></summary>
+        <section className="detail-section"><h3>내 모델의 배포 버전</h3><p className="hint">원본 최신판과 SMK 포트는 서로 다른 버전일 수 있습니다</p>
+          {artifactsFor(selected.id,model).map(a => <div className="version-row" key={a.id}><div><b>{a.version}</b><span>원본 {a.upstreamVersion??'미확인'} / SMK 포트 {a.portVersion??'해당 없음'}</span><code>{a.packageIdentity??'패키지 identity 미확인'}</code></div><span className="pill muted">{a.method==='direct'?'앱에서 설치':a.status==='port-required'?'포팅 필요':'외부 설치'}</span><a className="icon-button" href={a.releaseUrl} target="_blank" rel="noreferrer" aria-label={`${a.version} 배포 출처`}><ArrowUpRight aria-hidden="true"/></a></div>)}
+        </section>
+        <section className="detail-section"><h3>패널과 기능</h3><p>{selected.mapping}</p><ul>{selected.features.map(f => <li key={f}>{f}</li>)}</ul></section>
+        <section className="detail-section"><h3>데이터 보관과 복귀</h3><p>{active.backup.scope}</p>{active.backup.editorUrl && <a className="inline-link" href={active.backup.editorUrl} target="_blank" rel="noreferrer">개발자 백업·에디터 <ArrowUpRight aria-hidden="true"/></a>}<p className="notice">{active.dataImpact}</p><ul className="limitations">{selected.limitations.map(l => <li key={l}>{l}</li>)}</ul><a className="inline-link" href={active.recoveryUrl} target="_blank" rel="noreferrer">공식 복귀·복구 안내 <ArrowUpRight aria-hidden="true"/></a></section>
+      </details>
+      <details className="evidence"><summary>개발자·출처·검증 근거</summary><p>{selected.author}</p><p>{selected.license}</p><a className="inline-link" href={selected.repository} target="_blank" rel="noreferrer">원본 소스·개발자 <ArrowUpRight aria-hidden="true"/></a><ul>{active.evidence.map((e,i) => <li key={i}><a href={e.url} target="_blank" rel="noreferrer">{e.kind}</a> — {e.note}</li>)}</ul><p>이 앱의 USB 실기 기록은 없습니다. SHA-256은 파일 무결성 확인이며 호환성 증명이 아닙니다.</p>{selected.sources.map(url => <a className="source-link" href={url} key={url} target="_blank" rel="noreferrer">{url}</a>)}</details>
     </Modal>}
-    {help&&<Modal title="첫 연결을 준비하세요" onClose={()=>setHelp(false)}><ol className="guide-steps"><li><strong>PC의 Chrome 또는 Edge</strong><p>데이터 전송이 되는 USB 케이블을 사용하고 다른 MIDI 앱·설치기 탭을 닫으세요.</p></li><li><strong>내 기기의 전체 백업과 복귀 경로</strong><p>포팅 키트의 PC 절차로 전체 덤프를 별도 보관하고, 백업과 이력에서 사용자 검증 기록을 등록하세요.</p></li><li><strong>펌웨어 선택 → 파일 검사 → 직접 설치 시작</strong><p>실물 모델, 기기 응답, 파일의 모델과 해시를 대조합니다. 현재 지원 경로는 순정 V016·SLOOP Pro·Frodhes 0.9.2입니다.</p></li><li><strong>Galaxy는 HTTPS 환경에서</strong><p>홈 화면 추가용 PWA를 제공합니다. PC localhost 주소는 폰에서 그대로 열리지 않습니다. 접근 가능한 HTTPS 배포는 별도 요청 시 진행합니다. Android USB 설치와 재연결은 실기 미확인입니다.</p></li></ol><p className="notice">중단되면 같은 패키지를 보관하고 loader 식별자를 다시 확인하세요. 알 수 없는 상태에서 강제 재부팅·순정 복구를 자동 실행하지 않습니다.</p><a className="inline-link" href="https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md" target="_blank" rel="noreferrer">백업·복구 원문 <ArrowUpRight size={14}/></a><button className="button" onClick={()=>{setHelp(false);setView('backups');}}>백업 보관함 열기</button></Modal>}
-    {error&&<div className="toast" role="alert"><span>{error}</span><button className="icon-button" aria-label="알림 닫기" onClick={()=>setError('')}><X size={18}/></button></div>}
+    {help && <Modal title="연결 및 설치 안내" onClose={() => setHelp(false)}>
+      <ol className="guide-steps"><li><strong>모델과 현재 펌웨어 확인</strong><p>PC의 Chrome 또는 Edge와 USB 데이터 케이블을 사용하세요. 다른 MIDI 앱과 설치기 탭은 닫아 주세요.</p></li><li><strong>전체 백업과 복귀 파일 준비</strong><p>PC 백업 절차로 전체 덤프를 별도 보관하고 사용자 검증 기록을 등록합니다. 음색과 프로젝트는 펌웨어별 에디터에서 따로 저장하세요.</p></li><li><strong>파일 검사 후 직접 설치</strong><p>현재 직접 경로는 순정 V016·SLOOP Pro·Frodhes 0.9.2입니다. 실제 기기 응답과 파일을 검사한 뒤 최종 설치 버튼을 직접 누릅니다.</p></li><li><strong>Galaxy 사용은 별도 확인</strong><p>PC localhost는 휴대폰 주소가 아닙니다. 휴대폰에는 접근 가능한 HTTPS 환경이 필요하며, Android USB 설치와 재연결은 실기 미확인입니다.</p></li></ol>
+      <p className="notice">중단 후에는 같은 파일·loader·최근 중단 이력을 다시 검사합니다. 자동 재시도나 강제 재부팅은 하지 않습니다.</p>
+      <div className="button-row"><button className="button" onClick={() => { setHelp(false); setView('backups'); }}>백업 보관함 열기</button><a className="inline-link" href="https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md" target="_blank" rel="noreferrer">백업·복구 원문 <ArrowUpRight aria-hidden="true"/></a></div>
+    </Modal>}
+    {error && <div className="toast" role="alert"><span>{error}</span><button className="icon-button" aria-label="알림 닫기" onClick={() => setError('')}><X aria-hidden="true"/></button></div>}
   </div>;
 }

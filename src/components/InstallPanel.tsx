@@ -48,8 +48,10 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
   async function start(){try{if(!fullBackup)throw new Error('전체 백업의 검증 기록을 먼저 등록하세요.');await controller.current!.start({fullBackup,recoveryReady:recovery,projectsAcknowledged:projects});}catch(e){onError(e);}finally{setIdentity(null);}}
   const locked=state.busy||connecting;
   const ready=state.phase==='ready';
+  const transferStage=['entering-loader','writing','reconnecting','completed','interrupted'].includes(state.phase);
   return <section className="install-panel">
-    <div className="section-label"><span>INSTALL / 직접 설치</span><span className="pill muted">실기 미확인</span></div>
+    <ol className="install-steps" aria-label="설치 단계"><li aria-current={!ready&&!transferStage?'step':undefined}><span>1</span>기기·파일</li><li aria-current={ready?'step':undefined}><span>2</span>최종 확인</li><li aria-current={transferStage?'step':undefined}><span>3</span>설치·응답</li></ol>
+    <p className="hint hardware-disclosure">이 앱의 실제 USB 설치는 아직 검증되지 않았습니다.</p>
     <p className="notice">{artifact.dataImpact} 이 앱은 전체 플래시나 작업물을 자동 백업하지 않습니다.</p>
     <fieldset disabled={locked||ready}>
       <div className="install-step"><b>01</b><div><strong>내 기기 연결</strong><p>실물 선택: {model}<br/>응답: <code>{identity?.text??'아직 연결하지 않음'}</code></p></div><button className="button secondary" onClick={connect}><Usb size={16}/>{connecting?'연결 중…':'MIDI 연결'}</button></div>
@@ -61,6 +63,7 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
       <label className="file-label"><FileCheck2 size={20}/>{file?.name??(cached?'보관한 패키지를 불러왔습니다':'받은 .fwsc 파일 선택')}<input aria-label="설치 패키지 파일" type="file" accept=".fwsc" onChange={async e=>{const f=e.target.files?.[0];if(!f)return;try{if(f.size>2*1024*1024)throw new Error('패키지 파일은 2 MiB 이하이어야 합니다.');setFile(f);setBytes(new Uint8Array(await f.arrayBuffer()));setCached(false);}catch(err){onError(err);}}}/></label>
       <details><summary>고정된 SHA-256</summary><code className="hash">{artifact.sha256}</code></details>
       <div className="button-row"><button className="button secondary" disabled={!bytes} onClick={cache}><Download size={16}/>{cached?'다시 검증·보관':'검증 후 오프라인 보관'}</button><button className="button" disabled={!identity||!bytes} onClick={prepare}>호환성·파일 검사 <ArrowRight size={16}/></button></div>
+      {(!identity||!bytes)&&<p className="requirement-hint">검사 전 준비: {!identity&&!bytes?'MIDI 기기 연결과 패키지 파일 선택':!identity?'MIDI 기기 연결':'패키지 파일 선택'}</p>}
     </fieldset>
     <div className={'install-status '+(state.phase==='interrupted'||state.phase==='failed'?'problem':'')} role="status"><strong>{state.phase==='completed'?'재연결 응답 확인':state.phase==='interrupted'?'중단됨 — 상태 확인 필요':state.phase==='failed'?'진행할 수 없습니다':ready?'설치 준비됨':locked?'기기와 통신 중':'설치 전 확인'}</strong><p>{state.message}</p>{state.requests>0&&<p>{state.requests.toLocaleString()}개 요청에 응답 · {state.phase==='writing'?'기록 단계':'준비 단계'}</p>}</div>
     {ready&&<div className="final-review">

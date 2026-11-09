@@ -25,3 +25,9 @@ The pinned SLOOP Pro code is GPL-3.0-only. Its [LICENSING.md](https://github.com
 Pinned dependency graph: `package-lock.json`. Runtime dependencies include React/React DOM (MIT), Zod (MIT), idb (ISC) and Lucide (ISC). Tooling includes Vite/Vitest (MIT), TypeScript (Apache-2.0), Playwright (Apache-2.0), fake-indexeddb (Apache-2.0), and DefinitelyTyped declarations (MIT). Installed package license files carry their complete notices. When distributing a built copy, include those dependency notices along with this app's corresponding source and GPL license.
 
 M-VAVE, FM-1, SMK37 and third-party product names identify their respective products. This personal app is not an official manufacturer or firmware-author distribution.
+
+## UI review references (2026-11-09)
+
+The UI revision follows design guidance from [unslop by Damir Sokolovsky (@heydamir)](https://github.com/heydamir/unslop/tree/97daa3eb365670ea3f87ed85356cbfcee18105a5), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The Korean audit and direction in `docs/ui-redesign.md` adapt that guidance, with this attribution. No reference images or scripts were copied into the app.
+
+[Stageshow by Benji Taylor](https://github.com/benjitaylor/skills/tree/299140fafd08df55a9c234e610c3f64af3f45531/stageshow) informed hierarchy, typography, spacing and restrained motion. Its React demo kit, artwork and authored example scenes were not copied or used to simulate real installation. All app interactions remain real local functions.

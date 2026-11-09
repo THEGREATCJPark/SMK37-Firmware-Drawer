@@ -4,11 +4,11 @@
 
 | 검사 | 결과 |
 | --- | --- |
-| Vitest 7개 파일 | **42개 통과**, 41.98초 |
+| Vitest 7개 파일 | **42개 통과**, 41.64초 |
 | TypeScript strict + Vite production + PWA 생성 | 통과 |
-| Playwright / Windows Edge 157.0.4341.42 | 8개 통과 |
-| Playwright / Windows Chrome 157.0.8103.38 | 8개 통과 |
-| 브라우저 합계 | **16개 통과**, 11.6초 |
+| Playwright / Windows Edge 157.0.4341.42 | 13개 통과 |
+| Playwright / Windows Chrome 157.0.8103.38 | 13개 통과 |
+| 브라우저 합계 | **26개 통과**, 15.7초 |
 | Python 고정 recipe / bundle syntax | `py_compile` 통과 |
 | SLOOP Pro 고정 소스 SMK37 Pro 빌드 | 실제 빌드·CRC·모델·영역 검사 통과 |
 | 원본 FM-1 전후 app / package / loader | 세 파일 모두 byte-identical |
@@ -43,4 +43,8 @@ Service worker는 build별 shell을 사용하며 `skipWaiting`, 강제 새로고
 
 아직 하지 않은 작업: 실제 Pro/Elite/MKE 쓰기·왕복 전환·복구, 음색/패널/휠/페달/오디오/저장, 공장 보정값 보존, Galaxy USB 권한·재열거·화면 잠금. 신규 FM-1 포트와 새 입력 매핑도 구현하지 않았다. 해당 작업은 [사용자 실기 체크리스트](hardware-checklist.md)와 별도 포팅 명세로 이어진다.
 
-화면 증거는 로컬 `output/playwright/desktop.png`, `mobile.png`, `mobile-viewport.png`, Playwright 보고서는 `playwright-report/index.html`에 있다. 임시 화면과 바이너리·개인 데이터 경로는 Git에서 제외된다.
+## UI 개선 후 최종 재검증
+
+Stageshow·unslop 참고 개선 후 위 표의 42개 단위 시험·26개 브라우저 시험과 production 빌드를 모두 다시 통과했다. 추가한 10개 브라우저 시험은 검색·필터 초기화, 모델 변경 시 백업 확인값 초기화, 키보드 초점 복귀, 320–1280px 화면, 설치 첫 작업 및 미검증 표시, 좁은 오프라인 헤더를 검증한다. 이번 UI 작업에서 펌웨어를 다시 빌드하거나 실제 기기에 기록하지 않았다. 기존 펌웨어 빌드 증거와 원본 host 실패는 그대로다.
+
+변경 근거와 전후 비교는 [UI 개선 기록](ui-redesign.md)에 있다. 최종 화면 증거는 로컬 `output/playwright/redesign/final/`, 전후 비교 HTML은 `output/playwright/redesign/report.html`, Playwright 보고서는 `playwright-report/index.html`에 있다. 임시 화면과 바이너리·개인 데이터 경로는 Git에서 제외된다.
