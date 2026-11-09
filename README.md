@@ -1,3 +1,7 @@
+웹 앱: https://thegreatcjpark.github.io/SMK37-Firmware-Drawer/
+
+main에 push하면 GitHub Actions에서 파일 검사·단위 시험·빌드를 거쳐 Pages로 배포합니다. Android Chrome에서는 메뉴의 홈 화면 추가/앱 설치로 사용할 수 있는 PWA입니다. APK는 제공하지 않습니다. 실제 Android USB 설치는 미검증입니다. 로컬 앱과 웹 앱의 보관함은 주소별로 별개이므로 필요한 파일을 내보내기/가져오기로 옮겨 주세요.
+
 # SMK37 Firmware Drawer
 
 SMK37 개인용 펌웨어 카탈로그, 고정 패키지 설치 준비, 백업 파일 보관과 FM-1 포팅 작업실. 서버·계정·원격 업로드 없이 브라우저에 저장합니다. 실제 기기 기록은 사용자가 앱의 최종 버튼을 눌렀을 때만 시작됩니다.
@@ -14,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-개발 중에는 `npm run dev`. preview와 같은 포트를 사용하므로 동시에 실행하지 않습니다. `localhost`와 `127.0.0.1`은 저장소가 다르므로 위 주소를 일관되게 사용하세요. 외부 배포는 하지 않았습니다.
+개발 중에는 `npm run dev`. preview와 같은 포트를 사용하므로 동시에 실행하지 않습니다. `localhost`와 `127.0.0.1`은 저장소가 다르므로 위 주소를 일관되게 사용하세요. GitHub Pages 웹 앱도 제공합니다.
 
 ## 사용할 수 있는 기능
 
