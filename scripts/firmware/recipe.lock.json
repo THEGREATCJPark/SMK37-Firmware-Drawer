@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "sloop-pro-2.8.4-smk37-pro",
+  "bundleRecipeId": "sloop-pro-2.8.4-pro",
+  "checkedAt": "2026-11-09",
+  "source": {
+    "url": "https://github.com/isod89/sloop-pro.git",
+    "commit": "701844ba0103c434b4fe4467373857b794487b51",
+    "tag": "v2.8.4",
+    "license": "GPL-3.0-only"
+  },
+  "guide": {
+    "url": "https://github.com/genkigenki/fm1-to-smk37",
+    "commit": "54252ffa2219e3c9cd7eb70f4e99b361eaa048e1"
+  },
+  "toolchain": {
+    "url": "https://jl-update.oss-cn-shenzhen.aliyuncs.com/jieli-linux-toolchains-20260730.1.tar.xz",
+    "filename": "jieli-linux-toolchains-20260730.1.tar.xz",
+    "directory": "jieli-linux-toolchains-20260730.1",
+    "sha256": "a1545cddbc451a06bac43eb5cd96d831470c42a97c5c0b1f98879a20fc7647bd",
+    "size": 26027508
+  },
+  "sdk": {
+    "url": "https://gitee.com/Jieli-Tech/fw-AC79_AIoT_SDK",
+    "tag": "AC79NN_SDK_V1.2.1_2023-12-13",
+    "tagObject": "b02c8c9354c077238ccbf764e36eff53782e1c16",
+    "commit": "d179b4484759423312073f5fbb232501aa491047",
+    "license": "Apache-2.0",
+    "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "files": {
+      "cpu/wl82/tools/uboot.boot": "4e3b4c220dc96641cb5a723f41e68ce41d5261ae9434bb33fbd7f2c59976ded4",
+      "cpu/wl82/tools/cfg_tool.bin": "276579954f076886a6a7694f65dc71c034a63a2c204b76749065c0ac7b010d1b",
+      "cpu/wl82/tools/cfg/eq_cfg_hw.bin": "41167491bffed4651750719c973d2758adeb9021a5670d02d6a53c85ed80ea7d"
+    }
+  },
+  "host": { "python": "3.12.3", "pillow": "10.2.0", "raqmRequired": true },
+  "webTestNode": {
+    "version": "24.20.0",
+    "url": "https://nodejs.org/dist/v24.20.0/node-v24.20.0-linux-x64.tar.xz",
+    "filename": "node-v24.20.0-linux-x64.tar.xz",
+    "directory": "node-v24.20.0-linux-x64",
+    "sha256": "2f2c0da162318f0de47665410c7c8c2ed3d36c8f3105de4bbc61176c70a7cbf2",
+    "checksumSource": "https://nodejs.org/dist/v24.20.0/SHASUMS256.txt"
+  },
+  "pwaTest": {
+    "playwright": "1.65.0", "chromiumRevision": "1254", "chromiumVersion": "158.0.8127.18",
+    "localAlsa": {
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/a/alsa-lib/libasound2t64_1.2.11-1ubuntu0.3_amd64.deb",
+      "filename": "libasound2t64_1.2.11-1ubuntu0.3_amd64.deb",
+      "sha256": "5d17bfb5683eb99f1be951fe48e1be5bf3c52391913b6b74a8aecf9b4f5e779f",
+      "size": 397772
+    }
+  },
+  "build": {
+    "board": "smk37",
+    "model": "pro",
+    "version": "2.8.4",
+    "packageIdentity": "SMK-37 Pro_900",
+    "flags": { "FELUCCA_SLICE": "0" },
+    "sourceChanges": []
+  },
+  "published": {
+    "url": "https://github.com/isod89/sloop-pro/releases/download/v2.8.4/sloop-pro-2.8.4.fwsc",
+    "filename": "sloop-pro-2.8.4.fwsc",
+    "sha256": "7c18163fd2088663ff057b729419e4ff3b08ceb77ad72072fced3c26a8aeb80a",
+    "size": 651224,
+    "releaseUrl": "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4"
+  }
+}

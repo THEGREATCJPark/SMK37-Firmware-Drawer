@@ -1,0 +1,11 @@
+import { chromium } from '@playwright/test';
+const browser=await chromium.launch({channel:'msedge'});const page=await browser.newPage({viewport:{width:390,height:844}});
+await page.goto('http://127.0.0.1:4173/');
+console.log(await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,over:[...document.querySelectorAll('*')].map(e=>({tag:e.tagName,cls:e.className,left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right})).filter(e=>e.right>innerWidth+1||e.left< -1).slice(0,20)})));
+await page.getByRole('button',{name:'SLOOP Pro 즐겨찾기'}).click();
+await page.waitForFunction(()=>document.querySelector('[aria-label="SLOOP Pro 즐겨찾기"]')?.getAttribute('aria-pressed')==='true');
+await page.reload();
+console.log('favorite after saved then reload:',await page.getByRole('button',{name:'SLOOP Pro 즐겨찾기'}).getAttribute('aria-pressed'));
+await page.screenshot({path:'output/playwright/mobile-before-fix.png',fullPage:true});
+await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'output/playwright/desktop-initial.png',fullPage:true});
+await browser.close();

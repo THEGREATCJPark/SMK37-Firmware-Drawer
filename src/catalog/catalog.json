@@ -1,0 +1,1666 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-09",
+  "products": [
+    {
+      "id": "sloop-pro",
+      "name": "SLOOP Pro",
+      "author": "isod89; SLOOP/Felucca: Leo Kuroshita (Hügelton Instruments); SMK board layer: M. Geisler (genkigenki)",
+      "repository": "https://github.com/isod89/sloop-pro",
+      "description": "신시사이저 세 트랙과 드럼 한 트랙으로 루프를 쌓는 라이브 그루브박스입니다. 샘플, 12가지 합성 엔진, 피아노롤, 파라미터 잠금과 즉석 효과로 비트를 만들고 연주할 수 있습니다.",
+      "category": "드럼 · 샘플 · 그루브박스",
+      "features": [
+        "신스 3트랙 + 드럼 1트랙",
+        "12 합성 엔진·153 프리셋·37 드럼 키트",
+        "사용자 샘플·피아노롤·파라미터 잠금·27 즉석 효과"
+      ],
+      "limitations": [
+        "Snoop37·sloop-smk와 별도 제품이며 저장 형식 호환을 가정하지 않습니다.",
+        "일반 MIDI identity _900만으로 제품/2.8.4 버전을 증명할 수 없습니다.",
+        "코드와 자산의 라이선스가 달라 파일을 번들하지 않습니다.",
+        "Galaxy·Windows 실제 USB 설치는 아직 검증하지 않았습니다."
+      ],
+      "sourceAvailable": true,
+      "license": "GPL-3.0-only code; mixed assets",
+      "verifiedAt": "2026-11-09",
+      "sources": [
+        "https://github.com/isod89/sloop-pro",
+        "https://github.com/isod89/sloop-pro/blob/701844ba0103c434b4fe4467373857b794487b51/LICENSING.md",
+        "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4",
+        "https://github.com/isod89/sloop-pro/blob/701844ba0103c434b4fe4467373857b794487b51/SLOOP-PRO.md",
+        "https://github.com/isod89/sloop-pro/blob/701844ba0103c434b4fe4467373857b794487b51/SLOOP-PRO.md#knobs-faders-wheels",
+        "https://isod89.github.io/sloop-pro/"
+      ],
+      "manualUrl": "https://github.com/isod89/sloop-pro/blob/701844ba0103c434b4fe4467373857b794487b51/SLOOP-PRO.md",
+      "mapping": "37건반·16 RGB 패드·8노브·4페이더·피치/모드 휠·페달. K1 마스터, K2 선택, K3 트랙, K4 음색, K5–K8 화면의 네 파라미터. 상세 매핑은 SLOOP-PRO.md를 확인하세요.",
+      "color": "#E0A866",
+      "glyph": "▦"
+    },
+    {
+      "id": "va",
+      "name": "+VA",
+      "author": "Madeline / Baud Girl",
+      "repository": "https://baudgirl.com/work/SMK-37%2BVA",
+      "description": "FM, 가상 아날로그, 8비트 음원을 패널에서 편집하고 시퀀서와 함께 연주하는 펌웨어입니다. 개발자 설치 페이지에서 기기와 현재 펌웨어를 확인한 뒤 해당 모델용 버전을 선택합니다.",
+      "category": "FM · VA · 8비트",
+      "features": [
+        "FM·가상 아날로그·8비트 음원",
+        "프리셋 128개·패턴 16개",
+        "개발자 설치기와 Device Manager"
+      ],
+      "limitations": [
+        "설치는 개발자 페이지에서 진행하며 이 앱은 외부 성공을 자동 기록하지 않습니다.",
+        "Android Chrome 지원은 개발자가 명시한 설치 페이지에 한정합니다.",
+        "공개 소스·바이너리 재배포 허가를 확인하지 못했습니다."
+      ],
+      "sourceAvailable": false,
+      "license": "No redistribution permission established; author-hosted external only",
+      "verifiedAt": "2026-11-09",
+      "sources": [
+        "https://baudgirl.com/work/SMK-37%2BVA/manual",
+        "https://baudgirl.com/work/SMK-37%2BVA/install"
+      ],
+      "manualUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+      "mapping": "SMK-37용 패널 매핑은 개발자 매뉴얼을 따릅니다. 노브 뱅크·페이더·패드의 역할이 화면과 모드에 따라 달라집니다.",
+      "color": "#83AA91",
+      "glyph": "∿"
+    },
+    {
+      "id": "erik37",
+      "name": "Erik37",
+      "author": "M. Geisler / genkigenki",
+      "repository": "https://github.com/genkigenki/erik37",
+      "description": "콘서트 그랜드 피아노의 샘플을 건반 세기에 따라 섞고, 댐퍼 소리와 현의 공명, 공간 잔향을 더합니다. 네 가지 기본 음색과 사용자 프리셋 12개, 하프 페달을 지원하는 실험적 피아노 펌웨어입니다.",
+      "category": "그랜드 피아노",
+      "features": [
+        "Salamander Grand Piano V3의 3단계 강약 샘플",
+        "네 가지 기본 음색·사용자 프리셋 12개",
+        "하프 페달·소스테누토·우나 코르다·현 공명"
+      ],
+      "limitations": [
+        "원저자 experimental 표기를 유지합니다. FM-1 빌드는 실기 미시험입니다.",
+        "_480102는 초기 직접 어댑터의 3자리 로더 범위 밖이므로 개발자 경로만 제공합니다.",
+        "본 앱에는 기기 프리셋을 읽는 백업 어댑터가 없습니다."
+      ],
+      "sourceAvailable": true,
+      "license": "MPL-2.0 code; CC BY 3.0 piano; OFL fonts; Apache-2.0 SDK",
+      "verifiedAt": "2026-11-09",
+      "sources": [
+        "https://github.com/genkigenki/erik37",
+        "https://github.com/genkigenki/erik37/blob/c06c1f7f9e7864e7ad2552be540280d344676326/LICENSING.md",
+        "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+        "https://github.com/genkigenki/erik37/blob/c06c1f7f9e7864e7ad2552be540280d344676326/CONTROLS.md",
+        "https://genkigenki.github.io/smk37/#fw-erik37"
+      ],
+      "manualUrl": "https://github.com/genkigenki/erik37/blob/c06c1f7f9e7864e7ad2552be540280d344676326/CONTROLS.md",
+      "mapping": "K1–K4는 화면의 네 값, K5는 볼륨. 패드 1–4는 기본 음색, 5–16은 사용자 프리셋(길게 눌러 저장). SEQ REC 서스테인, CHORD 소스테누토, SCALE 우나 코르다. 페이더와 K6–K8은 미사용.",
+      "color": "#D6BC85",
+      "glyph": "♮"
+    },
+    {
+      "id": "frodhes",
+      "name": "Frodhes",
+      "author": "Leonardo Mirabal; SMK port M. Geisler / genkigenki; Dinghy platform zvenson",
+      "repository": "https://github.com/leonardoMirabal/frodhes",
+      "description": "해머가 금속 발음체를 때리는 과정을 실시간 계산하는 일렉트릭 피아노입니다. 고정된 0.9.2 SMK 이식판은 네 가지 악기 유형과 트레몰로·페이저·코러스·딜레이·리버브를 제공합니다.",
+      "category": "일렉트릭 피아노",
+      "features": [
+        "고정 0.9.2 포트: 네 악기 유형의 물리 모델 EP",
+        "트레몰로·페이저·코러스·딜레이·리버브",
+        "건반 강약·서스테인·패드 음색 선택"
+      ],
+      "limitations": [
+        "직접 설치는 검토한 0.9.2 이식판으로 고정하며 experimental입니다.",
+        "원저자 최신 0.9.9는 별도 외부 경로입니다. 최신 기능을 0.9.2에 적용하지 않습니다.",
+        "기기 프리셋 읽기·자동 복원과 실제 USB 시험은 미구현/미검증입니다."
+      ],
+      "sourceAvailable": true,
+      "license": "GPL-3.0-only code; OFL fonts; Apache-2.0 SDK",
+      "verifiedAt": "2026-11-09",
+      "sources": [
+        "https://github.com/leonardoMirabal/frodhes",
+        "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/LICENSING.md",
+        "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+        "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/SMK37.md",
+        "https://leonardomirabal.github.io/frodhes/#install"
+      ],
+      "manualUrl": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/SMK37.md",
+      "mapping": "0.9.2 포트: 37건반 강약과 페달, K1–K4는 현재 화면. 패드로 악기·프리셋·효과·아르페지오·서스테인을 선택하고 페이더로 톤·bark·효과를 조절합니다. 최신 원저자판은 해당 매뉴얼을 따르세요.",
+      "color": "#D78F6B",
+      "glyph": "≈"
+    },
+    {
+      "id": "obervave",
+      "name": "OberVave",
+      "author": "Sven Trogus / zvenson",
+      "repository": "https://github.com/zvenson/obervave",
+      "description": "아날로그 폴리 신시사이저 계열의 패드·브라스·스트링 소리를 만드는 8보이스 악기입니다. 원저자 3.3.2는 네 트랙과 믹서, 효과, 스텝 시퀀서를 제공하며 통합 사이트의 이전 1.5-beta와 별도 버전입니다.",
+      "category": "아날로그 · 스트링",
+      "features": [
+        "원저자 3.3.2: 8보이스·네 트랙 신스",
+        "믹서·스텝 시퀀서·마스터 효과",
+        "패드·페이더·휠을 활용한 SMK 매핑"
+      ],
+      "limitations": [
+        "원저자 3.3.2와 통합 사이트의 이전 SMK 1.5-beta는 별도 파일입니다.",
+        "현재 앱에서는 원저자 외부 경로로 설치합니다.",
+        "이 앱의 실기 설치 기록은 없습니다."
+      ],
+      "sourceAvailable": true,
+      "license": "GPL-3.0-only code; OFL fonts; MIT mirror; Apache-2.0 SDK; logo font has separate AGPL embedding exception",
+      "verifiedAt": "2026-11-09",
+      "sources": [
+        "https://github.com/zvenson/obervave",
+        "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/LICENSING.md",
+        "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+        "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/README.md",
+        "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/SMK37.md"
+      ],
+      "manualUrl": "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/README.md",
+      "mapping": "K1 마스터, K5–K8 화면의 네 파라미터. 패드는 시퀀서, 페이더는 필터·엔벌로프/효과 뱅크, 피치 휠은 벤드, 모드 휠은 비브라토. 원저자 SMK37.md 참조.",
+      "color": "#A8A8C7",
+      "glyph": "≋"
+    },
+    {
+      "id": "choralroot",
+      "name": "ChoralRoot",
+      "author": "Quixotic7; SMK board port M. Geisler / genkigenki",
+      "repository": "https://github.com/Quixotic7/ChoralRootFM1",
+      "description": "건반으로 근음을 누르고 패드로 코드 종류를 고르는 코드 연주 악기입니다. 스트럼·하프·아르페지오·패턴 연주를 제공하며, SMK-37용 0.29는 커뮤니티 시험 빌드입니다.",
+      "category": "코드 · 아르페지오",
+      "features": [
+        "모든 건반으로 근음 연주",
+        "패드로 코드 종류·확장음·LOCK 선택",
+        "스트럼·하프·아르페지오·패턴"
+      ],
+      "limitations": [
+        "SMK 0.29는 커뮤니티 시험용 pre-release이며 관리자는 SMK 실물을 가지고 있지 않습니다.",
+        "FM-1 최신 0.32를 SMK-37에 보낼 수 없습니다.",
+        "일부 공장 음색 데이터의 재배포 라이선스가 없어 바이너리를 복제하지 않습니다."
+      ],
+      "sourceAvailable": true,
+      "license": "GPL-3.0-only code with component licenses; some preset data has no redistribution license",
+      "verifiedAt": "2026-11-09",
+      "sources": [
+        "https://github.com/Quixotic7/ChoralRootFM1",
+        "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/LICENSING.md",
+        "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+        "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+        "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md#controls"
+      ],
+      "manualUrl": "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+      "mapping": "패드 1–4 DIM/MIN/MAJ/SUS, 9–12 6/m7/M7/9, 13 LOCK. 모든 건반은 근음, 나머지 패드는 연주 모드. K1 볼륨, K5–K8 화면 값. 0.29 SMK 매뉴얼 기준입니다.",
+      "color": "#B6A3C6",
+      "glyph": "♬"
+    },
+    {
+      "id": "sloopdx",
+      "name": "sloopDX",
+      "author": "Sven Trogus / zvenson",
+      "repository": "https://github.com/zvenson/dxsloop",
+      "description": "6오퍼레이터 FM 음원과 같은 엔진으로 만드는 FM 드럼을 SLOOP 방식의 시퀀서로 연주합니다. 현재 검토한 원본 빌드와 공개 패키지는 FM-1용이며, SMK-37에 쓰려면 별도 보드 포팅 작업이 필요합니다.",
+      "category": "FM · 드럼 · 포팅 대기",
+      "features": [
+        "6오퍼레이터 FM·32 알고리즘",
+        "FM 드럼과 SLOOP의 라이브 시퀀싱",
+        "DX7 SysEx 음색 가져오기·파라미터 잠금"
+      ],
+      "limitations": [
+        "검토한 원본 소스·릴리스에서 SMK 빌드가 확인되지 않았습니다.",
+        "FM-1 파일은 SMK-37 설치·재개 모두 금지합니다.",
+        "원저자 README는 4.0을 beta·실기 미시험으로 설명합니다.",
+        "처음 보는 포팅을 브라우저가 즉석 변환하지 않습니다."
+      ],
+      "sourceAvailable": true,
+      "license": "GPL-3.0-only code; Apache-2.0 msfa; OFL fonts; inherited icon atlas rights restricted",
+      "verifiedAt": "2026-11-09",
+      "sources": [
+        "https://github.com/zvenson/dxsloop",
+        "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/LICENSING.md",
+        "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
+        "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/SLOOP.md",
+        "https://dx7.designburgapps.com/"
+      ],
+      "manualUrl": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/SLOOP.md",
+      "mapping": "현재는 FM-1 매핑뿐입니다. SMK 키·패드·노브·페이더·휠·페달 배치는 새 포팅 작업에서 확정해야 합니다.",
+      "color": "#91A4B0",
+      "glyph": "⌁"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "sloop-pro-2.8.4-pro",
+      "productId": "sloop-pro",
+      "targetModel": "SMK-37 Pro",
+      "version": "2.8.4",
+      "upstreamVersion": "SLOOP 2.8.4",
+      "portVersion": "2.8.4",
+      "relationship": "official-board-build",
+      "sourceCommit": "701844ba0103c434b4fe4467373857b794487b51",
+      "releaseUrl": "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4",
+      "filename": "sloop-pro-2.8.4.fwsc",
+      "size": 651224,
+      "sha256": "7c18163fd2088663ff057b729419e4ff3b08ceb77ad72072fced3c26a8aeb80a",
+      "packageIdentity": "SMK-37 Pro_900",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "local-file",
+      "status": "published",
+      "externalUrl": "https://isod89.github.io/sloop-pro/",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/isod89/sloop-pro/blob/701844ba0103c434b4fe4467373857b794487b51/SLOOP-PRO.md",
+          "note": "고정 소스의 SMK 모델 분기와 전환 제한을 확인했습니다. 실기 설치는 미시험입니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4",
+          "note": "원저자 공개 파일을 읽어 크기·SHA-256·실제 패키지 identity를 대조했습니다. 파일은 번들하지 않습니다."
+        }
+      ],
+      "family": "sloop-pro",
+      "prerequisites": [
+        "실물 모델과 MIDI 응답·패키지 모델이 모두 일치해야 합니다.",
+        "출발은 검토한 순정 V016, SLOOP Pro(_900), Frodhes(_470) 범위로 제한합니다. 제품은 기기 화면에서 별도 확인하세요.",
+        "SMK-37_9xx인 sloop-smk 계열은 직접 경로가 아닙니다. 해당 개발자의 복귀 절차를 먼저 확인하세요.",
+        "기기 전체 덤프 검증 기록과 해당 펌웨어 백업 파일·순정 복귀 준비를 확인하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 처음 만나면 초기화할 수 있습니다. sloop-smk의 프로젝트를 SLOOP Pro 자료로 자동 복원하지 않습니다.",
+      "backup": {
+        "scope": "공식 웹 에디터의 백업 파일로 곡·프리셋·샘플·설정을 보관합니다. 이 앱은 파일 보관만 하며 기기 전체 덤프를 만들지 않습니다. 2.8.1의 두 개 80 KiB 샘플 슬롯에서 옮길 때는 원본 WAV를 다시 보내야 합니다.",
+        "editorUrl": "https://isod89.github.io/sloop-pro/webapp/editor/"
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "sloop-pro-2.8.4-elite",
+      "productId": "sloop-pro",
+      "targetModel": "SMK-37 Elite",
+      "version": "2.8.4",
+      "upstreamVersion": "SLOOP 2.8.4",
+      "portVersion": "2.8.4",
+      "relationship": "official-board-build",
+      "sourceCommit": "701844ba0103c434b4fe4467373857b794487b51",
+      "releaseUrl": "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4",
+      "filename": "sloop-pro-elite-2.8.4.fwsc",
+      "size": 651224,
+      "sha256": "c6278514ab3ca7b0bfbe3f976baead02cc2adcd801e39166130cb72a4b42705b",
+      "packageIdentity": "SMK-37 Elite_900",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "local-file",
+      "status": "published",
+      "externalUrl": "https://isod89.github.io/sloop-pro/",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/isod89/sloop-pro/blob/701844ba0103c434b4fe4467373857b794487b51/SLOOP-PRO.md",
+          "note": "고정 소스의 SMK 모델 분기와 전환 제한을 확인했습니다. 실기 설치는 미시험입니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4",
+          "note": "원저자 공개 파일을 읽어 크기·SHA-256·실제 패키지 identity를 대조했습니다. 파일은 번들하지 않습니다."
+        }
+      ],
+      "family": "sloop-pro",
+      "prerequisites": [
+        "실물 모델과 MIDI 응답·패키지 모델이 모두 일치해야 합니다.",
+        "출발은 검토한 순정 V016, SLOOP Pro(_900), Frodhes(_470) 범위로 제한합니다. 제품은 기기 화면에서 별도 확인하세요.",
+        "SMK-37_9xx인 sloop-smk 계열은 직접 경로가 아닙니다. 해당 개발자의 복귀 절차를 먼저 확인하세요.",
+        "기기 전체 덤프 검증 기록과 해당 펌웨어 백업 파일·순정 복귀 준비를 확인하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 처음 만나면 초기화할 수 있습니다. sloop-smk의 프로젝트를 SLOOP Pro 자료로 자동 복원하지 않습니다.",
+      "backup": {
+        "scope": "공식 웹 에디터의 백업 파일로 곡·프리셋·샘플·설정을 보관합니다. 이 앱은 파일 보관만 하며 기기 전체 덤프를 만들지 않습니다. 2.8.1의 두 개 80 KiB 샘플 슬롯에서 옮길 때는 원본 WAV를 다시 보내야 합니다.",
+        "editorUrl": "https://isod89.github.io/sloop-pro/webapp/editor/"
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "sloop-pro-2.8.4-mke",
+      "productId": "sloop-pro",
+      "targetModel": "MKE-P37",
+      "version": "2.8.4",
+      "upstreamVersion": "SLOOP 2.8.4",
+      "portVersion": "2.8.4",
+      "relationship": "official-board-build",
+      "sourceCommit": "701844ba0103c434b4fe4467373857b794487b51",
+      "releaseUrl": "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4",
+      "filename": "sloop-pro-mke-2.8.4.fwsc",
+      "size": 651220,
+      "sha256": "be1af47399b351a3c8e1147d9afe091199b5bc9c951db4515a2459f6ff7de61d",
+      "packageIdentity": "MKE-P37_900",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "local-file",
+      "status": "published",
+      "externalUrl": "https://isod89.github.io/sloop-pro/",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/isod89/sloop-pro/blob/701844ba0103c434b4fe4467373857b794487b51/SLOOP-PRO.md",
+          "note": "고정 소스의 SMK 모델 분기와 전환 제한을 확인했습니다. 실기 설치는 미시험입니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/isod89/sloop-pro/releases/tag/v2.8.4",
+          "note": "원저자 공개 파일을 읽어 크기·SHA-256·실제 패키지 identity를 대조했습니다. 파일은 번들하지 않습니다."
+        }
+      ],
+      "family": "sloop-pro",
+      "prerequisites": [
+        "실물 모델과 MIDI 응답·패키지 모델이 모두 일치해야 합니다.",
+        "출발은 검토한 순정 V016, SLOOP Pro(_900), Frodhes(_470) 범위로 제한합니다. 제품은 기기 화면에서 별도 확인하세요.",
+        "SMK-37_9xx인 sloop-smk 계열은 직접 경로가 아닙니다. 해당 개발자의 복귀 절차를 먼저 확인하세요.",
+        "기기 전체 덤프 검증 기록과 해당 펌웨어 백업 파일·순정 복귀 준비를 확인하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 처음 만나면 초기화할 수 있습니다. sloop-smk의 프로젝트를 SLOOP Pro 자료로 자동 복원하지 않습니다.",
+      "backup": {
+        "scope": "공식 웹 에디터의 백업 파일로 곡·프리셋·샘플·설정을 보관합니다. 이 앱은 파일 보관만 하며 기기 전체 덤프를 만들지 않습니다. 2.8.1의 두 개 80 KiB 샘플 슬롯에서 옮길 때는 원본 WAV를 다시 보내야 합니다.",
+        "editorUrl": "https://isod89.github.io/sloop-pro/webapp/editor/"
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "frodhes-0.9.2-pro",
+      "productId": "frodhes",
+      "targetModel": "SMK-37 Pro",
+      "version": "0.9.2",
+      "upstreamVersion": "0.9.2",
+      "portVersion": "0.9.2 genkigenki",
+      "relationship": "community-port",
+      "sourceCommit": "f41582ee99fad7f9eb32c3f6401548ac5fc9aec3",
+      "releaseUrl": "https://github.com/genkigenki/smk37/blob/f41582ee99fad7f9eb32c3f6401548ac5fc9aec3/firmware/frodhes-0.9.2.fwsc",
+      "filename": "frodhes-0.9.2.fwsc",
+      "size": 651270,
+      "sha256": "3363807b50524989a3d0bc2a0e03649f8b79a73d6b804359a554e0cbea110463",
+      "packageIdentity": "SMK-37 Pro_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "local-file",
+      "status": "published",
+      "externalUrl": "https://genkigenki.github.io/smk37/#fw-frodhes",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/SMK37.md",
+          "note": "이전 genkigenki SMK 포트의 매핑·라이선스를 확인했습니다. 이 sourceCommit은 배포 저장소의 파일 고정 커밋입니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/genkigenki/smk37/blob/f41582ee99fad7f9eb32c3f6401548ac5fc9aec3/firmware/frodhes-0.9.2.fwsc",
+          "note": "사이트 manifest와 실제 로컬 조사 파일의 크기·SHA-256이 일치합니다. 실기 설치 결과는 없습니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "고정 0.9.2 genkigenki 포트 파일만 이 경로에서 사용할 수 있습니다.",
+        "출발은 검토한 순정 V016, SLOOP Pro(_900), Frodhes(_470) 범위입니다. 제품은 화면에서 별도 확인하세요.",
+        "전체 덤프 검증 기록·기존 음색 백업 파일·모델별 순정 복귀 준비를 확인하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "frodhes-0.9.2-elite",
+      "productId": "frodhes",
+      "targetModel": "SMK-37 Elite",
+      "version": "0.9.2",
+      "upstreamVersion": "0.9.2",
+      "portVersion": "0.9.2 genkigenki",
+      "relationship": "community-port",
+      "sourceCommit": "f41582ee99fad7f9eb32c3f6401548ac5fc9aec3",
+      "releaseUrl": "https://github.com/genkigenki/smk37/blob/f41582ee99fad7f9eb32c3f6401548ac5fc9aec3/firmware/frodhes-0.9.2-elite.fwsc",
+      "filename": "frodhes-0.9.2-elite.fwsc",
+      "size": 651270,
+      "sha256": "0ca594e75e4683cf5f559a169972e064cd894a5b8e074b9a059e8baf57e039bc",
+      "packageIdentity": "SMK-37 Elite_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "local-file",
+      "status": "published",
+      "externalUrl": "https://genkigenki.github.io/smk37/#fw-frodhes",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/SMK37.md",
+          "note": "이전 genkigenki SMK 포트의 매핑·라이선스를 확인했습니다. 이 sourceCommit은 배포 저장소의 파일 고정 커밋입니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/genkigenki/smk37/blob/f41582ee99fad7f9eb32c3f6401548ac5fc9aec3/firmware/frodhes-0.9.2-elite.fwsc",
+          "note": "사이트 manifest와 실제 로컬 조사 파일의 크기·SHA-256이 일치합니다. 실기 설치 결과는 없습니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "고정 0.9.2 genkigenki 포트 파일만 이 경로에서 사용할 수 있습니다.",
+        "출발은 검토한 순정 V016, SLOOP Pro(_900), Frodhes(_470) 범위입니다. 제품은 화면에서 별도 확인하세요.",
+        "전체 덤프 검증 기록·기존 음색 백업 파일·모델별 순정 복귀 준비를 확인하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "frodhes-0.9.2-mke",
+      "productId": "frodhes",
+      "targetModel": "MKE-P37",
+      "version": "0.9.2",
+      "upstreamVersion": "0.9.2",
+      "portVersion": "0.9.2 genkigenki",
+      "relationship": "community-port",
+      "sourceCommit": "f41582ee99fad7f9eb32c3f6401548ac5fc9aec3",
+      "releaseUrl": "https://github.com/genkigenki/smk37/blob/f41582ee99fad7f9eb32c3f6401548ac5fc9aec3/firmware/frodhes-0.9.2-mke.fwsc",
+      "filename": "frodhes-0.9.2-mke.fwsc",
+      "size": 651266,
+      "sha256": "09974f1fb9470a23b83dc5e524508b83acf2c6057959caada5b125e67ba3e06c",
+      "packageIdentity": "MKE-P37_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "local-file",
+      "status": "published",
+      "externalUrl": "https://genkigenki.github.io/smk37/#fw-frodhes",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/SMK37.md",
+          "note": "이전 genkigenki SMK 포트의 매핑·라이선스를 확인했습니다. 이 sourceCommit은 배포 저장소의 파일 고정 커밋입니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/genkigenki/smk37/blob/f41582ee99fad7f9eb32c3f6401548ac5fc9aec3/firmware/frodhes-0.9.2-mke.fwsc",
+          "note": "사이트 manifest와 실제 로컬 조사 파일의 크기·SHA-256이 일치합니다. 실기 설치 결과는 없습니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "고정 0.9.2 genkigenki 포트 파일만 이 경로에서 사용할 수 있습니다.",
+        "출발은 검토한 순정 V016, SLOOP Pro(_900), Frodhes(_470) 범위입니다. 제품은 화면에서 별도 확인하세요.",
+        "전체 덤프 검증 기록·기존 음색 백업 파일·모델별 순정 복귀 준비를 확인하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "va-102-pro",
+      "productId": "va",
+      "targetModel": "SMK-37 Pro",
+      "version": "102",
+      "upstreamVersion": "102",
+      "portVersion": "102",
+      "relationship": "official-board-build",
+      "sourceCommit": null,
+      "releaseUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
+      "filename": null,
+      "size": null,
+      "sha256": null,
+      "packageIdentity": null,
+      "loaderFamily": "baudgirl",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+          "note": "원저자 매뉴얼의 지원 모델·Android 설치·백업 경계를 확인했습니다. 직접 설치 어댑터는 없습니다."
+        }
+      ],
+      "family": "va",
+      "prerequisites": [
+        "다른 MIDI 프로그램과 이 앱의 포트를 닫고 개발자 설치기로 이동하세요.",
+        "개발자 설치기가 현재 펌웨어에서의 전환 가능 여부를 판정합니다.",
+        "저장되지 않은 편집은 먼저 저장하고 프리셋·패턴 백업을 별도 보관하세요."
+      ],
+      "dataImpact": "저장하지 않은 편집은 사라집니다. 순정에서 첫 설치 시 설치기가 프리셋·패턴을 백업하고 다시 쓰며, 설정은 +VA 기본값이 됩니다. 101 이하와 102 이상 전환에는 엔벌로프 시간 조정 및 백업 단계가 있습니다.",
+      "backup": {
+        "scope": "개발자 Device Manager에서 프리셋 128개와 잠금이 포함된 패턴 16개를 각각 .syx 파일로 보관합니다. 전체 플래시/보정값 백업이 아닙니다.",
+        "editorUrl": "https://baudgirl.com/work/SMK-37%2BVA/device-manager"
+      },
+      "recoveryUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "va-102-elite",
+      "productId": "va",
+      "targetModel": "SMK-37 Elite",
+      "version": "102",
+      "upstreamVersion": "102",
+      "portVersion": "102",
+      "relationship": "official-board-build",
+      "sourceCommit": null,
+      "releaseUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
+      "filename": null,
+      "size": null,
+      "sha256": null,
+      "packageIdentity": null,
+      "loaderFamily": "baudgirl",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+          "note": "원저자 매뉴얼의 지원 모델·Android 설치·백업 경계를 확인했습니다. 직접 설치 어댑터는 없습니다."
+        }
+      ],
+      "family": "va",
+      "prerequisites": [
+        "다른 MIDI 프로그램과 이 앱의 포트를 닫고 개발자 설치기로 이동하세요.",
+        "개발자 설치기가 현재 펌웨어에서의 전환 가능 여부를 판정합니다.",
+        "저장되지 않은 편집은 먼저 저장하고 프리셋·패턴 백업을 별도 보관하세요."
+      ],
+      "dataImpact": "저장하지 않은 편집은 사라집니다. 순정에서 첫 설치 시 설치기가 프리셋·패턴을 백업하고 다시 쓰며, 설정은 +VA 기본값이 됩니다. 101 이하와 102 이상 전환에는 엔벌로프 시간 조정 및 백업 단계가 있습니다.",
+      "backup": {
+        "scope": "개발자 Device Manager에서 프리셋 128개와 잠금이 포함된 패턴 16개를 각각 .syx 파일로 보관합니다. 전체 플래시/보정값 백업이 아닙니다.",
+        "editorUrl": "https://baudgirl.com/work/SMK-37%2BVA/device-manager"
+      },
+      "recoveryUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "va-102-mke",
+      "productId": "va",
+      "targetModel": "MKE-P37",
+      "version": "102",
+      "upstreamVersion": "102",
+      "portVersion": "102",
+      "relationship": "official-board-build",
+      "sourceCommit": null,
+      "releaseUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
+      "filename": null,
+      "size": null,
+      "sha256": null,
+      "packageIdentity": null,
+      "loaderFamily": "baudgirl",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+          "note": "원저자 매뉴얼의 지원 모델·Android 설치·백업 경계를 확인했습니다. 직접 설치 어댑터는 없습니다."
+        }
+      ],
+      "family": "va",
+      "prerequisites": [
+        "다른 MIDI 프로그램과 이 앱의 포트를 닫고 개발자 설치기로 이동하세요.",
+        "개발자 설치기가 현재 펌웨어에서의 전환 가능 여부를 판정합니다.",
+        "저장되지 않은 편집은 먼저 저장하고 프리셋·패턴 백업을 별도 보관하세요."
+      ],
+      "dataImpact": "저장하지 않은 편집은 사라집니다. 순정에서 첫 설치 시 설치기가 프리셋·패턴을 백업하고 다시 쓰며, 설정은 +VA 기본값이 됩니다. 101 이하와 102 이상 전환에는 엔벌로프 시간 조정 및 백업 단계가 있습니다.",
+      "backup": {
+        "scope": "개발자 Device Manager에서 프리셋 128개와 잠금이 포함된 패턴 16개를 각각 .syx 파일로 보관합니다. 전체 플래시/보정값 백업이 아닙니다.",
+        "editorUrl": "https://baudgirl.com/work/SMK-37%2BVA/device-manager"
+      },
+      "recoveryUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "va-102-fm1",
+      "productId": "va",
+      "targetModel": "FM-1",
+      "version": "102",
+      "upstreamVersion": "102",
+      "portVersion": null,
+      "relationship": "original",
+      "sourceCommit": null,
+      "releaseUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
+      "filename": null,
+      "size": null,
+      "sha256": null,
+      "packageIdentity": null,
+      "loaderFamily": "baudgirl",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://baudgirl.com/work/FM-1%2BVA/install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+          "note": "원저자 매뉴얼의 지원 모델·Android 설치·백업 경계를 확인했습니다. 직접 설치 어댑터는 없습니다."
+        }
+      ],
+      "family": "va",
+      "prerequisites": [
+        "다른 MIDI 프로그램과 이 앱의 포트를 닫고 개발자 설치기로 이동하세요.",
+        "개발자 설치기가 현재 펌웨어에서의 전환 가능 여부를 판정합니다.",
+        "저장되지 않은 편집은 먼저 저장하고 프리셋·패턴 백업을 별도 보관하세요."
+      ],
+      "dataImpact": "저장하지 않은 편집은 사라집니다. 순정에서 첫 설치 시 설치기가 프리셋·패턴을 백업하고 다시 쓰며, 설정은 +VA 기본값이 됩니다. 101 이하와 102 이상 전환에는 엔벌로프 시간 조정 및 백업 단계가 있습니다.",
+      "backup": {
+        "scope": "개발자 Device Manager에서 프리셋 128개와 잠금이 포함된 패턴 16개를 각각 .syx 파일로 보관합니다. 전체 플래시/보정값 백업이 아닙니다.",
+        "editorUrl": "https://baudgirl.com/work/SMK-37%2BVA/device-manager"
+      },
+      "recoveryUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "erik37-1.2-pro",
+      "productId": "erik37",
+      "targetModel": "SMK-37 Pro",
+      "version": "1.2",
+      "upstreamVersion": "1.2",
+      "portVersion": null,
+      "relationship": "original",
+      "sourceCommit": "c06c1f7f9e7864e7ad2552be540280d344676326",
+      "releaseUrl": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+      "filename": "erik37.fwsc",
+      "size": 651224,
+      "sha256": "a83285d8e6ef9291bd613a248ff78a0c3e6efc02d231fcc53fb6e5d2ac3ac638",
+      "packageIdentity": "SMK-37 Pro_480102",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://genkigenki.github.io/smk37/#fw-erik37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/erik37/blob/c06c1f7f9e7864e7ad2552be540280d344676326/LICENSING.md",
+          "note": "MPL-2.0 코드와 CC BY 3.0 Salamander 샘플·글꼴 조건을 분리했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+          "note": "v1.2의 모델별 파일과 해시 확인. 원저자는 experimental 및 FM-1 실기 미시험으로 표시합니다."
+        }
+      ],
+      "family": "erik37",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "설정·프리셋을 다른 펌웨어와 공유하거나 자동 복원한다고 가정하지 않습니다.",
+      "backup": {
+        "scope": "사용자 프리셋은 기기 자체 저장소에 남지만, 검토 자료에서 에디터 덤프 어댑터는 확인하지 못했습니다. 별도 백업 파일 보관은 가능해도 이 앱이 프리셋을 읽었다고 표시하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "erik37-1.2-elite",
+      "productId": "erik37",
+      "targetModel": "SMK-37 Elite",
+      "version": "1.2",
+      "upstreamVersion": "1.2",
+      "portVersion": null,
+      "relationship": "official-board-build",
+      "sourceCommit": "c06c1f7f9e7864e7ad2552be540280d344676326",
+      "releaseUrl": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+      "filename": "erik37-elite.fwsc",
+      "size": 651228,
+      "sha256": "1d6b2ca90d6403bb4e9b3a1a805a719d314523afaea5f835bf7e3cec347e99a3",
+      "packageIdentity": "SMK-37 Elite_480102",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://genkigenki.github.io/smk37/#fw-erik37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/erik37/blob/c06c1f7f9e7864e7ad2552be540280d344676326/LICENSING.md",
+          "note": "MPL-2.0 코드와 CC BY 3.0 Salamander 샘플·글꼴 조건을 분리했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+          "note": "v1.2의 모델별 파일과 해시 확인. 원저자는 experimental 및 FM-1 실기 미시험으로 표시합니다."
+        }
+      ],
+      "family": "erik37",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "설정·프리셋을 다른 펌웨어와 공유하거나 자동 복원한다고 가정하지 않습니다.",
+      "backup": {
+        "scope": "사용자 프리셋은 기기 자체 저장소에 남지만, 검토 자료에서 에디터 덤프 어댑터는 확인하지 못했습니다. 별도 백업 파일 보관은 가능해도 이 앱이 프리셋을 읽었다고 표시하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "erik37-1.2-mke",
+      "productId": "erik37",
+      "targetModel": "MKE-P37",
+      "version": "1.2",
+      "upstreamVersion": "1.2",
+      "portVersion": null,
+      "relationship": "official-board-build",
+      "sourceCommit": "c06c1f7f9e7864e7ad2552be540280d344676326",
+      "releaseUrl": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+      "filename": "erik37-mke.fwsc",
+      "size": 651220,
+      "sha256": "9a1d892e84992c2bd2ce00244f37cc77b7892078f348552e74cad84d6cba5224",
+      "packageIdentity": "MKE-P37_480102",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://genkigenki.github.io/smk37/#fw-erik37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/erik37/blob/c06c1f7f9e7864e7ad2552be540280d344676326/LICENSING.md",
+          "note": "MPL-2.0 코드와 CC BY 3.0 Salamander 샘플·글꼴 조건을 분리했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+          "note": "v1.2의 모델별 파일과 해시 확인. 원저자는 experimental 및 FM-1 실기 미시험으로 표시합니다."
+        }
+      ],
+      "family": "erik37",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "설정·프리셋을 다른 펌웨어와 공유하거나 자동 복원한다고 가정하지 않습니다.",
+      "backup": {
+        "scope": "사용자 프리셋은 기기 자체 저장소에 남지만, 검토 자료에서 에디터 덤프 어댑터는 확인하지 못했습니다. 별도 백업 파일 보관은 가능해도 이 앱이 프리셋을 읽었다고 표시하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "erik37-1.2-fm1",
+      "productId": "erik37",
+      "targetModel": "FM-1",
+      "version": "1.2",
+      "upstreamVersion": "1.2",
+      "portVersion": null,
+      "relationship": "official-board-build",
+      "sourceCommit": "c06c1f7f9e7864e7ad2552be540280d344676326",
+      "releaseUrl": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+      "filename": "erik37-fm1.fwsc",
+      "size": 610108,
+      "sha256": "8497d58eef3d65214ae09817656afa53206899fd8364c3171173fa5e22a3fbe2",
+      "packageIdentity": "FM-1_480102",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://genkigenki.github.io/smk37/#fw-erik37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/erik37/blob/c06c1f7f9e7864e7ad2552be540280d344676326/LICENSING.md",
+          "note": "MPL-2.0 코드와 CC BY 3.0 Salamander 샘플·글꼴 조건을 분리했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/genkigenki/erik37/releases/tag/v1.2",
+          "note": "v1.2의 모델별 파일과 해시 확인. 원저자는 experimental 및 FM-1 실기 미시험으로 표시합니다."
+        }
+      ],
+      "family": "erik37",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "설정·프리셋을 다른 펌웨어와 공유하거나 자동 복원한다고 가정하지 않습니다.",
+      "backup": {
+        "scope": "사용자 프리셋은 기기 자체 저장소에 남지만, 검토 자료에서 에디터 덤프 어댑터는 확인하지 못했습니다. 별도 백업 파일 보관은 가능해도 이 앱이 프리셋을 읽었다고 표시하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "frodhes-0.9.9-mke",
+      "productId": "frodhes",
+      "targetModel": "MKE-P37",
+      "version": "0.9.9",
+      "upstreamVersion": "0.9.9",
+      "portVersion": "0.9.9",
+      "relationship": "official-board-build",
+      "sourceCommit": "456b5da4e933b01e6babeb8b2e3d211cb3896ff7",
+      "releaseUrl": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+      "filename": "frodhes-0.9.9-mke-p37.fwsc",
+      "size": 651385,
+      "sha256": "99112bda23fa4d4c605eee47b86eac3410f3914ba46fafd765ae2899c1bfd7ca",
+      "packageIdentity": "MKE-P37_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://leonardomirabal.github.io/frodhes/#install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "frodhes-0.9.9-elite",
+      "productId": "frodhes",
+      "targetModel": "SMK-37 Elite",
+      "version": "0.9.9",
+      "upstreamVersion": "0.9.9",
+      "portVersion": "0.9.9",
+      "relationship": "official-board-build",
+      "sourceCommit": "456b5da4e933b01e6babeb8b2e3d211cb3896ff7",
+      "releaseUrl": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+      "filename": "frodhes-0.9.9-smk37-elite.fwsc",
+      "size": 651389,
+      "sha256": "8e16684b40ce5f4ce372ddd194abf34f60a62fea3048789109f48b95f1b184eb",
+      "packageIdentity": "SMK-37 Elite_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://leonardomirabal.github.io/frodhes/#install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "frodhes-0.9.9-pro",
+      "productId": "frodhes",
+      "targetModel": "SMK-37 Pro",
+      "version": "0.9.9",
+      "upstreamVersion": "0.9.9",
+      "portVersion": "0.9.9",
+      "relationship": "official-board-build",
+      "sourceCommit": "456b5da4e933b01e6babeb8b2e3d211cb3896ff7",
+      "releaseUrl": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+      "filename": "frodhes-0.9.9-smk37-pro.fwsc",
+      "size": 651389,
+      "sha256": "e72acee65db0c87c92b4d4d301562162eaad6f1a23357e6ca8413266bd267a34",
+      "packageIdentity": "SMK-37 Pro_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://leonardomirabal.github.io/frodhes/#install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "frodhes-0.9.9-fm1",
+      "productId": "frodhes",
+      "targetModel": "FM-1",
+      "version": "0.9.9",
+      "upstreamVersion": "0.9.9",
+      "portVersion": null,
+      "relationship": "original",
+      "sourceCommit": "456b5da4e933b01e6babeb8b2e3d211cb3896ff7",
+      "releaseUrl": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+      "filename": "frodhes-0.9.9.fwsc",
+      "size": 612225,
+      "sha256": "4b37fdb89b301428d37bffe92405614158cba7843583562e4d391337b5b3d80b",
+      "packageIdentity": "FM-1_958",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://leonardomirabal.github.io/frodhes/#install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/genkigenki/frodhes/blob/9f83c0c84bd2659ebe0e435bb98c0b46e2af967a/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.9",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "obervave-3.3.2-elite",
+      "productId": "obervave",
+      "targetModel": "SMK-37 Elite",
+      "version": "3.3.2",
+      "upstreamVersion": "3.3.2",
+      "portVersion": "3.3.2",
+      "relationship": "official-board-build",
+      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "filename": "obervave-3.3.2-smk37-elite.fwsc",
+      "size": 651327,
+      "sha256": "753e8f659d84574f74b03bbf16dc11a7650c099402a6f6af63cef529b732c17c",
+      "packageIdentity": "SMK-37 Elite_9533",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "obervave",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "현재 앱은 OberVave 프리셋의 기기 읽기 어댑터가 없습니다. 외부 도구로 내보낸 파일과 전체 덤프 검증 기록만 관리합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "obervave-3.3.2-mke",
+      "productId": "obervave",
+      "targetModel": "MKE-P37",
+      "version": "3.3.2",
+      "upstreamVersion": "3.3.2",
+      "portVersion": "3.3.2",
+      "relationship": "official-board-build",
+      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "filename": "obervave-3.3.2-smk37-mke.fwsc",
+      "size": 651323,
+      "sha256": "5154d15fb7b4a662ea619c90b2c00b051dc61169865ebfcefeb6e4d2b0c37f42",
+      "packageIdentity": "MKE-P37_9533",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "obervave",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "현재 앱은 OberVave 프리셋의 기기 읽기 어댑터가 없습니다. 외부 도구로 내보낸 파일과 전체 덤프 검증 기록만 관리합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "obervave-3.3.2-pro",
+      "productId": "obervave",
+      "targetModel": "SMK-37 Pro",
+      "version": "3.3.2",
+      "upstreamVersion": "3.3.2",
+      "portVersion": "3.3.2",
+      "relationship": "official-board-build",
+      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "filename": "obervave-3.3.2-smk37.fwsc",
+      "size": 651327,
+      "sha256": "a23372836bcf4487228220fa8ec41b5f013f538151f9416aef3b69f75b45b6ae",
+      "packageIdentity": "SMK-37 Pro_9533",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "obervave",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "현재 앱은 OberVave 프리셋의 기기 읽기 어댑터가 없습니다. 외부 도구로 내보낸 파일과 전체 덤프 검증 기록만 관리합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "obervave-3.3.2-fm1",
+      "productId": "obervave",
+      "targetModel": "FM-1",
+      "version": "3.3.2",
+      "upstreamVersion": "3.3.2",
+      "portVersion": null,
+      "relationship": "original",
+      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "filename": "obervave-3.3.2.fwsc",
+      "size": 612223,
+      "sha256": "ba54723e1ec0d40d3552fb463a384d3b9a33290e57fdf8a615f7f22fa34644a2",
+      "packageIdentity": "FM-1_9533",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/blob/099ccd6f30a83591cea3521efaec6d3546004036/LICENSING.md",
+          "note": "구성요소 라이선스와 원저자의 보드별 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
+          "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        }
+      ],
+      "family": "obervave",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "현재 앱은 OberVave 프리셋의 기기 읽기 어댑터가 없습니다. 외부 도구로 내보낸 파일과 전체 덤프 검증 기록만 관리합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "choralroot-0.29-pro-1core",
+      "productId": "choralroot",
+      "targetModel": "SMK-37 Pro",
+      "version": "0.29-smk37 1-core",
+      "upstreamVersion": "0.29",
+      "portVersion": "0.29-smk37-1core",
+      "relationship": "official-board-build",
+      "sourceCommit": "904f275e897948cc2ef364714f4b6982a29c7754",
+      "releaseUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "filename": "choralroot-0.29-smk37-1core.fwsc",
+      "size": 651496,
+      "sha256": "637fae9dfaae4cbe64deeba4bcff87f83fc35ac3be552958a8f58b2c3559d9b4",
+      "packageIdentity": "SMK-37 Pro_920",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+          "note": "커뮤니티 시험판이며 관리자의 SMK 실기 시험이 없다는 원문 표기를 유지합니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+          "note": "Pro/Elite/MKE 각각 기본판과 1-core 공개 파일의 크기·해시·identity 확인."
+        }
+      ],
+      "family": "choralroot",
+      "prerequisites": [
+        "커뮤니티 시험용 pre-release입니다. 일반 실기 검증 완료 패키지가 아닙니다.",
+        "모델별 파일과 기본/1-core 구분을 확인하고 원저자 SMK37.md를 따르세요.",
+        "복귀용 순정 파일·M-UPGRADE·전체 덤프 및 ChoralRoot 백업을 먼저 준비하세요."
+      ],
+      "dataImpact": "FM-1 최신 0.32를 SMK-37로 설치하지 않습니다. 1-core 대체 파일은 별도 해시를 가진 시험용 패키지입니다.",
+      "backup": {
+        "scope": "원저자 SMK 시험 설치기는 이미 ChoralRoot인 기기를 먼저 파일로 백업한다고 문서화합니다. 이 앱은 그 백업 프로토콜을 구현하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "choralroot-0.29-elite-1core",
+      "productId": "choralroot",
+      "targetModel": "SMK-37 Elite",
+      "version": "0.29-smk37 1-core",
+      "upstreamVersion": "0.29",
+      "portVersion": "0.29-smk37-1core",
+      "relationship": "official-board-build",
+      "sourceCommit": "904f275e897948cc2ef364714f4b6982a29c7754",
+      "releaseUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "filename": "choralroot-0.29-smk37-elite-1core.fwsc",
+      "size": 651500,
+      "sha256": "e7cf9ada92659660e692dc674e1ea9d1c1b238d9b3a52776000dd908735b525e",
+      "packageIdentity": "SMK-37 Elite_920",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+          "note": "커뮤니티 시험판이며 관리자의 SMK 실기 시험이 없다는 원문 표기를 유지합니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+          "note": "Pro/Elite/MKE 각각 기본판과 1-core 공개 파일의 크기·해시·identity 확인."
+        }
+      ],
+      "family": "choralroot",
+      "prerequisites": [
+        "커뮤니티 시험용 pre-release입니다. 일반 실기 검증 완료 패키지가 아닙니다.",
+        "모델별 파일과 기본/1-core 구분을 확인하고 원저자 SMK37.md를 따르세요.",
+        "복귀용 순정 파일·M-UPGRADE·전체 덤프 및 ChoralRoot 백업을 먼저 준비하세요."
+      ],
+      "dataImpact": "FM-1 최신 0.32를 SMK-37로 설치하지 않습니다. 1-core 대체 파일은 별도 해시를 가진 시험용 패키지입니다.",
+      "backup": {
+        "scope": "원저자 SMK 시험 설치기는 이미 ChoralRoot인 기기를 먼저 파일로 백업한다고 문서화합니다. 이 앱은 그 백업 프로토콜을 구현하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "choralroot-0.29-elite",
+      "productId": "choralroot",
+      "targetModel": "SMK-37 Elite",
+      "version": "0.29-smk37",
+      "upstreamVersion": "0.29",
+      "portVersion": "0.29-smk37",
+      "relationship": "official-board-build",
+      "sourceCommit": "904f275e897948cc2ef364714f4b6982a29c7754",
+      "releaseUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "filename": "choralroot-0.29-smk37-elite.fwsc",
+      "size": 651500,
+      "sha256": "dae721828de71e3e485c1df5364ec74b2b3c4543755d4dd7fa85778300d5f56d",
+      "packageIdentity": "SMK-37 Elite_920",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+          "note": "커뮤니티 시험판이며 관리자의 SMK 실기 시험이 없다는 원문 표기를 유지합니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+          "note": "Pro/Elite/MKE 각각 기본판과 1-core 공개 파일의 크기·해시·identity 확인."
+        }
+      ],
+      "family": "choralroot",
+      "prerequisites": [
+        "커뮤니티 시험용 pre-release입니다. 일반 실기 검증 완료 패키지가 아닙니다.",
+        "모델별 파일과 기본/1-core 구분을 확인하고 원저자 SMK37.md를 따르세요.",
+        "복귀용 순정 파일·M-UPGRADE·전체 덤프 및 ChoralRoot 백업을 먼저 준비하세요."
+      ],
+      "dataImpact": "FM-1 최신 0.32를 SMK-37로 설치하지 않습니다. 1-core 대체 파일은 별도 해시를 가진 시험용 패키지입니다.",
+      "backup": {
+        "scope": "원저자 SMK 시험 설치기는 이미 ChoralRoot인 기기를 먼저 파일로 백업한다고 문서화합니다. 이 앱은 그 백업 프로토콜을 구현하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "choralroot-0.29-mke-1core",
+      "productId": "choralroot",
+      "targetModel": "MKE-P37",
+      "version": "0.29-smk37 1-core",
+      "upstreamVersion": "0.29",
+      "portVersion": "0.29-smk37-1core",
+      "relationship": "official-board-build",
+      "sourceCommit": "904f275e897948cc2ef364714f4b6982a29c7754",
+      "releaseUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "filename": "choralroot-0.29-smk37-mke-1core.fwsc",
+      "size": 651492,
+      "sha256": "27b7f38982c259d9d050b99bb5d6dc84a7032e18d080e93c8246c0873a13b88e",
+      "packageIdentity": "MKE-P37_920",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+          "note": "커뮤니티 시험판이며 관리자의 SMK 실기 시험이 없다는 원문 표기를 유지합니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+          "note": "Pro/Elite/MKE 각각 기본판과 1-core 공개 파일의 크기·해시·identity 확인."
+        }
+      ],
+      "family": "choralroot",
+      "prerequisites": [
+        "커뮤니티 시험용 pre-release입니다. 일반 실기 검증 완료 패키지가 아닙니다.",
+        "모델별 파일과 기본/1-core 구분을 확인하고 원저자 SMK37.md를 따르세요.",
+        "복귀용 순정 파일·M-UPGRADE·전체 덤프 및 ChoralRoot 백업을 먼저 준비하세요."
+      ],
+      "dataImpact": "FM-1 최신 0.32를 SMK-37로 설치하지 않습니다. 1-core 대체 파일은 별도 해시를 가진 시험용 패키지입니다.",
+      "backup": {
+        "scope": "원저자 SMK 시험 설치기는 이미 ChoralRoot인 기기를 먼저 파일로 백업한다고 문서화합니다. 이 앱은 그 백업 프로토콜을 구현하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "choralroot-0.29-mke",
+      "productId": "choralroot",
+      "targetModel": "MKE-P37",
+      "version": "0.29-smk37",
+      "upstreamVersion": "0.29",
+      "portVersion": "0.29-smk37",
+      "relationship": "official-board-build",
+      "sourceCommit": "904f275e897948cc2ef364714f4b6982a29c7754",
+      "releaseUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "filename": "choralroot-0.29-smk37-mke.fwsc",
+      "size": 651492,
+      "sha256": "ab31898a3df0de9e37601354e3a89448f9bc46ede74bcdd09dbfa76530786972",
+      "packageIdentity": "MKE-P37_920",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+          "note": "커뮤니티 시험판이며 관리자의 SMK 실기 시험이 없다는 원문 표기를 유지합니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+          "note": "Pro/Elite/MKE 각각 기본판과 1-core 공개 파일의 크기·해시·identity 확인."
+        }
+      ],
+      "family": "choralroot",
+      "prerequisites": [
+        "커뮤니티 시험용 pre-release입니다. 일반 실기 검증 완료 패키지가 아닙니다.",
+        "모델별 파일과 기본/1-core 구분을 확인하고 원저자 SMK37.md를 따르세요.",
+        "복귀용 순정 파일·M-UPGRADE·전체 덤프 및 ChoralRoot 백업을 먼저 준비하세요."
+      ],
+      "dataImpact": "FM-1 최신 0.32를 SMK-37로 설치하지 않습니다. 1-core 대체 파일은 별도 해시를 가진 시험용 패키지입니다.",
+      "backup": {
+        "scope": "원저자 SMK 시험 설치기는 이미 ChoralRoot인 기기를 먼저 파일로 백업한다고 문서화합니다. 이 앱은 그 백업 프로토콜을 구현하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "choralroot-0.29-pro",
+      "productId": "choralroot",
+      "targetModel": "SMK-37 Pro",
+      "version": "0.29-smk37",
+      "upstreamVersion": "0.29",
+      "portVersion": "0.29-smk37",
+      "relationship": "official-board-build",
+      "sourceCommit": "904f275e897948cc2ef364714f4b6982a29c7754",
+      "releaseUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "filename": "choralroot-0.29-smk37.fwsc",
+      "size": 651496,
+      "sha256": "07abef95a089c91863828ddc15d6da339af085ad7cb6e737e86f5d74ee8b5d36",
+      "packageIdentity": "SMK-37 Pro_920",
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/blob/904f275e897948cc2ef364714f4b6982a29c7754/SMK37.md",
+          "note": "커뮤니티 시험판이며 관리자의 SMK 실기 시험이 없다는 원문 표기를 유지합니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.29-smk37",
+          "note": "Pro/Elite/MKE 각각 기본판과 1-core 공개 파일의 크기·해시·identity 확인."
+        }
+      ],
+      "family": "choralroot",
+      "prerequisites": [
+        "커뮤니티 시험용 pre-release입니다. 일반 실기 검증 완료 패키지가 아닙니다.",
+        "모델별 파일과 기본/1-core 구분을 확인하고 원저자 SMK37.md를 따르세요.",
+        "복귀용 순정 파일·M-UPGRADE·전체 덤프 및 ChoralRoot 백업을 먼저 준비하세요."
+      ],
+      "dataImpact": "FM-1 최신 0.32를 SMK-37로 설치하지 않습니다. 1-core 대체 파일은 별도 해시를 가진 시험용 패키지입니다.",
+      "backup": {
+        "scope": "원저자 SMK 시험 설치기는 이미 ChoralRoot인 기기를 먼저 파일로 백업한다고 문서화합니다. 이 앱은 그 백업 프로토콜을 구현하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "choralroot-0.32-fm1",
+      "productId": "choralroot",
+      "targetModel": "FM-1",
+      "version": "0.32",
+      "upstreamVersion": "0.32",
+      "portVersion": null,
+      "relationship": "original",
+      "sourceCommit": "5e08da8797019b17b390954ad834cd5aa679e037",
+      "releaseUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.32",
+      "filename": "choralroot-0.32.fwsc",
+      "size": 659880,
+      "sha256": "a4f88c00142141a40b645162f360696c319f78c0ce032a87d4d014f52ddd12b0",
+      "packageIdentity": null,
+      "loaderFamily": "felucca-ufw",
+      "method": "external",
+      "distribution": "external-only",
+      "status": "published",
+      "externalUrl": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.32",
+      "evidence": [
+        {
+          "kind": "published-build",
+          "url": "https://github.com/Quixotic7/ChoralRootFM1/releases/tag/v0.32",
+          "note": "원저자 최신 FM-1 릴리스 metadata 확인. 모델 identity는 이 파일에서 따로 읽지 않았으며 SMK 설치 대상이 아닙니다."
+        }
+      ],
+      "family": "choralroot",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "FM-1 최신 0.32를 SMK-37로 설치하지 않습니다. 1-core 대체 파일은 별도 해시를 가진 시험용 패키지입니다.",
+      "backup": {
+        "scope": "원저자 SMK 시험 설치기는 이미 ChoralRoot인 기기를 먼저 파일로 백업한다고 문서화합니다. 이 앱은 그 백업 프로토콜을 구현하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "sloopdx-4.0.1-fm1",
+      "productId": "sloopdx",
+      "targetModel": "FM-1",
+      "version": "4.0.1",
+      "upstreamVersion": "4.0.1",
+      "portVersion": null,
+      "relationship": "original",
+      "sourceCommit": "8c1035b79d860edcb6f23556910206332669dac8",
+      "releaseUrl": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
+      "filename": "felucca-4.0.1.fwsc",
+      "size": 610154,
+      "sha256": "cebc88c0f996f338d4741502ec7f99d05ecb9c6de3715ab674401a14d6a255d7",
+      "packageIdentity": "FM-1_940",
+      "loaderFamily": "felucca-ufw",
+      "method": "unavailable",
+      "distribution": "none",
+      "status": "published",
+      "externalUrl": "https://dx7.designburgapps.com/",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/tools/build.py",
+          "note": "검토한 빌드는 FM-1 PRODUCT만 생성하고 SMK/BOARD 분기가 없습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
+          "note": "실제 FM-1 공개 파일입니다. 이 앱은 FM-1 파일을 SMK-37에 설치하거나 재개하지 않습니다."
+        }
+      ],
+      "family": "sloopdx",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "FM-1용 웹 에디터의 백업 기능을 SMK-37 지원 근거로 사용하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "sloopdx-port-pro",
+      "productId": "sloopdx",
+      "targetModel": "SMK-37 Pro",
+      "version": "SMK 포팅 필요",
+      "upstreamVersion": "4.0.1",
+      "portVersion": null,
+      "relationship": "community-port",
+      "sourceCommit": "8c1035b79d860edcb6f23556910206332669dac8",
+      "releaseUrl": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
+      "filename": null,
+      "size": null,
+      "sha256": null,
+      "packageIdentity": null,
+      "loaderFamily": "unknown",
+      "method": "unavailable",
+      "distribution": "none",
+      "status": "port-required",
+      "externalUrl": "https://dx7.designburgapps.com/",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/tools/build.py",
+          "note": "원본 소스·최신 공개 릴리스에서 SMK target/package를 확인하지 못했습니다. 다른 제3자 포크 전체의 부재를 뜻하지는 않습니다."
+        }
+      ],
+      "family": "sloopdx",
+      "prerequisites": [
+        "소스·라이선스·FM-1 기준 빌드를 먼저 고정합니다.",
+        "SMK 입력 매핑과 저장 영역·보호 주소·로더 분기를 검토하는 별도 포팅 작업이 필요합니다.",
+        "빌드만 성공한 결과는 실기 검토 전 일반 설치 패키지로 승격하지 않습니다."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "FM-1용 웹 에디터의 백업 기능을 SMK-37 지원 근거로 사용하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "sloopdx-port-elite",
+      "productId": "sloopdx",
+      "targetModel": "SMK-37 Elite",
+      "version": "SMK 포팅 필요",
+      "upstreamVersion": "4.0.1",
+      "portVersion": null,
+      "relationship": "community-port",
+      "sourceCommit": "8c1035b79d860edcb6f23556910206332669dac8",
+      "releaseUrl": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
+      "filename": null,
+      "size": null,
+      "sha256": null,
+      "packageIdentity": null,
+      "loaderFamily": "unknown",
+      "method": "unavailable",
+      "distribution": "none",
+      "status": "port-required",
+      "externalUrl": "https://dx7.designburgapps.com/",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/tools/build.py",
+          "note": "원본 소스·최신 공개 릴리스에서 SMK target/package를 확인하지 못했습니다. 다른 제3자 포크 전체의 부재를 뜻하지는 않습니다."
+        }
+      ],
+      "family": "sloopdx",
+      "prerequisites": [
+        "소스·라이선스·FM-1 기준 빌드를 먼저 고정합니다.",
+        "SMK 입력 매핑과 저장 영역·보호 주소·로더 분기를 검토하는 별도 포팅 작업이 필요합니다.",
+        "빌드만 성공한 결과는 실기 검토 전 일반 설치 패키지로 승격하지 않습니다."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "FM-1용 웹 에디터의 백업 기능을 SMK-37 지원 근거로 사용하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "id": "sloopdx-port-mke",
+      "productId": "sloopdx",
+      "targetModel": "MKE-P37",
+      "version": "SMK 포팅 필요",
+      "upstreamVersion": "4.0.1",
+      "portVersion": null,
+      "relationship": "community-port",
+      "sourceCommit": "8c1035b79d860edcb6f23556910206332669dac8",
+      "releaseUrl": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
+      "filename": null,
+      "size": null,
+      "sha256": null,
+      "packageIdentity": null,
+      "loaderFamily": "unknown",
+      "method": "unavailable",
+      "distribution": "none",
+      "status": "port-required",
+      "externalUrl": "https://dx7.designburgapps.com/",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/tools/build.py",
+          "note": "원본 소스·최신 공개 릴리스에서 SMK target/package를 확인하지 못했습니다. 다른 제3자 포크 전체의 부재를 뜻하지는 않습니다."
+        }
+      ],
+      "family": "sloopdx",
+      "prerequisites": [
+        "소스·라이선스·FM-1 기준 빌드를 먼저 고정합니다.",
+        "SMK 입력 매핑과 저장 영역·보호 주소·로더 분기를 검토하는 별도 포팅 작업이 필요합니다.",
+        "빌드만 성공한 결과는 실기 검토 전 일반 설치 패키지로 승격하지 않습니다."
+      ],
+      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "backup": {
+        "scope": "FM-1용 웹 에디터의 백업 기능을 SMK-37 지원 근거로 사용하지 않습니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
+      "verifiedAt": "2026-11-09"
+    }
+  ]
+}
