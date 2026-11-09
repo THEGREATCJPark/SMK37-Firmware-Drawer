@@ -15,3 +15,11 @@ for(const f of files){
   if(createHash('sha256').update(bytes).digest('hex')!==f.sha)throw new Error(`${f.name}: SHA-256 mismatch; nothing replaced.`);
   await writeFile(path,bytes);console.log(`${f.name}: ${bytes.length} bytes, pinned SHA-256 OK (local-only fixture)`);
 }
+
+await mkdir('.local/integration',{recursive:true});
+await writeFile('.local/integration/va.fwsc',await readFile('.local/packages/SMK-37+VA-102.fwsc'));
+
+const factory={name:'va-factory.syx',url:'https://baudgirl.com/fm1/presets/fm1-factory-presets.syx',sha:'8e67df1ceda3ae814cc4bb982413ef88cc8435263869afc2f29327b7954e2a41'};
+let factoryBytes;try{factoryBytes=await readFile('.local/integration/'+factory.name);}catch{const r=await fetch(factory.url,{signal:AbortSignal.timeout(60000)});if(!r.ok)throw Error('Factory download failed');factoryBytes=Buffer.from(await r.arrayBuffer());}
+if(createHash('sha256').update(factoryBytes).digest('hex')!==factory.sha)throw Error('Factory SHA mismatch');
+await writeFile('.local/integration/'+factory.name,factoryBytes);

@@ -52,15 +52,15 @@ test('오프라인 보관 bytes가 손상되면 metadata가 같아도 SHA 검사
   await page.reload();await page.getByRole('button',{name:'Frodhes 열기',exact:true}).click();await page.getByRole('button',{name:'파일 검사·설치 준비'}).click();await page.getByRole('button',{name:'다시 검증·보관'}).click();
   await expect(page.getByText(/SHA-256.*다릅니다/)).toBeVisible();await expect(page.getByRole('button',{name:'호환성·파일 검사'})).toBeDisabled();
 });
-test('외부 설치기는 opened 상태만 남기고 성공을 만들지 않는다',async({page,context})=>{
-  await context.route('https://baudgirl.com/**',route=>route.fulfill({body:'external installer test boundary',contentType:'text/html'}));
+test('+VA도 외부 설치기로 이동하지 않고 개인 다운로드 도우미를 안내한다',async({page,context})=>{
   await page.goto('/');await page.getByRole('button',{name:'+VA 열기',exact:true}).click();
-  const popupPromise=page.waitForEvent('popup');await page.getByRole('button',{name:'개발자 설치 페이지',exact:true}).click();
-  const popup=await popupPromise;await popup.waitForURL(/baudgirl/);await popup.close();
-  await page.getByRole('button',{name:'닫기',exact:true}).click();await page.getByRole('button',{name:'백업과 이력',exact:true}).click();
-  await expect(page.getByText('외부 설치기 열림',{exact:true})).toBeVisible();
-  await expect(page.getByText('응답 확인',{exact:true})).toHaveCount(0);
+  await page.getByRole('button',{name:'파일 검사·설치 준비',exact:true}).click();
+  await expect(page.getByText('+VA 개인 다운로드 도우미',{exact:true})).toBeVisible();
+  await expect(page.getByRole('link',{name:'Windows 도우미 다운로드'})).toBeVisible();
+  expect(context.pages()).toHaveLength(1);
+  await expect(page.getByRole('button',{name:'개발자 설치 페이지',exact:true})).toHaveCount(0);
 });
+
 test('실제 패키지 명시적 보관 · 오프라인 앱과 파일 재검증',async({page,context})=>{
   await page.goto('/');await page.evaluate(()=>navigator.serviceWorker.ready);await page.reload();
   await page.getByRole('button',{name:'Frodhes 열기',exact:true}).click();await page.getByRole('button',{name:'파일 검사·설치 준비'}).click();

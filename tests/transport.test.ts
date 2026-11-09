@@ -44,3 +44,13 @@ it('재열거 때 다른 모델을 고르면 다음 데이터 요청 전에 차�
   Object.assign(up,{needsSelection:true,stage:'loader'});
   await expect(up.find()).rejects.toThrow(/모델/);expect(mock.upgrades).toBe(0);
 });
+
+it('+VA102에서 Felucca 패키지로 전환할 때 최종 모델별 loader를 검사한다',async()=>{
+  const image=logicalImage(fixtureBytes),mock=new MockMidiDevice(image,fixtureArtifact.packageIdentity!,'SMK-37+VA_102','none',true);
+  const request={artifact:fixtureArtifact,physical:'SMK-37 Pro' as const,family:'va' as const,resume:false};
+  const identity={text:'SMK-37+VA_102',model:'SMK-37+VA',version:102};
+  const up=new SelectedUpdater(mock.access as unknown as MIDIAccess,{inputId:mock.input.id,outputId:mock.output.id},async()=>({inputId:mock.input.id,outputId:mock.output.id}),request,identity,null as unknown as MidiSession,()=>{},new AbortController().signal);
+  Object.assign(up,{t:{open:100,settle:0,reboot:0,step1Total:1000,step1Idle:200,loader:2000,back:2000,firstReq:150,idle:150,resend:[]}});
+  expect(await up.install(image,fixtureArtifact.packageIdentity!,()=>{},true,{refuseOldStock:true})).toBe('SMK-37 Pro_470');
+  expect(mock.mismatches).toBe(0);expect(mock.loaderIdentity()).toBe('ota-SMK-37 Pro_900');
+});

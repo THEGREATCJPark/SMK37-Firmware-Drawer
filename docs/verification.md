@@ -52,3 +52,11 @@ Service worker는 build별 shell을 사용하며 `skipWaiting`, 강제 새로고
 Stageshow·unslop 참고 개선 후 위 표의 42개 단위 시험·26개 브라우저 시험과 production 빌드를 모두 다시 통과했다. 추가한 10개 브라우저 시험은 검색·필터 초기화, 모델 변경 시 백업 확인값 초기화, 키보드 초점 복귀, 320–1280px 화면, 설치 첫 작업 및 미검증 표시, 좁은 오프라인 헤더를 검증한다. 이번 UI 작업에서 펌웨어를 다시 빌드하거나 실제 기기에 기록하지 않았다. 기존 펌웨어 빌드 증거와 원본 host 실패는 그대로다.
 
 변경 근거와 전후 비교는 [UI 개선 기록](ui-redesign.md)에 있다. 최종 화면 증거는 로컬 `output/playwright/redesign/final/`, 전후 비교 HTML은 `output/playwright/redesign/report.html`, Playwright 보고서는 `playwright-report/index.html`에 있다. 임시 화면과 바이너리·개인 데이터 경로는 Git에서 제외된다.
+
+## 2026-11-09 일곱 제품 통합 검증 추가
+
++VA 전용 어댑터·factory 초기화와 sloopDX 세 모델 실험 포트를 같은 웹 설치 흐름에 연결했다. 전체 `npm run check`는 단위 90개, production build, Chrome/Edge 36개 UI 시험을 통과했다. 이후 +VA 체크섬 범위 시험 두 개를 추가해 해당 16개 시험을 재통과했고, 최종 sloopDX 실패 처리·watchdog 수정 바이너리로 포트/카탈로그 14개와 production build를 재검증했다. 최종 저장소의 전체 단위 시험 수는 92개다.
+
+공개 Pages origin의 Chrome에서 패키징된 Windows 도우미를 통해 +VA 펌웨어 859716 B와 factory 29568 B를 HTTP 200으로 받았고 각각 고정 SHA와 일치했다. USB/MIDI 권한이나 기기 기록은 요청하지 않았다. 다운로드 UI 시험은 변조 factory 차단과 명시적 오프라인 보관, 한 화면 유지까지 검사한다.
+
+독립 검토의 저장소 오류 전파·순정 복귀 마커 보호·watchdog·이전 해시 배포 잔류 지적을 수정하고 재검토했다. 최종 패치 `48d597fe29fc03115e81965c1d8e3162bf49a47cbc6da08ecc9a6c72fccc198f`, 대응 소스 `57186e2ea6a0d5dd68ec25dfc10b96623dec93fde771b9f2eabaa019ae896655` 기준 남은 critical/important 코드 지적은 없다. 실기 지원을 증명한 것은 아니다.

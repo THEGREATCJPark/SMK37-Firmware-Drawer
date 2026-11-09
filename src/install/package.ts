@@ -1,3 +1,4 @@
+import { validateBaudgirlPackage } from './baudgirl';
 import { ArtifactSchema, type Artifact } from '../catalog/schema';
 import { filesOk, logicalImage, productOf, sha256hex } from '../vendor/fm1pkg.js';
 import { isStockPackage, packageBoard, packageFiles, regionTable } from '../vendor/fm1ota.js';
@@ -36,6 +37,7 @@ export async function validatePackage(input: Uint8Array, artifact: Artifact): Pr
   const bytes = input.slice();
   if (bytes.length !== a.size) throw new Error(`패키지 크기 불일치: ${a.size} bytes 파일이 필요합니다.`);
   if (await sha256hex(bytes) !== a.sha256) throw new Error('SHA-256 해시가 검토된 패키지와 다릅니다.');
+  if(a.loaderFamily==='baudgirl')return validateBaudgirlPackage(bytes);
   const result = await inspectPackage(bytes);
   if (result.identity !== a.packageIdentity) throw new Error('실제 패키지 식별자가 manifest와 다릅니다.');
   const loader=packageFiles(result.image).find(f=>f.type===100)!;

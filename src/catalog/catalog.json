@@ -40,7 +40,7 @@
       "name": "+VA",
       "author": "Madeline / Baud Girl",
       "repository": "https://baudgirl.com/work/SMK-37%2BVA",
-      "description": "FM, 가상 아날로그, 8비트 음원을 패널에서 편집하고 시퀀서와 함께 연주하는 펌웨어입니다. 개발자 설치 페이지에서 기기와 현재 펌웨어를 확인한 뒤 해당 모델용 버전을 선택합니다.",
+      "description": "FM·가상 아날로그·8비트 음원을 패널에서 편집하고 시퀀서와 함께 연주하는 펌웨어입니다. 개인 다운로드 도우미로 원본 파일을 받아 이 웹에서 설치합니다.",
       "category": "FM · VA · 8비트",
       "features": [
         "FM·가상 아날로그·8비트 음원",
@@ -48,9 +48,9 @@
         "개발자 설치기와 Device Manager"
       ],
       "limitations": [
-        "설치는 개발자 페이지에서 진행하며 이 앱은 외부 성공을 자동 기록하지 않습니다.",
-        "Android Chrome 지원은 개발자가 명시한 설치 페이지에 한정합니다.",
-        "공개 소스·바이너리 재배포 허가를 확인하지 못했습니다."
+        "이 앱은 Windows 개인 다운로드 도우미를 통해 원본 파일을 받아 검사합니다.",
+        "직접 설치는 순정 V016 출발 경로만 지원하며 실제 USB 시험은 아직 하지 않았습니다.",
+        "개발자 서버의 원본 파일을 개인 PC로 읽으며 공개 재배포하지 않습니다."
       ],
       "sourceAvailable": false,
       "license": "No redistribution permission established; author-hosted external only",
@@ -193,7 +193,7 @@
       "name": "sloopDX",
       "author": "Sven Trogus / zvenson",
       "repository": "https://github.com/zvenson/dxsloop",
-      "description": "6오퍼레이터 FM 음원과 같은 엔진으로 만드는 FM 드럼을 SLOOP 방식의 시퀀서로 연주합니다. 현재 검토한 원본 빌드와 공개 패키지는 FM-1용이며, SMK-37에 쓰려면 별도 보드 포팅 작업이 필요합니다.",
+      "description": "DX7 6오퍼레이터 엔진과 FM 드럼을 SLOOP 시퀀서에서 사용합니다. SMK37용 preview.1은 이 프로젝트에서 만든 실험 포트이며 실기기 검증 전입니다.",
       "category": "FM · 드럼 · 포팅 대기",
       "features": [
         "6오퍼레이터 FM·32 알고리즘",
@@ -201,10 +201,10 @@
         "DX7 SysEx 음색 가져오기·파라미터 잠금"
       ],
       "limitations": [
-        "검토한 원본 소스·릴리스에서 SMK 빌드가 확인되지 않았습니다.",
-        "FM-1 파일은 SMK-37 설치·재개 모두 금지합니다.",
-        "원저자 README는 4.0을 beta·실기 미시험으로 설명합니다.",
-        "처음 보는 포팅을 브라우저가 즉석 변환하지 않습니다."
+        "실험 포트: 실제 부팅·오디오·입력·저장·복구 검증 전",
+        "PAN 페이더 뱅크 사용; DAW 모드 및 휠 보정 메뉴 미포함",
+        "아이콘 그림 대신 텍스트 표시",
+        "펌웨어 간 프로젝트/음색 호환 없음"
       ],
       "sourceAvailable": true,
       "license": "GPL-3.0-only code; Apache-2.0 msfa; OFL fonts; inherited icon atlas rights restricted",
@@ -217,7 +217,7 @@
         "https://dx7.designburgapps.com/"
       ],
       "manualUrl": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/SLOOP.md",
-      "mapping": "현재는 FM-1 매핑뿐입니다. SMK 키·패드·노브·페이더·휠·페달 배치는 새 포팅 작업에서 확정해야 합니다.",
+      "mapping": "SMK37 키·패드·휠·4개 페이더 매핑. 페이더 B는 PAN. 모델별 부팅·입력·LCD/LED는 실기기 확인이 필요합니다.",
       "color": "#91A4B0",
       "glyph": "⌁"
     }
@@ -518,13 +518,13 @@
       "relationship": "official-board-build",
       "sourceCommit": null,
       "releaseUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
-      "filename": null,
-      "size": null,
-      "sha256": null,
-      "packageIdentity": null,
+      "filename": "SMK-37+VA-102.fwsc",
+      "size": 859716,
+      "sha256": "01f7283b951d7a00ad54d00da6099b247085c87668d2be72519dc395ab9f83e4",
+      "packageIdentity": "SMK-37+VA_102",
       "loaderFamily": "baudgirl",
-      "method": "external",
-      "distribution": "external-only",
+      "method": "direct",
+      "distribution": "fetch-allowed",
       "status": "published",
       "externalUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
       "evidence": [
@@ -536,17 +536,19 @@
       ],
       "family": "va",
       "prerequisites": [
-        "다른 MIDI 프로그램과 이 앱의 포트를 닫고 개발자 설치기로 이동하세요.",
-        "개발자 설치기가 현재 펌웨어에서의 전환 가능 여부를 판정합니다.",
-        "저장되지 않은 편집은 먼저 저장하고 프리셋·패턴 백업을 별도 보관하세요."
+        "Windows 개인 다운로드 도우미 또는 원본 파일이 필요합니다.",
+        "같은 모델의 순정 V016 출발 경로를 검사합니다.",
+        "전체 백업과 음색·패턴의 별도 보관이 필요합니다."
       ],
-      "dataImpact": "저장하지 않은 편집은 사라집니다. 순정에서 첫 설치 시 설치기가 프리셋·패턴을 백업하고 다시 쓰며, 설정은 +VA 기본값이 됩니다. 101 이하와 102 이상 전환에는 엔벌로프 시간 조정 및 백업 단계가 있습니다.",
+      "dataImpact": "순정 음색·패턴 저장 형식이 +VA와 다릅니다. 전체 백업과 별도 작업물 보관을 먼저 준비하세요.",
       "backup": {
         "scope": "개발자 Device Manager에서 프리셋 128개와 잠금이 포함된 패턴 16개를 각각 .syx 파일로 보관합니다. 전체 플래시/보정값 백업이 아닙니다.",
         "editorUrl": "https://baudgirl.com/work/SMK-37%2BVA/device-manager"
       },
       "recoveryUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-09",
+      "personalHelper": true,
+      "downloadUrl": "https://baudgirl.com/fm1/firmware/SMK-37+VA-102.fwsc"
     },
     {
       "id": "va-102-elite",
@@ -558,13 +560,13 @@
       "relationship": "official-board-build",
       "sourceCommit": null,
       "releaseUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
-      "filename": null,
-      "size": null,
-      "sha256": null,
-      "packageIdentity": null,
+      "filename": "SMK-37+VA-102.fwsc",
+      "size": 859716,
+      "sha256": "01f7283b951d7a00ad54d00da6099b247085c87668d2be72519dc395ab9f83e4",
+      "packageIdentity": "SMK-37+VA_102",
       "loaderFamily": "baudgirl",
-      "method": "external",
-      "distribution": "external-only",
+      "method": "direct",
+      "distribution": "fetch-allowed",
       "status": "published",
       "externalUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
       "evidence": [
@@ -576,17 +578,19 @@
       ],
       "family": "va",
       "prerequisites": [
-        "다른 MIDI 프로그램과 이 앱의 포트를 닫고 개발자 설치기로 이동하세요.",
-        "개발자 설치기가 현재 펌웨어에서의 전환 가능 여부를 판정합니다.",
-        "저장되지 않은 편집은 먼저 저장하고 프리셋·패턴 백업을 별도 보관하세요."
+        "Windows 개인 다운로드 도우미 또는 원본 파일이 필요합니다.",
+        "같은 모델의 순정 V016 출발 경로를 검사합니다.",
+        "전체 백업과 음색·패턴의 별도 보관이 필요합니다."
       ],
-      "dataImpact": "저장하지 않은 편집은 사라집니다. 순정에서 첫 설치 시 설치기가 프리셋·패턴을 백업하고 다시 쓰며, 설정은 +VA 기본값이 됩니다. 101 이하와 102 이상 전환에는 엔벌로프 시간 조정 및 백업 단계가 있습니다.",
+      "dataImpact": "순정 음색·패턴 저장 형식이 +VA와 다릅니다. 전체 백업과 별도 작업물 보관을 먼저 준비하세요.",
       "backup": {
         "scope": "개발자 Device Manager에서 프리셋 128개와 잠금이 포함된 패턴 16개를 각각 .syx 파일로 보관합니다. 전체 플래시/보정값 백업이 아닙니다.",
         "editorUrl": "https://baudgirl.com/work/SMK-37%2BVA/device-manager"
       },
       "recoveryUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-09",
+      "personalHelper": true,
+      "downloadUrl": "https://baudgirl.com/fm1/firmware/SMK-37+VA-102.fwsc"
     },
     {
       "id": "va-102-mke",
@@ -598,13 +602,13 @@
       "relationship": "official-board-build",
       "sourceCommit": null,
       "releaseUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
-      "filename": null,
-      "size": null,
-      "sha256": null,
-      "packageIdentity": null,
+      "filename": "SMK-37+VA-102.fwsc",
+      "size": 859716,
+      "sha256": "01f7283b951d7a00ad54d00da6099b247085c87668d2be72519dc395ab9f83e4",
+      "packageIdentity": "SMK-37+VA_102",
       "loaderFamily": "baudgirl",
-      "method": "external",
-      "distribution": "external-only",
+      "method": "direct",
+      "distribution": "fetch-allowed",
       "status": "published",
       "externalUrl": "https://baudgirl.com/work/SMK-37%2BVA/install",
       "evidence": [
@@ -616,17 +620,19 @@
       ],
       "family": "va",
       "prerequisites": [
-        "다른 MIDI 프로그램과 이 앱의 포트를 닫고 개발자 설치기로 이동하세요.",
-        "개발자 설치기가 현재 펌웨어에서의 전환 가능 여부를 판정합니다.",
-        "저장되지 않은 편집은 먼저 저장하고 프리셋·패턴 백업을 별도 보관하세요."
+        "Windows 개인 다운로드 도우미 또는 원본 파일이 필요합니다.",
+        "같은 모델의 순정 V016 출발 경로를 검사합니다.",
+        "전체 백업과 음색·패턴의 별도 보관이 필요합니다."
       ],
-      "dataImpact": "저장하지 않은 편집은 사라집니다. 순정에서 첫 설치 시 설치기가 프리셋·패턴을 백업하고 다시 쓰며, 설정은 +VA 기본값이 됩니다. 101 이하와 102 이상 전환에는 엔벌로프 시간 조정 및 백업 단계가 있습니다.",
+      "dataImpact": "순정 음색·패턴 저장 형식이 +VA와 다릅니다. 전체 백업과 별도 작업물 보관을 먼저 준비하세요.",
       "backup": {
         "scope": "개발자 Device Manager에서 프리셋 128개와 잠금이 포함된 패턴 16개를 각각 .syx 파일로 보관합니다. 전체 플래시/보정값 백업이 아닙니다.",
         "editorUrl": "https://baudgirl.com/work/SMK-37%2BVA/device-manager"
       },
       "recoveryUrl": "https://baudgirl.com/work/SMK-37%2BVA/manual",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-09",
+      "personalHelper": true,
+      "downloadUrl": "https://baudgirl.com/fm1/firmware/SMK-37+VA-102.fwsc"
     },
     {
       "id": "va-102-fm1",
@@ -1604,121 +1610,133 @@
       "id": "sloopdx-port-pro",
       "productId": "sloopdx",
       "targetModel": "SMK-37 Pro",
-      "version": "SMK 포팅 필요",
+      "version": "4.0.1-smk37-preview.1",
       "upstreamVersion": "4.0.1",
-      "portVersion": null,
+      "portVersion": "preview.1",
       "relationship": "community-port",
       "sourceCommit": "8c1035b79d860edcb6f23556910206332669dac8",
-      "releaseUrl": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
-      "filename": null,
-      "size": null,
-      "sha256": null,
-      "packageIdentity": null,
-      "loaderFamily": "unknown",
-      "method": "unavailable",
-      "distribution": "none",
-      "status": "port-required",
+      "releaseUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/tag/sloopdx-smk37-preview-1",
+      "filename": "sloopdx-smk37.fwsc",
+      "size": 651292,
+      "sha256": "d66714261375f74f2c3e7197706108e21ce63b0dde627b5f6d04981fc245af33",
+      "packageIdentity": "SMK-37 Pro_900",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "fetch-allowed",
+      "status": "published",
       "externalUrl": "https://dx7.designburgapps.com/",
       "evidence": [
         {
-          "kind": "source-reviewed",
-          "url": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/tools/build.py",
-          "note": "원본 소스·최신 공개 릴리스에서 SMK target/package를 확인하지 못했습니다. 다른 제3자 포크 전체의 부재를 뜻하지는 않습니다."
+          "kind": "build-tested",
+          "url": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/tag/sloopdx-smk37-preview-1",
+          "note": "3개 모델 빌드, CRC·보호 영역·모의 저장/복구 검증. 실제 하드웨어 미검증."
         }
       ],
-      "family": "sloopdx",
+      "family": "sloopdx-preview",
       "prerequisites": [
-        "소스·라이선스·FM-1 기준 빌드를 먼저 고정합니다.",
-        "SMK 입력 매핑과 저장 영역·보호 주소·로더 분기를 검토하는 별도 포팅 작업이 필요합니다.",
-        "빌드만 성공한 결과는 실기 검토 전 일반 설치 패키지로 승격하지 않습니다."
+        "실험 포트 · 실제 기기 부팅·오디오·패널·복귀 미검증",
+        "전체 백업 및 해당 모델 순정 복구 준비"
       ],
-      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "dataImpact": "펌웨어 전환 시 SLOOP 계열 저장 공간과 DX 음색 뱅크가 초기화됩니다. 기존 프로젝트를 별도 보관하세요.",
       "backup": {
         "scope": "FM-1용 웹 에디터의 백업 기능을 SMK-37 지원 근거로 사용하지 않습니다.",
         "editorUrl": null
       },
       "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-09",
+      "downloadUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/download/sloopdx-smk37-preview-1/sloopdx-smk37.fwsc",
+      "sourceArchiveUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/download/sloopdx-smk37-preview-1/sloopdx-smk37-source.tar.gz",
+      "loaderIdentity": "ota-SMK-37 Pro_900",
+      "experimental": true,
+      "bundled": true
     },
     {
       "id": "sloopdx-port-elite",
       "productId": "sloopdx",
       "targetModel": "SMK-37 Elite",
-      "version": "SMK 포팅 필요",
+      "version": "4.0.1-smk37-preview.1",
       "upstreamVersion": "4.0.1",
-      "portVersion": null,
+      "portVersion": "preview.1",
       "relationship": "community-port",
       "sourceCommit": "8c1035b79d860edcb6f23556910206332669dac8",
-      "releaseUrl": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
-      "filename": null,
-      "size": null,
-      "sha256": null,
-      "packageIdentity": null,
-      "loaderFamily": "unknown",
-      "method": "unavailable",
-      "distribution": "none",
-      "status": "port-required",
+      "releaseUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/tag/sloopdx-smk37-preview-1",
+      "filename": "sloopdx-smk37-elite.fwsc",
+      "size": 651292,
+      "sha256": "5315364c6782911b1d228dcfb75f09df1cb1250b6b3124ec77ece14e070b45df",
+      "packageIdentity": "SMK-37 Elite_900",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "fetch-allowed",
+      "status": "published",
       "externalUrl": "https://dx7.designburgapps.com/",
       "evidence": [
         {
-          "kind": "source-reviewed",
-          "url": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/tools/build.py",
-          "note": "원본 소스·최신 공개 릴리스에서 SMK target/package를 확인하지 못했습니다. 다른 제3자 포크 전체의 부재를 뜻하지는 않습니다."
+          "kind": "build-tested",
+          "url": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/tag/sloopdx-smk37-preview-1",
+          "note": "3개 모델 빌드, CRC·보호 영역·모의 저장/복구 검증. 실제 하드웨어 미검증."
         }
       ],
-      "family": "sloopdx",
+      "family": "sloopdx-preview",
       "prerequisites": [
-        "소스·라이선스·FM-1 기준 빌드를 먼저 고정합니다.",
-        "SMK 입력 매핑과 저장 영역·보호 주소·로더 분기를 검토하는 별도 포팅 작업이 필요합니다.",
-        "빌드만 성공한 결과는 실기 검토 전 일반 설치 패키지로 승격하지 않습니다."
+        "실험 포트 · 실제 기기 부팅·오디오·패널·복귀 미검증",
+        "전체 백업 및 해당 모델 순정 복구 준비"
       ],
-      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "dataImpact": "펌웨어 전환 시 SLOOP 계열 저장 공간과 DX 음색 뱅크가 초기화됩니다. 기존 프로젝트를 별도 보관하세요.",
       "backup": {
         "scope": "FM-1용 웹 에디터의 백업 기능을 SMK-37 지원 근거로 사용하지 않습니다.",
         "editorUrl": null
       },
       "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-09",
+      "downloadUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/download/sloopdx-smk37-preview-1/sloopdx-smk37-elite.fwsc",
+      "sourceArchiveUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/download/sloopdx-smk37-preview-1/sloopdx-smk37-source.tar.gz",
+      "loaderIdentity": "ota-SMK-37 Elite_900",
+      "experimental": true,
+      "bundled": true
     },
     {
       "id": "sloopdx-port-mke",
       "productId": "sloopdx",
       "targetModel": "MKE-P37",
-      "version": "SMK 포팅 필요",
+      "version": "4.0.1-smk37-preview.1",
       "upstreamVersion": "4.0.1",
-      "portVersion": null,
+      "portVersion": "preview.1",
       "relationship": "community-port",
       "sourceCommit": "8c1035b79d860edcb6f23556910206332669dac8",
-      "releaseUrl": "https://github.com/zvenson/dxsloop/releases/tag/v4.0.1",
-      "filename": null,
-      "size": null,
-      "sha256": null,
-      "packageIdentity": null,
-      "loaderFamily": "unknown",
-      "method": "unavailable",
-      "distribution": "none",
-      "status": "port-required",
+      "releaseUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/tag/sloopdx-smk37-preview-1",
+      "filename": "sloopdx-smk37-mke.fwsc",
+      "size": 651288,
+      "sha256": "c9ba8efe4338fd27aa2cb026ac5edbae1c056e433f5ae30a091aecc4d993f15f",
+      "packageIdentity": "MKE-P37_900",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "fetch-allowed",
+      "status": "published",
       "externalUrl": "https://dx7.designburgapps.com/",
       "evidence": [
         {
-          "kind": "source-reviewed",
-          "url": "https://github.com/zvenson/dxsloop/blob/8c1035b79d860edcb6f23556910206332669dac8/tools/build.py",
-          "note": "원본 소스·최신 공개 릴리스에서 SMK target/package를 확인하지 못했습니다. 다른 제3자 포크 전체의 부재를 뜻하지는 않습니다."
+          "kind": "build-tested",
+          "url": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/tag/sloopdx-smk37-preview-1",
+          "note": "3개 모델 빌드, CRC·보호 영역·모의 저장/복구 검증. 실제 하드웨어 미검증."
         }
       ],
-      "family": "sloopdx",
+      "family": "sloopdx-preview",
       "prerequisites": [
-        "소스·라이선스·FM-1 기준 빌드를 먼저 고정합니다.",
-        "SMK 입력 매핑과 저장 영역·보호 주소·로더 분기를 검토하는 별도 포팅 작업이 필요합니다.",
-        "빌드만 성공한 결과는 실기 검토 전 일반 설치 패키지로 승격하지 않습니다."
+        "실험 포트 · 실제 기기 부팅·오디오·패널·복귀 미검증",
+        "전체 백업 및 해당 모델 순정 복구 준비"
       ],
-      "dataImpact": "다른 펌웨어의 사용자 자료 보존·복원을 보장하지 않습니다. 전환 전에 해당 펌웨어의 백업을 별도 파일로 보관하세요.",
+      "dataImpact": "펌웨어 전환 시 SLOOP 계열 저장 공간과 DX 음색 뱅크가 초기화됩니다. 기존 프로젝트를 별도 보관하세요.",
       "backup": {
         "scope": "FM-1용 웹 에디터의 백업 기능을 SMK-37 지원 근거로 사용하지 않습니다.",
         "editorUrl": null
       },
       "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-09",
+      "downloadUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/download/sloopdx-smk37-preview-1/sloopdx-smk37-mke.fwsc",
+      "sourceArchiveUrl": "https://github.com/THEGREATCJPark/SMK37-Firmware-Drawer/releases/download/sloopdx-smk37-preview-1/sloopdx-smk37-source.tar.gz",
+      "loaderIdentity": "ota-MKE-P37_900",
+      "experimental": true,
+      "bundled": true
     }
   ]
 }

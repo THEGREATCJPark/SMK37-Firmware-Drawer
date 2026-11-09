@@ -1,3 +1,5 @@
+import { initializeBaudgirlData } from './baudgirl-data';
+import { transferBaudgirl } from './baudgirl';
 import { MidiSession, Updater, type Device, type Identity, type StepCallback } from '../vendor/fm1ota.js';
 import type { InstallRequest, Transport } from './types';
 import { assertRoute } from './policy';
@@ -44,9 +46,9 @@ export class SelectedUpdater extends Updater {
       if(this.request) {
         const {artifact,physical,family,resume}=this.request;
         if(this.stage==='initial') {
-          assertRoute(found.id,artifact,physical,family,resume);
+          assertRoute(found.id,artifact,physical,family,resume,this.request.previousIdentity);
           if(found.id.text!==this.original?.text) throw new Error('설치 직전 기기 식별자가 바뀌었습니다.');
-        } else if(this.stage==='loader') assertRoute(found.id,artifact,physical,family,true);
+        } else if(this.stage==='loader') assertRoute(found.id,artifact,physical,family,true,this.request.previousIdentity??this.original?.text);
         else if(found.id.text!==artifact.packageIdentity) throw new Error('재연결된 기기의 식별자가 목표와 다릅니다.');
       }
       if(filter&&!filter(found.id)) {found.link.closeNow();return null;}
@@ -90,9 +92,11 @@ export class WebMidiTransport implements Transport {
     if(!this.access||!this.choice) throw new Error('MIDI 연결이 없습니다.');
     const up=new SelectedUpdater(this.access,this.choice,this.select,request,identity,this.session,this.log,this.abort.signal);
     try {
-      const result=request.resume
+      const result=request.artifact.loaderFamily==='baudgirl'
+        ? await transferBaudgirl(up,image,identity,{physical:request.physical,resume:request.resume,previousIdentity:request.previousIdentity,afterFirmware:async device=>{if(!request.factoryBytes)throw new Error('+VA 초기 음색 파일이 없습니다.');await initializeBaudgirlData(device,request.factoryBytes,{factoryResetConfirmed:request.factoryResetConfirmed===true,backupVerified:request.factoryResetConfirmed===true,signal:this.abort.signal,onProgress:(stage,done,total)=>onStep('setup',`${stage==='presets'?'기본 음색':stage==='patterns'?'빈 패턴 준비':'패턴 읽기 검증'} ${done}/${total} · USB·전원을 유지하세요.`)});}},onStep)
+        : request.resume
         ? await up.resume(image,onStep,{package:request.artifact.packageIdentity,verify:true,anyModel:false})
-        : await up.install(image,request.artifact.packageIdentity!,onStep,false,{refuseOldStock:true});
+        : await up.install(image,request.artifact.packageIdentity!,onStep,identity.text==='SMK-37+VA_102'&&request.family==='va',{refuseOldStock:true});
       if(typeof result!=='string') throw new Error('전송 또는 재연결 응답이 완료되지 않았습니다.');
       return result;
     } finally {await this.close();}

@@ -10,7 +10,7 @@ it('카탈로그는 중복 ID, 없는 제품 참조, 대상 identity 혼합을 �
 it('FM-1 원본과 SMK 포트 버전 및 포팅 필요 상태를 독립적으로 유지한다',()=>{
   const choral=catalog.artifacts.filter(a=>a.productId==='choralroot');
   expect(new Set(choral.map(a=>a.version)).size).toBeGreaterThan(1);
-  expect(catalog.artifacts.filter(a=>a.productId==='sloopdx'&&a.targetModel!=='FM-1').every(a=>a.status==='port-required'&&a.method==='unavailable')).toBe(true);
+  expect(catalog.artifacts.filter(a=>a.productId==='sloopdx'&&a.targetModel!=='FM-1').every(a=>a.status==='published'&&a.method==='direct'&&a.experimental===true&&!!a.sourceArchiveUrl)).toBe(true);
   const sloop=catalog.products.find(p=>p.id==='sloop-pro')!;
   expect(createPortJob(sloop,catalog,'SMK-37 Elite',true).recipe).toBe(null);
   expect(createPortJob(sloop,catalog,'SMK-37 Pro',true).recipe?.target).toContain('MODEL=pro');

@@ -1,21 +1,28 @@
+import { assertBaudgirlRoute } from './baudgirl';
 import type { Artifact, Model } from '../catalog/schema';
 import type { Identity } from '../vendor/fm1ota.js';
 import { OTHER_SMK, OUR_LOADER } from '../vendor/fm1ota.js';
-export type CurrentFamily = 'stock' | 'sloop-pro' | 'frodhes' | 'erik37' | 'obervave' | 'choralroot' | 'unknown';
+export type CurrentFamily = 'stock' | 'sloop-pro' | 'frodhes' | 'erik37' | 'obervave' | 'choralroot' | 'va' | 'sloopdx-preview' | 'unknown';
 export const TRANSITIONS = [
   { family: 'stock', version: 16, evidence: 'source-reviewed' },
+  { family: 'sloopdx-preview', version: 900, evidence: 'source-reviewed' },
   { family: 'sloop-pro', version: 900, evidence: 'source-reviewed' },
   { family: 'frodhes', version: 470, evidence: 'source-reviewed' },
   { family: 'erik37', version: 480102, evidence: 'source-reviewed' },
   { family: 'obervave', version: 9533, evidence: 'source-reviewed' },
   { family: 'choralroot', version: 920, evidence: 'source-reviewed' },
+  { family: 'va', version: 102, evidence: 'source-reviewed' },
 ] as const;
-export function assertRoute(identity: Identity, artifact: Artifact, physical: Model, family: CurrentFamily, resume = false): void {
+export function assertRoute(identity: Identity, artifact: Artifact, physical: Model, family: CurrentFamily, resume = false, previousIdentity?:string): void {
+  if(artifact.loaderFamily==='baudgirl'){
+    if(artifact.targetModel!==physical||artifact.method!=='direct'||artifact.status!=='published')throw new Error('+VA 대상 모델/배포 경로가 다릅니다.');
+    return assertBaudgirlRoute(identity,physical,family,resume,previousIdentity);
+  }
   const match = /^(.*)_(\d+)$/.exec(identity.text);
   if (!match || match[1] !== identity.model || Number(match[2]) !== identity.version) throw new Error('MIDI 식별 응답이 없거나 서로 일치하지 않습니다.');
   if (OTHER_SMK(identity)) throw new Error('독자 업데이트 형식입니다. 해당 개발자의 설치기를 사용하세요.');
   const reported = identity.model.replace(/^ota-/, '');
-  if (physical === 'FM-1' || artifact.targetModel === 'FM-1' || reported !== physical || artifact.targetModel !== physical) {
+  if (physical === 'FM-1' || artifact.targetModel === 'FM-1' || (reported !== physical && !(reported==='SMK-37+VA'&&family==='va'&&identity.version===102&&!resume)) || artifact.targetModel !== physical) {
     throw new Error(`모델 불일치: 선택한 실물 ${physical} · 응답 ${reported} · 파일 ${artifact.targetModel}`);
   }
   if (artifact.loaderFamily !== 'felucca-ufw' || artifact.method !== 'direct' || artifact.status !== 'published') throw new Error('검토된 SMK37 직접 설치 경로가 아닙니다.');

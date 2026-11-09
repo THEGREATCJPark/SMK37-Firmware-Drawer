@@ -1,13 +1,15 @@
-import { readFile,writeFile,mkdir } from 'node:fs/promises';
+import { readFile,writeFile,mkdir,readdir,unlink } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 const catalog=JSON.parse(await readFile('src/catalog/catalog.json','utf8'));
 await mkdir('public/packages',{recursive:true});
+const expected=new Set(catalog.artifacts.filter(a=>a.bundled&&a.method==='direct').map(a=>`${a.sha256}.fwsc`));
+for(const name of await readdir('public/packages'))if(/^[a-f0-9]{64}\.fwsc$/.test(name)&&!expected.has(name))await unlink('public/packages/'+name);
 await writeFile('public/packages/GPL-3.0.txt',await readFile('LICENSE'));
 const notices=catalog.artifacts.filter(a=>a.bundled&&a.method==='direct').map(a=>{
   const product=catalog.products.find(p=>p.id===a.productId);
   return {filename:`${a.sha256}.fwsc`,originalFilename:a.filename,sha256:a.sha256,author:product.author,license:product.license,
     originalRelease:a.releaseUrl,originalDownload:a.downloadUrl,source:product.repository+'/tree/'+a.sourceCommit,
-    sourceArchive:product.repository+'/archive/'+a.sourceCommit+'.zip',licensing:product.repository+'/blob/'+a.sourceCommit+'/LICENSING.md'};
+    sourceArchive:a.sourceArchiveUrl??product.repository+'/archive/'+a.sourceCommit+'.zip',licensing:product.repository+'/blob/'+a.sourceCommit+'/LICENSING.md'};
 });
 await writeFile('public/packages/NOTICE.json',JSON.stringify(notices,null,2));
 for(const a of catalog.artifacts.filter(a=>a.bundled&&a.method==='direct')) {

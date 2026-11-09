@@ -119,13 +119,13 @@ function response(addr, data, fl = 0) {
   return [0xF0, ...pack7(body), 0xF7];
 }
 
-function parseRequest(pkt) {
+function parseRequest(pkt, allowTwosChecksum = false) {
   if (pkt[0] !== 0xF0 || pkt[pkt.length - 1] !== 0xF7) return null;
   const u = unpack7(pkt.slice(1, -1));
   if (u.length !== 15 || u[0] !== 0 || u[1] !== 0x59 || u[2] !== 0x30) return null;
   let s = 0;
   for (let i = 6; i < 14; i++) s += u[i];
-  if ((~s & 0xFF) !== u[14]) return null;
+  if ((~s & 0xFF) !== u[14] && !(allowTwosChecksum && (-s & 0xFF) === u[14])) return null;
   return { fl: u[6], addr: (u[7] | (u[8] << 8) | (u[9] << 16) | (u[10] << 24)) >>> 0, len: u[11] | (u[12] << 8) | (u[13] << 16) };
 }
 
@@ -423,7 +423,7 @@ export class Updater {
         if ((seen || !o.firstMs) && Date.now() - last > idleMs) return out({ finished: false });
         continue;
       }
-      const r = parseRequest(pkt);
+      const r = parseRequest(pkt, this.allowTwosChecksum === true);
       if (!r) continue;
       seen++; last = Date.now();
       if (r.addr === 0xE0000000 || r.addr === 0xF0000000) {
