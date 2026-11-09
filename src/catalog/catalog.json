@@ -194,7 +194,7 @@
       "author": "Sven Trogus / zvenson",
       "repository": "https://github.com/zvenson/dxsloop",
       "description": "DX7 6오퍼레이터 엔진과 FM 드럼을 SLOOP 시퀀서에서 사용합니다. SMK37용 preview.1은 이 프로젝트에서 만든 실험 포트이며 실기기 검증 전입니다.",
-      "category": "FM · 드럼 · 포팅 대기",
+      "category": "FM · 드럼 · 그루브박스",
       "features": [
         "6오퍼레이터 FM·32 알고리즘",
         "FM 드럼과 SLOOP의 라이브 시퀀싱",
