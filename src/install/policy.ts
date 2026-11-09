@@ -1,11 +1,14 @@
 import type { Artifact, Model } from '../catalog/schema';
 import type { Identity } from '../vendor/fm1ota.js';
 import { OTHER_SMK, OUR_LOADER } from '../vendor/fm1ota.js';
-export type CurrentFamily = 'stock' | 'sloop-pro' | 'frodhes' | 'unknown';
+export type CurrentFamily = 'stock' | 'sloop-pro' | 'frodhes' | 'erik37' | 'obervave' | 'choralroot' | 'unknown';
 export const TRANSITIONS = [
   { family: 'stock', version: 16, evidence: 'source-reviewed' },
   { family: 'sloop-pro', version: 900, evidence: 'source-reviewed' },
   { family: 'frodhes', version: 470, evidence: 'source-reviewed' },
+  { family: 'erik37', version: 480102, evidence: 'source-reviewed' },
+  { family: 'obervave', version: 9533, evidence: 'source-reviewed' },
+  { family: 'choralroot', version: 920, evidence: 'source-reviewed' },
 ] as const;
 export function assertRoute(identity: Identity, artifact: Artifact, physical: Model, family: CurrentFamily, resume = false): void {
   const match = /^(.*)_(\d+)$/.exec(identity.text);
@@ -18,7 +21,7 @@ export function assertRoute(identity: Identity, artifact: Artifact, physical: Mo
   if (artifact.loaderFamily !== 'felucca-ufw' || artifact.method !== 'direct' || artifact.status !== 'published') throw new Error('검토된 SMK37 직접 설치 경로가 아닙니다.');
   if (resume) {
     if (!OUR_LOADER(identity)) throw new Error('지원하지 않는 loader입니다. 원래 설치기로 복구 안내를 확인하세요.');
-    if (identity.text !== 'ota-' + artifact.packageIdentity) throw new Error('목표 패키지와 loader identity가 다릅니다.');
+    if (identity.text !== artifact.loaderIdentity) throw new Error('목표 패키지와 loader identity가 다릅니다.');
     return;
   }
   if (identity.model.startsWith('ota-')) throw new Error('업데이트 모드입니다. 동일 패키지 재개 절차를 사용하세요.');

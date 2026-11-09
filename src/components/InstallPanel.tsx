@@ -3,6 +3,7 @@ import { Usb,FileCheck2,ArrowRight,ExternalLink,ShieldCheck,Download,ChevronDown
 import type { Artifact, Model } from '../catalog/schema';
 import { catalog } from '../catalog';
 import { InstallController,messageOf } from '../install/controller';
+import { downloadPackage } from '../install/download';
 import { validatePackage } from '../install/package';
 import { WebMidiTransport, portLists, type PortChoice,type PortLists } from '../install/transport';
 import type { CurrentFamily } from '../install/policy';
@@ -16,6 +17,8 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
   const [inputId,setInputId]=useState(''),[outputId,setOutputId]=useState('');
   const [identity,setIdentity]=useState<Identity|null>(null),[connecting,setConnecting]=useState(false);
   const [family,setFamily]=useState<CurrentFamily>('unknown'),[file,setFile]=useState<File|null>(null);
+  const [downloading,setDownloading]=useState(false),[received,setReceived]=useState(0);
+  const fetchAbort=useRef<AbortController|null>(null),packageEdited=useRef(false);
   const [bytes,setBytes]=useState<Uint8Array|null>(null),[cached,setCached]=useState(false);
   const [fullBackup,setFullBackup]=useState<FullBackupRecord|null>(null);
   const [recovery,setRecovery]=useState(false),[projects,setProjects]=useState(false),[resume,setResume]=useState(false);
@@ -32,21 +35,27 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
     setInputId('');setOutputId('');access.addEventListener('statechange',refresh);signal.addEventListener('abort',abort,{once:true});refresh();
   }),line=>setLogs(v=>[...v.slice(-149),line]));
   if(!controller.current) controller.current=new InstallController(transport.current,catalog.artifacts,saveHistory,setState,listHistory);
-  useEffect(()=>{onBusy(state.busy||connecting);},[state.busy,connecting,onBusy]);
+  useEffect(()=>{onBusy(state.busy||connecting||downloading);},[state.busy,connecting,downloading,onBusy]);
   useEffect(()=>{
     getFullBackup(model).then(setFullBackup).catch(onError);
-    listBackups().then(items=>{const found=items.find(b=>b.kind==='package'&&b.sha256===artifact.sha256);if(found){setBytes(new Uint8Array(found.bytes));setCached(true);}}).catch(onError);
-    return()=>{void transport.current?.close();};
+    listBackups().then(items=>{const found=items.find(b=>b.kind==='package'&&b.sha256===artifact.sha256);if(found&&!packageEdited.current){setBytes(new Uint8Array(found.bytes));setCached(true);}}).catch(onError);
+    return()=>{fetchAbort.current?.abort();void transport.current?.close();};
   },[artifact.id,model]);
   useEffect(()=>{
     const prevent=(e:BeforeUnloadEvent)=>{if(state.busy){e.preventDefault();e.returnValue='';}};
     window.addEventListener('beforeunload',prevent);return()=>window.removeEventListener('beforeunload',prevent);
   },[state.busy]);
+  async function download(){
+    packageEdited.current=true;setDownloading(true);setReceived(0);setBytes(null);setCached(false);setFile(null);
+    const abort=new AbortController();fetchAbort.current=abort;const timer=setTimeout(()=>abort.abort(new Error('다운로드 시간이 초과되었습니다. 다시 시도해 주세요.')),60000);
+    try{const result=await downloadPackage(artifact,abort.signal,setReceived);setBytes(result);setFile(new File([result as BlobPart],artifact.filename!));}
+    catch(error){if(!abort.signal.aborted)onError(error);else onError(abort.signal.reason);}finally{clearTimeout(timer);setDownloading(false);}
+  }
   async function connect(){setConnecting(true);try{const id=await transport.current!.connect();setIdentity(id);setResume(id.model.startsWith('ota-'));}catch(e){onError(e);await transport.current!.close();}finally{setConnecting(false);}}
   async function prepare(){try{if(!bytes)throw new Error('패키지 파일을 먼저 선택하세요.');await controller.current!.prepare({artifact,bytes,physical:model,family,resume});}catch(e){onError(e);}}
   async function cache(){try{if(!bytes) return;await validatePackage(bytes,artifact);await addBackup({name:artifact.filename!,kind:'package',productId:artifact.productId,family:artifact.family,version:artifact.version,schema:'fwsc-v1'},bytes);setCached(true);}catch(e){onError(e);}}
   async function start(){try{if(!fullBackup)throw new Error('전체 백업의 검증 기록을 먼저 등록하세요.');await controller.current!.start({fullBackup,recoveryReady:recovery,projectsAcknowledged:projects});}catch(e){onError(e);}finally{setIdentity(null);}}
-  const locked=state.busy||connecting;
+  const locked=state.busy||connecting||downloading;
   const ready=state.phase==='ready';
   const transferStage=['entering-loader','writing','reconnecting','completed','interrupted'].includes(state.phase);
   return <section className="install-panel">
@@ -55,12 +64,12 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
     <p className="notice">{artifact.dataImpact} 이 앱은 전체 플래시나 작업물을 자동 백업하지 않습니다.</p>
     <fieldset disabled={locked||ready}>
       <div className="install-step"><b>01</b><div><strong>내 기기 연결</strong><p>실물 선택: {model}<br/>응답: <code>{identity?.text??'아직 연결하지 않음'}</code></p></div><button className="button secondary" onClick={connect}><Usb size={16}/>{connecting?'연결 중…':'MIDI 연결'}</button></div>
-      <label>기기에서 직접 확인한 현재 펌웨어<select value={family} onChange={e=>setFamily(e.target.value as CurrentFamily)}><option value="unknown">현재 펌웨어를 선택하세요</option><option value="stock">M-Vave 순정 V016</option><option value="sloop-pro">SLOOP Pro (identity _900)</option><option value="frodhes">Frodhes 0.9.2 SMK 포트 (_470)</option></select></label>
-      <p className="hint">다른 펌웨어는 개발자 설치 경로를 이용하세요. USB 이름과 identity만으로 실물 모델·설치 버전을 확정할 수 없습니다.</p>
+      <label>기기에서 직접 확인한 현재 펌웨어<select value={family} onChange={e=>setFamily(e.target.value as CurrentFamily)}><option value="unknown">현재 펌웨어를 선택하세요</option><option value="stock">M-Vave 순정 V016</option><option value="sloop-pro">SLOOP Pro (identity _900)</option><option value="frodhes">Frodhes SMK (_470)</option><option value="erik37">Erik37 1.2 (_480102)</option><option value="obervave">OberVave 3.3.2 (_9533)</option><option value="choralroot">ChoralRoot SMK (_920)</option></select></label>
+      <p className="hint">선택 목록에 없는 출발 펌웨어는 아직 전환을 지원하지 않습니다. USB 이름과 identity만으로 실물 모델·설치 버전을 확정할 수 없습니다.</p>
       <label className="check-row"><input type="checkbox" checked={resume} onChange={e=>setResume(e.target.checked)}/>중단한 설치 재개 — 이 앱의 최근 중단 이력·파일 SHA-256·loader를 모두 검사합니다.</label>
       <div className="install-step"><b>02</b><div><strong>고정된 패키지 파일</strong><p className="filename">{artifact.filename} · {artifact.size?.toLocaleString()} bytes</p></div></div>
-      <a className="inline-link" href={artifact.releaseUrl} target="_blank" rel="noreferrer">원저자 배포처에서 파일 받기 <ExternalLink size={14}/></a>
-      <label className="file-label"><FileCheck2 size={20}/>{file?.name??(cached?'보관한 패키지를 불러왔습니다':'받은 .fwsc 파일 선택')}<input aria-label="설치 패키지 파일" type="file" accept=".fwsc" onChange={async e=>{const f=e.target.files?.[0];if(!f)return;try{if(f.size>2*1024*1024)throw new Error('패키지 파일은 2 MiB 이하이어야 합니다.');setFile(f);setBytes(new Uint8Array(await f.arrayBuffer()));setCached(false);}catch(err){onError(err);}}}/></label>
+      <button className="button" onClick={download} disabled={!artifact.downloadUrl}><Download size={16}/>{downloading?`다운로드 중 ${Math.round(received/(artifact.size||1)*100)}%`:bytes?'패키지 다시 받기':'이 웹에서 패키지 받기'}</button><p className="hint">선택한 모델의 파일을 받아 SHA-256·CRC·모델·영역을 검사합니다. 다른 사이트를 열거나 파일을 직접 고를 필요가 없습니다.</p>
+      <label className="file-label"><FileCheck2 size={20}/>{file?.name??(cached?'보관한 패키지를 불러왔습니다':'또는 내 컴퓨터의 .fwsc 파일 선택')}<input aria-label="설치 패키지 파일" type="file" accept=".fwsc" onChange={async e=>{const f=e.target.files?.[0];if(!f)return;try{packageEdited.current=true;if(f.size>2*1024*1024)throw new Error('패키지 파일은 2 MiB 이하이어야 합니다.');setFile(f);setBytes(new Uint8Array(await f.arrayBuffer()));setCached(false);}catch(err){onError(err);}}}/></label>
       <details><summary>고정된 SHA-256</summary><code className="hash">{artifact.sha256}</code></details>
       <div className="button-row"><button className="button secondary" disabled={!bytes} onClick={cache}><Download size={16}/>{cached?'다시 검증·보관':'검증 후 오프라인 보관'}</button><button className="button" disabled={!identity||!bytes} onClick={prepare}>호환성·파일 검사 <ArrowRight size={16}/></button></div>
       {(!identity||!bytes)&&<p className="requirement-hint">검사 전 준비: {!identity&&!bytes?'MIDI 기기 연결과 패키지 파일 선택':!identity?'MIDI 기기 연결':'패키지 파일 선택'}</p>}
@@ -77,7 +86,7 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
     </div>}
     <details className="technical-log"><summary><ChevronDown size={15}/>기술 로그</summary><pre>{logs.join('\n')||'아직 MIDI 통신이 없습니다.'}</pre><p className="hint">포트 이름이 포함될 수 있습니다. 외부 공유 전 확인하세요.</p></details>
     <p className="hint">기록을 시작하면 취소로 원상 복구되지 않습니다. 탭·USB·전원·화면을 유지하세요. 자동 재시도나 강제 재부팅은 실행하지 않습니다.</p>
-    <button className="text-button" disabled={locked} onClick={()=>onExternal(artifact)}>개발자 설치기에서 진행 <ExternalLink size={14}/></button>
+    <a className="inline-link" href={artifact.releaseUrl} target="_blank" rel="noreferrer">패키지 출처 <ExternalLink size={14}/></a>
     {ports&&<Modal title="MIDI 포트 선택" busy={false} onClose={()=>{ports.reject(new Error('기기 선택을 취소했습니다.'));setPorts(null);}}>
       <p>{ports.reason}</p><p className="hint">다른 MIDI 기기는 분리해 주세요. 선택한 입력·출력 쌍에만 식별 요청을 보냅니다.</p>
       <label>MIDI 입력<select value={inputId} onChange={e=>setInputId(e.target.value)}><option value="">입력 선택</option>{ports.lists.inputs.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select></label>

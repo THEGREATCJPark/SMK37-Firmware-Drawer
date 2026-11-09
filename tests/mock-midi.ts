@@ -2,13 +2,14 @@
 // Protocol framing follows SLOOP Pro web/test_pro.mjs (GPL-3.0-only),
 // Copyright (C) 2026 Leo Kuroshita (@kurogedelic), Hügelton Instruments.
 // Drawer additions: full-image comparison, invalid request, timeout and detach cases.
-import { pack7,unpack7 } from '../src/vendor/fm1ota.js';
+import { pack7,unpack7,packageFiles } from '../src/vendor/fm1ota.js';
 export type Fault='none'|'disconnect'|'timeout'|'bad-request'|'wrong-return';
 export class MockMidiDevice {
   access:{inputs:Map<string,any>;outputs:Map<string,any>}={inputs:new Map(),outputs:new Map()};
   input:any;output:any;identity:string;sent:number[][]=[];received:number[]=[];mismatches=0;upgrades=0;generation=0;
   queue:Array<[number,number]>=[];waiting?:[number,number];
   constructor(public image:Uint8Array,public product:string,public initial='SMK-37 Pro_016',public fault:Fault='none',public sampleOnly=false){this.identity=initial;this.boot(initial);}
+  loaderIdentity(){const f=packageFiles(this.image).find(f=>f.type===100)!;const match=new TextDecoder().decode(this.image.subarray(f.off,f.off+f.size)).match(/ota-(?:SMK-37 Pro|SMK-37 Elite|MKE-P37)_\d+/);if(!match)throw Error('Fixture loader identity missing');return match[0];}
   boot(identity:string){
     for(const p of [...this.access.inputs.values(),...this.access.outputs.values()])p.state='disconnected';
     this.access.inputs.clear();this.access.outputs.clear();this.identity=identity;this.generation++;
@@ -37,7 +38,7 @@ export class MockMidiDevice {
       if(data.some((b,i)=>b!==this.image[addr+i]))this.mismatches++;
       if(this.identity.startsWith('ota-'))this.received.push(...data);
     }
-    if(addr===0xe0000000){setTimeout(()=>this.boot('ota-'+this.product),60);return;}
+    if(addr===0xe0000000){setTimeout(()=>this.boot(this.loaderIdentity()),60);return;}
     if(addr===0xf0000000){setTimeout(()=>this.boot(this.fault==='wrong-return'?'SMK-37 Pro_999':this.product),20);return;}
     if(this.identity.startsWith('ota-')&&this.fault==='disconnect'&&this.received.length>=512){this.input.state='disconnected';this.output.state='disconnected';return;}
     this.next();

@@ -9,7 +9,7 @@ export async function inspectPackage(input: Uint8Array): Promise<ValidatedPackag
   if (input.length < 960 || input.length > 2 * 1024 * 1024) throw new Error('패키지 크기가 허용 범위 밖입니다.');
   const bytes = input.slice();
   const identity = productOf(bytes);
-  if (!/^(SMK-37 Pro|SMK-37 Elite|MKE-P37)_\d{3}$/.test(identity)) throw new Error('지원하는 SMK37 패키지 식별자가 아닙니다.');
+  if (!/^(SMK-37 Pro|SMK-37 Elite|MKE-P37)_(?:[3-9]\d{2}|480102|9533)$/.test(identity)) throw new Error('지원하는 SMK37 패키지 식별자가 아닙니다.');
   const image = logicalImage(bytes);
   if (!filesOk(image)) throw new Error('패키지 구조 또는 CRC가 올바르지 않습니다.');
   const entries = packageFiles(image);
@@ -38,5 +38,8 @@ export async function validatePackage(input: Uint8Array, artifact: Artifact): Pr
   if (await sha256hex(bytes) !== a.sha256) throw new Error('SHA-256 해시가 검토된 패키지와 다릅니다.');
   const result = await inspectPackage(bytes);
   if (result.identity !== a.packageIdentity) throw new Error('실제 패키지 식별자가 manifest와 다릅니다.');
+  const loader=packageFiles(result.image).find(f=>f.type===100)!;
+  const names=new TextDecoder().decode(result.image.subarray(loader.off,loader.off+loader.size)).match(/ota-(?:SMK-37 Pro|SMK-37 Elite|MKE-P37)_\d+/g);
+  if(!names?.length||names.some(name=>name!==a.loaderIdentity))throw new Error('실제 업데이트 loader 식별자가 manifest와 다릅니다.');
   return result;
 }

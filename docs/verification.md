@@ -1,3 +1,7 @@
+# 통합 다운로드 검증 추가 · 2026-11-09
+
+최신 검증은 단위 **50개**, Chrome/Edge **30개** 통과, production 빌드 통과다. 21개 실제 파일의 다운로드·SHA·CRC·모델·영역 표와 앱/loader identity 분리를 검사했다. [통합 설치 기록](integrated-installation.md)에 범위와 +VA/sloopDX의 남은 조건을 정리했다. 아래는 이전 구현 단계의 기록이다.
+
 # 최종 소프트웨어 검증 · 2026-11-09
 
 `npm run check` 최종 실행은 **exit 0**이다. 실제 기기의 update entry, flash write, erase, restore는 실행하지 않았다.

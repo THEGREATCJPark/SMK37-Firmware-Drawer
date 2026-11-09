@@ -1,3 +1,5 @@
+통합 설치: SLOOP Pro·Frodhes·Erik37·OberVave·ChoralRoot의 21개 모델별 패키지를 이 웹에서 받아 검사하고 설치할 수 있습니다. 상세 → 파일 검사·설치 준비 → 이 웹에서 패키지 받기를 사용하세요. +VA는 아직 외부 경로이며 sloopDX는 포팅 준비 대상입니다. [지원 범위와 검증 근거](docs/integrated-installation.md).
+
 웹 앱: https://thegreatcjpark.github.io/SMK37-Firmware-Drawer/
 
 main에 push하면 GitHub Actions에서 파일 검사·단위 시험·빌드를 거쳐 Pages로 배포합니다. Android Chrome에서는 메뉴의 홈 화면 추가/앱 설치로 사용할 수 있는 PWA입니다. APK는 제공하지 않습니다. 실제 Android USB 설치는 미검증입니다. 로컬 앱과 웹 앱의 보관함은 주소별로 별개이므로 필요한 파일을 내보내기/가져오기로 옮겨 주세요.
@@ -24,7 +26,7 @@ npm run preview
 
 - 7개 제품, 33개 모델별 아티팩트의 출처·버전·제약·백업/복구 정보, 검색과 즐겨찾기.
 - SLOOP Pro 2.8.4 / Frodhes SMK 포트 0.9.2의 고정 패키지 설치 어댑터. 로컬 `.fwsc` 파일을 선택해 hash/CRC/모델/영역을 검사하고 명시적으로 오프라인 보관합니다.
-- +VA, Erik37, OberVave, ChoralRoot 등의 개발자 설치기 연결. 외부 열기는 완료로 기록하지 않습니다.
+- +VA는 개발자 설치기로 연결합니다. 다른 다섯 제품은 웹 내 다운로드·설치 경로를 제공합니다. 외부 열기는 완료로 기록하지 않습니다.
 - 전체 플래시의 **사용자 검증 기록**, 펌웨어별 프로젝트 파일, 설치 패키지를 구별하는 보관함. 내보내기/가져오기 지원.
 - 기존 SLOOP Pro 소스 재현 빌드 recipe와 실제 빌드 번들 가져오기. sloopDX 신규 포팅은 작업 명세 내보내기까지 연결하며, 가져온 결과는 항상 `build-only`입니다.
 - 동일 origin의 탭 간 MIDI 잠금, 선택한 포트만 탐색, 중단 이력/동일 SHA로 제한한 재개. 사용자 최종 클릭 전에는 식별 요청만 가능합니다.
@@ -53,7 +55,7 @@ fixtures는 고정 공개 파일 세 개를 `.local/packages`에 내려받아 SH
 
 시험 결과와 한계: [검증 기록](docs/verification.md), [펌웨어 빌드 보고서](docs/build-report.md), [Stageshow·unslop 기반 UI 개선 기록](docs/ui-redesign.md). 원본 host suite 일부는 실패했고 통과로 처리하지 않았습니다.
 
-UI 개선 후 단위 시험 42개·Chrome/Edge 브라우저 시험 26개와 production 빌드를 통과했습니다. 이전 화면이 남아 있으면 앱 탭을 모두 닫은 뒤 다시 여세요. 설치 도중 새 버전으로 강제 전환하지 않습니다.
+통합 다운로드 개선 후 단위 시험 50개·Chrome/Edge 브라우저 시험 30개와 production 빌드를 통과했습니다. 이전 화면이 남아 있으면 앱 탭을 모두 닫은 뒤 다시 여세요. 설치 도중 새 버전으로 강제 전환하지 않습니다.
 
 ## 파일 안내
 

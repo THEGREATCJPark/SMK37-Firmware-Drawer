@@ -31,3 +31,8 @@ M-VAVE, FM-1, SMK37 and third-party product names identify their respective prod
 The UI revision follows design guidance from [unslop by Damir Sokolovsky (@heydamir)](https://github.com/heydamir/unslop/tree/97daa3eb365670ea3f87ed85356cbfcee18105a5), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The Korean audit and direction in `docs/ui-redesign.md` adapt that guidance, with this attribution. No reference images or scripts were copied into the app.
 
 [Stageshow by Benji Taylor](https://github.com/benjitaylor/skills/tree/299140fafd08df55a9c234e610c3f64af3f45531/stageshow) informed hierarchy, typography, spacing and restrained motion. Its React demo kit, artwork and authored example scenes were not copied or used to simulate real installation. All app interactions remain real local functions.
+
+
+## 통합 다운로드 (2026-11-09)
+
+Frodhes 0.9.9와 OberVave 3.3.2의 공개 SMK37 패키지는 빌드 시 원본 릴리스에서 내려받아 해시를 확인한 뒤 수정 없이 Pages에 제공합니다. GPL-3.0-only 코드와 각 구성요소의 별도 고지를 유지합니다. 배포물의 `packages/NOTICE.json`은 각 파일의 저자, 원본 릴리스, 고정 소스 및 소스 아카이브, LICENSING.md를 연결하고 `packages/GPL-3.0.txt`를 제공합니다. 다른 제품의 파일은 원저자 배포 서버에서 사용자 브라우저가 직접 읽습니다. +VA 파일과 제3자의 프리셋·아이콘을 별도로 복제하지 않습니다.

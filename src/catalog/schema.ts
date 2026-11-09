@@ -21,9 +21,9 @@ export const ArtifactSchema = z.object({
   version: z.string(), upstreamVersion: z.string().nullable(), portVersion: z.string().nullable(),
   relationship: z.enum(['original', 'official-board-build', 'community-port']),
   sourceCommit: z.string().regex(/^[a-f0-9]{40}$/).nullable(), releaseUrl: url,
-  filename: z.string().nullable(), size: z.number().int().positive().max(2 * 1024 * 1024).nullable(),
+  bundled: z.boolean().optional(), downloadUrl: url.optional(), filename: z.string().nullable(), size: z.number().int().positive().max(2 * 1024 * 1024).nullable(),
   sha256: sha.nullable(), packageIdentity: z.string().nullable(),
-  loaderFamily: z.enum(['felucca-ufw', 'baudgirl', 'unknown']),
+  loaderIdentity: z.string().optional(), loaderFamily: z.enum(['felucca-ufw', 'baudgirl', 'unknown']),
   method: z.enum(['direct', 'external', 'unavailable']),
   distribution: z.enum(['local-file', 'fetch-allowed', 'external-only', 'none']),
   status: z.enum(['published', 'build-only', 'port-required']),
@@ -33,7 +33,7 @@ export const ArtifactSchema = z.object({
   recoveryUrl: url, verifiedAt: z.iso.date(),
 }).superRefine((a, ctx) => {
   if (a.method === 'direct' && (a.targetModel === 'FM-1' || a.status !== 'published' ||
-      a.loaderFamily !== 'felucca-ufw' || !a.sha256 || !a.size || !a.filename || !a.packageIdentity || !a.sourceCommit)) {
+      a.loaderFamily !== 'felucca-ufw' || !a.sha256 || !a.size || !a.filename || !a.packageIdentity || !a.sourceCommit || !a.loaderIdentity)) {
     ctx.addIssue({ code: 'custom', message: '직접 설치에는 검토된 SMK37 공개 패키지의 고정 정보가 필요합니다.' });
   }
   if (a.method === 'direct' && !a.packageIdentity?.startsWith(a.targetModel + '_')) {

@@ -19,13 +19,13 @@ it('파일 준비는 기록 명령을 보내지 않고 최종 클릭 이후 응�
   await r.controller.start(consent); expect(r.controller.state.phase).toBe('completed'); expect(r.records.at(-1)?.simulated).toBe(true);
 });
 it('loader 이름만 같고 정확한 중단 파일 이력이 없으면 재개를 거절한다',async()=>{
-  const r=rig();r.transport.identify=async()=>({text:'ota-SMK-37 Pro_470',model:'ota-SMK-37 Pro',version:470});
+  const r=rig();r.transport.identify=async()=>({text:'ota-SMK-37 Pro_900',model:'ota-SMK-37 Pro',version:900});
   await expect(r.controller.prepare({...r.req,resume:true})).rejects.toThrow(/이력/);expect(r.transfers()).toBe(0);
 });
 it('중단 이력의 실제 SHA와 모델이 맞아야 재개한다',async()=>{
   const r=rig();await r.controller.prepare(r.req);r.transport.transfer=async()=>{throw new Error('disconnect');};
   await expect(r.controller.start(consent)).rejects.toThrow();
-  r.transport.identify=async()=>({text:'ota-SMK-37 Pro_470',model:'ota-SMK-37 Pro',version:470});
+  r.transport.identify=async()=>({text:'ota-SMK-37 Pro_900',model:'ota-SMK-37 Pro',version:900});
   await r.controller.prepare({...r.req,resume:true});expect(r.controller.state.phase).toBe('ready');
   r.records.at(-1)!.sha256='0'.repeat(64);
   await expect(r.controller.prepare({...r.req,resume:true})).rejects.toThrow(/이력/);
@@ -37,7 +37,7 @@ it('백업 준비가 없으면 쓰지 않는다',async()=>{
 it('중단 뒤 외부 설치기를 열었다면 같은 loader라도 재개 근거로 쓰지 않는다',async()=>{
   const r=rig();await r.controller.prepare(r.req);r.transport.transfer=async()=>{throw new Error('disconnect');};await expect(r.controller.start(consent)).rejects.toThrow();
   r.records.push({...r.records.at(-1)!,id:'external',startedAt:'2099-01-01T00:00:00.000Z',status:'external-opened'});
-  r.transport.identify=async()=>({text:'ota-SMK-37 Pro_470',model:'ota-SMK-37 Pro',version:470});
+  r.transport.identify=async()=>({text:'ota-SMK-37 Pro_900',model:'ota-SMK-37 Pro',version:900});
   await expect(r.controller.prepare({...r.req,resume:true})).rejects.toThrow(/이력/);
 });
 it('준비 후 기기를 바꿔도 재확인에서 차단한다',async()=>{

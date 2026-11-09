@@ -5,6 +5,14 @@ import {MockMidiDevice} from './mock-midi';
 import {fixtureArtifact,fixtureBytes} from './fixtures';
 import {logicalImage} from '../src/vendor/fm1pkg.js';
 import type {MidiSession} from '../src/vendor/fm1ota.js';
+it('선택 포트 어댑터가 앱 _470과 실제 loader _900을 구분해 끝까지 전송한다',async()=>{
+  const image=logicalImage(fixtureBytes),mock=new MockMidiDevice(image,fixtureArtifact.packageIdentity!,'SMK-37 Pro_016','none',true);
+  const request={artifact:fixtureArtifact,physical:'SMK-37 Pro' as const,family:'stock' as const,resume:false};
+  const up=new SelectedUpdater(mock.access as unknown as MIDIAccess,{inputId:mock.input.id,outputId:mock.output.id},async()=>({inputId:mock.input.id,outputId:mock.output.id}),request,{text:'SMK-37 Pro_016',model:'SMK-37 Pro',version:16},null as unknown as MidiSession,()=>{},new AbortController().signal);
+  Object.assign(up,{t:{open:100,settle:0,reboot:0,step1Total:1000,step1Idle:200,loader:2000,back:2000,firstReq:150,idle:150,resend:[]}});
+  expect(await up.install(image,fixtureArtifact.packageIdentity!,()=>{},false,{refuseOldStock:true})).toBe('SMK-37 Pro_470');
+  expect(mock.loaderIdentity()).toBe('ota-SMK-37 Pro_900');expect(mock.mismatches).toBe(0);expect(mock.generation).toBe(3);
+});
 it('같은 origin의 두 MIDI 세션은 동시에 잠금을 얻을 수 없다',async()=>{
   let held=false;
   const manager={request:async(_name:unknown,_opts:unknown,cb:(lock:unknown)=>Promise<void>)=>{

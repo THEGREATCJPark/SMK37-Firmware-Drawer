@@ -33,6 +33,7 @@ export default function App() {
   const [savingFavorite, setSavingFavorite] = useState(false);
   const [recent, setRecent] = useState<string[]>([]);
   const [selected, setSelected] = useState<Product|null>(null);
+  const [artifactId,setArtifactId]=useState<string|null>(null);
   const [install, setInstall] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -63,7 +64,7 @@ export default function App() {
     catch (e) { onError(e); }
     finally { setSavingFavorite(false); }
   }
-  function show(product:Product) { setSelected(product); setInstall(false); }
+  function show(product:Product) { setSelected(product); setArtifactId(null); setInstall(false); }
   function resetFilters() { setQuery(''); setCategory('전체'); setOnlyAvailable(false); }
   async function closeDetail() {
     if (busy) return;
@@ -81,7 +82,7 @@ export default function App() {
       else throw new Error('새 창이 차단되었습니다. 브라우저의 팝업 설정을 확인한 뒤 다시 눌러 주세요.');
     } catch (e) { tab?.close(); onError(e); }
   }
-  const active = selected ? primaryArtifact(selected.id,model) : undefined;
+  const active = selected ? artifactsFor(selected.id,model).find(a=>a.id===artifactId)??primaryArtifact(selected.id,model) : undefined;
   const visible = catalog.products.filter(product => {
     const artifact = primaryArtifact(product.id,model);
     return (view!=='favorites' || favorites.includes(product.id)) &&
@@ -158,7 +159,7 @@ export default function App() {
     {selected && active && <Modal title={selected.name} wide busy={busy} onClose={() => void closeDetail().catch(onError)}>
       <div className="detail-context"><span>{selected.category}</span><span>{model} · {active.version}</span></div>
       {install && active.method==='direct' ? <InstallPanel key={active.id} artifact={active} model={model} onBusy={onBusy} onError={onError} onExternal={a => void external(a)} onBackups={() => { void closeDetail(); setView('backups'); }}/>:<>
-        <p className="detail-description">{selected.description}</p>
+        <p className="detail-description">{selected.description}</p>{artifactsFor(selected.id,model).filter(a=>a.method==='direct').length>1&&<label>설치할 버전<select aria-label="설치할 버전" value={active.id} onChange={e=>setArtifactId(e.target.value)}>{artifactsFor(selected.id,model).filter(a=>a.method==='direct').map(a=><option key={a.id} value={a.id}>{a.version} · {a.filename}</option>)}</select></label>}
         <div className="detail-actions">
           {active.method==='direct'?<button className="button" onClick={() => setInstall(true)}>파일 검사·설치 준비 <ArrowRight aria-hidden="true"/></button>:active.method==='external'?<button className="button" onClick={() => void external(active)}>개발자 설치 페이지 <ArrowUpRight aria-hidden="true"/></button>:<button className="button" onClick={() => { setSelected(null); setView('porting'); }}>포팅 준비하기 <ArrowRight aria-hidden="true"/></button>}
           <a className="button secondary" href={selected.manualUrl} target="_blank" rel="noreferrer">매뉴얼 <ArrowUpRight aria-hidden="true"/></a>
@@ -175,7 +176,7 @@ export default function App() {
       <details className="evidence"><summary>개발자·출처·검증 근거</summary><p>{selected.author}</p><p>{selected.license}</p><a className="inline-link" href={selected.repository} target="_blank" rel="noreferrer">원본 소스·개발자 <ArrowUpRight aria-hidden="true"/></a><ul>{active.evidence.map((e,i) => <li key={i}><a href={e.url} target="_blank" rel="noreferrer">{e.kind}</a> — {e.note}</li>)}</ul><p>이 앱의 USB 실기 기록은 없습니다. SHA-256은 파일 무결성 확인이며 호환성 증명이 아닙니다.</p>{selected.sources.map(url => <a className="source-link" href={url} key={url} target="_blank" rel="noreferrer">{url}</a>)}</details>
     </Modal>}
     {help && <Modal title="연결 및 설치 안내" onClose={() => setHelp(false)}>
-      <ol className="guide-steps"><li><strong>모델과 현재 펌웨어 확인</strong><p>PC의 Chrome 또는 Edge와 USB 데이터 케이블을 사용하세요. 다른 MIDI 앱과 설치기 탭은 닫아 주세요.</p></li><li><strong>전체 백업과 복귀 파일 준비</strong><p>PC 백업 절차로 전체 덤프를 별도 보관하고 사용자 검증 기록을 등록합니다. 음색과 프로젝트는 펌웨어별 에디터에서 따로 저장하세요.</p></li><li><strong>파일 검사 후 직접 설치</strong><p>현재 직접 경로는 순정 V016·SLOOP Pro·Frodhes 0.9.2입니다. 실제 기기 응답과 파일을 검사한 뒤 최종 설치 버튼을 직접 누릅니다.</p></li><li><strong>Galaxy 사용은 별도 확인</strong><p>PC localhost는 휴대폰 주소가 아닙니다. 휴대폰에는 접근 가능한 HTTPS 환경이 필요하며, Android USB 설치와 재연결은 실기 미확인입니다.</p></li></ol>
+      <ol className="guide-steps"><li><strong>모델과 현재 펌웨어 확인</strong><p>PC의 Chrome 또는 Edge와 USB 데이터 케이블을 사용하세요. 다른 MIDI 앱과 설치기 탭은 닫아 주세요.</p></li><li><strong>전체 백업과 복귀 파일 준비</strong><p>PC 백업 절차로 전체 덤프를 별도 보관하고 사용자 검증 기록을 등록합니다. 음색과 프로젝트는 펌웨어별 에디터에서 따로 저장하세요.</p></li><li><strong>파일 검사 후 직접 설치</strong><p>순정 V016·SLOOP Pro·Frodhes·Erik37·OberVave·ChoralRoot의 검토한 identity를 지원합니다. 실제 기기 응답과 파일을 검사한 뒤 최종 설치 버튼을 직접 누릅니다.</p></li><li><strong>Galaxy 사용은 별도 확인</strong><p>PC localhost는 휴대폰 주소가 아닙니다. 휴대폰에는 접근 가능한 HTTPS 환경이 필요하며, Android USB 설치와 재연결은 실기 미확인입니다.</p></li></ol>
       <p className="notice">중단 후에는 같은 파일·loader·최근 중단 이력을 다시 검사합니다. 자동 재시도나 강제 재부팅은 하지 않습니다.</p>
       <div className="button-row"><button className="button" onClick={() => { setHelp(false); setView('backups'); }}>백업 보관함 열기</button><a className="inline-link" href="https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md" target="_blank" rel="noreferrer">백업·복구 원문 <ArrowUpRight aria-hidden="true"/></a></div>
     </Modal>}
