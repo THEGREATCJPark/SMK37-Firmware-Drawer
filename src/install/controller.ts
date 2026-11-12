@@ -7,7 +7,7 @@ import type { Identity } from '../vendor/fm1ota.js';
 export class InstallController {
   state:InstallState={phase:'idle',busy:false,message:'기기를 연결해 주세요.',requests:0,simulated:false};
   private prepared?: { request: InstallRequest; pkg: ValidatedPackage; identity: Identity };
-  constructor(private transport:Transport,private approved:readonly Artifact[],private record:(r:InstallRecord)=>Promise<void>,private changed:(s:InstallState)=>void=()=>{}, private history:()=>Promise<InstallRecord[]>=async()=>[]) {
+  constructor(private transport:Transport,private approved:readonly Artifact[],private record:(r:InstallRecord)=>Promise<void>,private changed:(s:InstallState)=>void=()=>{}, private history:()=>Promise<InstallRecord[]>=async()=>[],private approvalBlock:(artifact:Artifact)=>string|null=()=>null) {
     this.state.simulated=transport.simulated;
   }
   private emit(patch:Partial<InstallState>) { this.state={...this.state,...patch}; this.changed({...this.state}); }
@@ -24,6 +24,7 @@ export class InstallController {
     try {
       const known=this.approved.find(a=>a.id===r.artifact.id);
       if(!known || JSON.stringify(known)!==JSON.stringify(r.artifact)) throw new Error('검토된 카탈로그와 다른 manifest입니다.');
+      const block=this.approvalBlock(r.artifact);if(block)throw new Error(block);
       const request=structuredClone(r); // Caller cannot swap bytes/model while hashing or installing.
       const identity=await this.transport.identify();
       this.emit({phase:'checking',identity,message:'모델과 출발 펌웨어의 전환 조건을 확인합니다.'});
@@ -43,6 +44,7 @@ export class InstallController {
     this.assertIdle();
     const p=this.prepared;
     if(!p || this.state.phase!=='ready') throw new Error('기기와 파일을 다시 검사하세요.');
+    const block=this.approvalBlock(p.request.artifact);if(block)throw new Error(block);
     if(!consent.fullBackup.verifiedByOwner || consent.fullBackup.model!==p.request.physical || !/^[a-f0-9]{64}$/.test(consent.fullBackup.sha256) || !consent.recoveryReady || !consent.projectsAcknowledged) {
       throw new Error('전체 백업 검증 기록, 복구 경로와 작업물 보존 확인이 필요합니다.');
     }
@@ -61,6 +63,7 @@ export class InstallController {
         sha256:p.pkg.sha256,targetModel:p.request.physical,previousIdentity:p.request.previousIdentity??identity.text,status:'in-progress',simulated:this.transport.simulated,
         browser:globalThis.navigator?.userAgent??'Node test',note:'기록 시작 전 저장. 새로고침 후에는 상태를 다시 검사해야 합니다.'};
       await this.record(entry); // No device mutation if the local journal could not be saved.
+      const finalBlock=this.approvalBlock(p.request.artifact);if(finalBlock)throw new Error(finalBlock);
       started=true;
       this.emit({phase:p.request.resume?'writing':'entering-loader',message:'기기 요청에 응답하고 있습니다. USB·전원을 유지하세요.'});
       const returned=await this.transport.transfer(p.pkg.image.slice(),p.request,identity,(step,detail)=>{

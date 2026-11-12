@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-09",
+  "reviewedAt": "2026-11-12",
   "products": [
     {
       "id": "sloop-pro",
@@ -1055,7 +1055,7 @@
       "upstreamVersion": "3.3.2",
       "portVersion": "3.3.2",
       "relationship": "official-board-build",
-      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "sourceCommit": "792535d23ef4265475b1c2f9895ca30e857fe596",
       "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
       "filename": "obervave-3.3.2-smk37-elite.fwsc",
       "size": 651327,
@@ -1076,6 +1076,11 @@
           "kind": "published-build",
           "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
           "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        },
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/tree/792535d23ef4265475b1c2f9895ca30e857fe596",
+          "note": "릴리스 attestation의 소스 의존성과 빌드 경로를 대조해 실제 빌드 커밋으로 정정. 서명은 host 시험 통과나 실기 검증의 증거가 아닙니다."
         }
       ],
       "family": "obervave",
@@ -1090,10 +1095,11 @@
         "editorUrl": null
       },
       "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
-      "verifiedAt": "2026-11-09",
+      "verifiedAt": "2026-11-12",
       "downloadUrl": "https://github.com/zvenson/obervave/releases/download/v3.3.2/obervave-3.3.2-smk37-elite.fwsc",
       "bundled": true,
-      "loaderIdentity": "ota-SMK-37 Elite_900"
+      "loaderIdentity": "ota-SMK-37 Elite_900",
+      "sourceArchiveUrl": "https://github.com/zvenson/obervave/archive/792535d23ef4265475b1c2f9895ca30e857fe596.zip"
     },
     {
       "id": "obervave-3.3.2-mke",
@@ -1103,7 +1109,7 @@
       "upstreamVersion": "3.3.2",
       "portVersion": "3.3.2",
       "relationship": "official-board-build",
-      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "sourceCommit": "792535d23ef4265475b1c2f9895ca30e857fe596",
       "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
       "filename": "obervave-3.3.2-smk37-mke.fwsc",
       "size": 651323,
@@ -1124,6 +1130,11 @@
           "kind": "published-build",
           "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
           "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        },
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/tree/792535d23ef4265475b1c2f9895ca30e857fe596",
+          "note": "릴리스 attestation의 소스 의존성과 빌드 경로를 대조해 실제 빌드 커밋으로 정정. 서명은 host 시험 통과나 실기 검증의 증거가 아닙니다."
         }
       ],
       "family": "obervave",
@@ -1138,10 +1149,11 @@
         "editorUrl": null
       },
       "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
-      "verifiedAt": "2026-11-09",
+      "verifiedAt": "2026-11-12",
       "downloadUrl": "https://github.com/zvenson/obervave/releases/download/v3.3.2/obervave-3.3.2-smk37-mke.fwsc",
       "bundled": true,
-      "loaderIdentity": "ota-MKE-P37_900"
+      "loaderIdentity": "ota-MKE-P37_900",
+      "sourceArchiveUrl": "https://github.com/zvenson/obervave/archive/792535d23ef4265475b1c2f9895ca30e857fe596.zip"
     },
     {
       "id": "obervave-3.3.2-pro",
@@ -1151,7 +1163,7 @@
       "upstreamVersion": "3.3.2",
       "portVersion": "3.3.2",
       "relationship": "official-board-build",
-      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "sourceCommit": "792535d23ef4265475b1c2f9895ca30e857fe596",
       "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
       "filename": "obervave-3.3.2-smk37.fwsc",
       "size": 651327,
@@ -1172,6 +1184,11 @@
           "kind": "published-build",
           "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
           "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        },
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/tree/792535d23ef4265475b1c2f9895ca30e857fe596",
+          "note": "릴리스 attestation의 소스 의존성과 빌드 경로를 대조해 실제 빌드 커밋으로 정정. 서명은 host 시험 통과나 실기 검증의 증거가 아닙니다."
         }
       ],
       "family": "obervave",
@@ -1186,10 +1203,11 @@
         "editorUrl": null
       },
       "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
-      "verifiedAt": "2026-11-09",
+      "verifiedAt": "2026-11-12",
       "downloadUrl": "https://github.com/zvenson/obervave/releases/download/v3.3.2/obervave-3.3.2-smk37.fwsc",
       "bundled": true,
-      "loaderIdentity": "ota-SMK-37 Pro_900"
+      "loaderIdentity": "ota-SMK-37 Pro_900",
+      "sourceArchiveUrl": "https://github.com/zvenson/obervave/archive/792535d23ef4265475b1c2f9895ca30e857fe596.zip"
     },
     {
       "id": "obervave-3.3.2-fm1",
@@ -1199,7 +1217,7 @@
       "upstreamVersion": "3.3.2",
       "portVersion": null,
       "relationship": "original",
-      "sourceCommit": "099ccd6f30a83591cea3521efaec6d3546004036",
+      "sourceCommit": "792535d23ef4265475b1c2f9895ca30e857fe596",
       "releaseUrl": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
       "filename": "obervave-3.3.2.fwsc",
       "size": 612223,
@@ -1220,6 +1238,11 @@
           "kind": "published-build",
           "url": "https://github.com/zvenson/obervave/releases/tag/v3.3.2",
           "note": "원저자의 버전별 파일을 메모리에서 읽어 크기·SHA-256·모델 identity를 확인했습니다. 직접 어댑터 검토 대상은 아닙니다."
+        },
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/zvenson/obervave/tree/792535d23ef4265475b1c2f9895ca30e857fe596",
+          "note": "릴리스 attestation의 소스 의존성과 빌드 경로를 대조해 실제 빌드 커밋으로 정정. 서명은 host 시험 통과나 실기 검증의 증거가 아닙니다."
         }
       ],
       "family": "obervave",
@@ -1233,7 +1256,8 @@
         "editorUrl": null
       },
       "recoveryUrl": "https://github.com/genkigenki/fm1-to-smk37/blob/54252ffa2219e3c9cd7eb70f4e99b361eaa048e1/docs/02-update-and-recovery.md",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-12",
+      "sourceArchiveUrl": "https://github.com/zvenson/obervave/archive/792535d23ef4265475b1c2f9895ca30e857fe596.zip"
     },
     {
       "id": "choralroot-0.29-pro-1core",
@@ -1737,6 +1761,157 @@
       "loaderIdentity": "ota-MKE-P37_900",
       "experimental": true,
       "bundled": true
+    },
+    {
+      "id": "frodhes-0.9.10-mke",
+      "productId": "frodhes",
+      "targetModel": "MKE-P37",
+      "version": "0.9.10",
+      "upstreamVersion": "0.9.10",
+      "portVersion": "0.9.10",
+      "relationship": "official-board-build",
+      "sourceCommit": "b51b37bc8c69f76958c026877286491ab8550630",
+      "releaseUrl": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.10",
+      "filename": "frodhes-0.9.10-mke-p37.fwsc",
+      "size": 651385,
+      "sha256": "457ec89fcbc45d855f27550153f8f2a5774f2477f1c21111f24d47f5cdd4507d",
+      "packageIdentity": "MKE-P37_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "fetch-allowed",
+      "status": "published",
+      "externalUrl": "https://leonardomirabal.github.io/frodhes/#install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/leonardoMirabal/frodhes/blob/b51b37bc8c69f76958c026877286491ab8550630/LICENSING.md",
+          "note": "릴리스 태그의 정확한 소스 커밋과 GPL-3.0-only·폰트 OFL·SDK Apache-2.0 및 SMK 보드 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.10",
+          "note": "공식 릴리스 API 해시와 다운로드 바이트를 대조했습니다. 모델 identity·loader·CRC·보호 영역과 모의 전송을 검사하며 실물 설치 검증은 아닙니다. GitHub artifact attestation은 확인되지 않았습니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요.",
+        "선택한 모델과 기기 응답, 고정 파일 SHA-256·CRC·영역 표를 검사합니다.",
+        "업스트림은 이 릴리스의 SMK-37 실물 테스트를 보고하지 않았습니다. 변경된 저장소·복구 안내를 먼저 읽으세요.",
+        "MKE-P37 순정 설정 첫 섹터 영향과 자기 기기 백업의 복구 방법을 확인하세요."
+      ],
+      "dataImpact": "업스트림 문서상 프로그램 영역 기록이 MKE-P37 순정 설정 첫 섹터(0x9C000–0x9CFFF)를 덮어쓸 수 있습니다. 자기 기기의 전체 백업이 필요합니다. 다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/leonardoMirabal/frodhes/blob/b51b37bc8c69f76958c026877286491ab8550630/docs/SMK37.md#the-way-back-to-stock",
+      "verifiedAt": "2026-11-12",
+      "downloadUrl": "https://github.com/leonardoMirabal/frodhes/releases/download/v0.9.10/frodhes-0.9.10-mke-p37.fwsc",
+      "bundled": true,
+      "loaderIdentity": "ota-MKE-P37_900",
+      "sourceArchiveUrl": "https://github.com/leonardoMirabal/frodhes/archive/b51b37bc8c69f76958c026877286491ab8550630.zip"
+    },
+    {
+      "id": "frodhes-0.9.10-elite",
+      "productId": "frodhes",
+      "targetModel": "SMK-37 Elite",
+      "version": "0.9.10",
+      "upstreamVersion": "0.9.10",
+      "portVersion": "0.9.10",
+      "relationship": "official-board-build",
+      "sourceCommit": "b51b37bc8c69f76958c026877286491ab8550630",
+      "releaseUrl": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.10",
+      "filename": "frodhes-0.9.10-smk37-elite.fwsc",
+      "size": 651389,
+      "sha256": "fbdc0eae5ab11dd59d3d7d63df58c282c560266d3fa74294973c5a8700585346",
+      "packageIdentity": "SMK-37 Elite_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "fetch-allowed",
+      "status": "published",
+      "externalUrl": "https://leonardomirabal.github.io/frodhes/#install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/leonardoMirabal/frodhes/blob/b51b37bc8c69f76958c026877286491ab8550630/LICENSING.md",
+          "note": "릴리스 태그의 정확한 소스 커밋과 GPL-3.0-only·폰트 OFL·SDK Apache-2.0 및 SMK 보드 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.10",
+          "note": "공식 릴리스 API 해시와 다운로드 바이트를 대조했습니다. 모델 identity·loader·CRC·보호 영역과 모의 전송을 검사하며 실물 설치 검증은 아닙니다. GitHub artifact attestation은 확인되지 않았습니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요.",
+        "선택한 모델과 기기 응답, 고정 파일 SHA-256·CRC·영역 표를 검사합니다.",
+        "업스트림은 이 릴리스의 SMK-37 실물 테스트를 보고하지 않았습니다. 변경된 저장소·복구 안내를 먼저 읽으세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/leonardoMirabal/frodhes/blob/b51b37bc8c69f76958c026877286491ab8550630/docs/SMK37.md#the-way-back-to-stock",
+      "verifiedAt": "2026-11-12",
+      "downloadUrl": "https://github.com/leonardoMirabal/frodhes/releases/download/v0.9.10/frodhes-0.9.10-smk37-elite.fwsc",
+      "bundled": true,
+      "loaderIdentity": "ota-SMK-37 Elite_900",
+      "sourceArchiveUrl": "https://github.com/leonardoMirabal/frodhes/archive/b51b37bc8c69f76958c026877286491ab8550630.zip"
+    },
+    {
+      "id": "frodhes-0.9.10-pro",
+      "productId": "frodhes",
+      "targetModel": "SMK-37 Pro",
+      "version": "0.9.10",
+      "upstreamVersion": "0.9.10",
+      "portVersion": "0.9.10",
+      "relationship": "official-board-build",
+      "sourceCommit": "b51b37bc8c69f76958c026877286491ab8550630",
+      "releaseUrl": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.10",
+      "filename": "frodhes-0.9.10-smk37-pro.fwsc",
+      "size": 651389,
+      "sha256": "c0016b057034a68aad0dd20a320bf5e89b63efb8c40e0c7961260de0a395fdd6",
+      "packageIdentity": "SMK-37 Pro_470",
+      "loaderFamily": "felucca-ufw",
+      "method": "direct",
+      "distribution": "fetch-allowed",
+      "status": "published",
+      "externalUrl": "https://leonardomirabal.github.io/frodhes/#install",
+      "evidence": [
+        {
+          "kind": "source-reviewed",
+          "url": "https://github.com/leonardoMirabal/frodhes/blob/b51b37bc8c69f76958c026877286491ab8550630/LICENSING.md",
+          "note": "릴리스 태그의 정확한 소스 커밋과 GPL-3.0-only·폰트 OFL·SDK Apache-2.0 및 SMK 보드 문서를 확인했습니다."
+        },
+        {
+          "kind": "published-build",
+          "url": "https://github.com/leonardoMirabal/frodhes/releases/tag/v0.9.10",
+          "note": "공식 릴리스 API 해시와 다운로드 바이트를 대조했습니다. 모델 identity·loader·CRC·보호 영역과 모의 전송을 검사하며 실물 설치 검증은 아닙니다. GitHub artifact attestation은 확인되지 않았습니다."
+        }
+      ],
+      "family": "frodhes",
+      "prerequisites": [
+        "정확한 실물 모델과 해당 파일의 모델을 대조하세요.",
+        "자기 기기의 전체 백업 검증 기록과 돌아갈 순정 파일·도구를 준비하세요.",
+        "선택한 모델과 기기 응답, 고정 파일 SHA-256·CRC·영역 표를 검사합니다.",
+        "업스트림은 이 릴리스의 SMK-37 실물 테스트를 보고하지 않았습니다. 변경된 저장소·복구 안내를 먼저 읽으세요."
+      ],
+      "dataImpact": "다른 펌웨어의 저장소를 만나는 첫 부팅에서 초기화할 수 있습니다. 재설치 패키지는 사용자 프리셋 백업이 아닙니다.",
+      "backup": {
+        "scope": "이 앱에는 Frodhes 기기 저장소 백업 어댑터가 없습니다. 외부 도구의 내보낸 파일과 동일 버전 설치 파일을 분리해서 보관합니다.",
+        "editorUrl": null
+      },
+      "recoveryUrl": "https://github.com/leonardoMirabal/frodhes/blob/b51b37bc8c69f76958c026877286491ab8550630/docs/SMK37.md#the-way-back-to-stock",
+      "verifiedAt": "2026-11-12",
+      "downloadUrl": "https://github.com/leonardoMirabal/frodhes/releases/download/v0.9.10/frodhes-0.9.10-smk37-pro.fwsc",
+      "bundled": true,
+      "loaderIdentity": "ota-SMK-37 Pro_900",
+      "sourceArchiveUrl": "https://github.com/leonardoMirabal/frodhes/archive/b51b37bc8c69f76958c026877286491ab8550630.zip"
     }
   ]
 }

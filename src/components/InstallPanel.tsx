@@ -13,7 +13,8 @@ import type { InstallState } from '../install/types';
 import { addBackup,getFullBackup,listBackups,listHistory,saveHistory,type FullBackupRecord } from '../storage/vault';
 import { Modal } from './Modal';
 
-export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups}:{artifact:Artifact;model:Model;onBusy:(v:boolean)=>void;onError:(e:unknown)=>void;onExternal:(a:Artifact)=>void;onBackups:()=>void}){
+export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups,approvalBlock}:{artifact:Artifact;model:Model;approvalBlock?:string|null;onBusy:(v:boolean)=>void;onError:(e:unknown)=>void;onExternal:(a:Artifact)=>void;onBackups:()=>void}){
+  const blockRef=useRef(approvalBlock);blockRef.current=approvalBlock;
   const [ports,setPorts]=useState<{lists:PortLists;reason:string;resolve:(c:PortChoice)=>void;reject:(e:Error)=>void}|null>(null);
   const [inputId,setInputId]=useState(''),[outputId,setOutputId]=useState('');
   const [identity,setIdentity]=useState<Identity|null>(null),[connecting,setConnecting]=useState(false);
@@ -37,7 +38,7 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
     if(signal.aborted){abort();return;}
     setInputId('');setOutputId('');access.addEventListener('statechange',refresh);signal.addEventListener('abort',abort,{once:true});refresh();
   }),line=>setLogs(v=>[...v.slice(-149),line]));
-  if(!controller.current) controller.current=new InstallController(transport.current,catalog.artifacts,saveHistory,setState,listHistory);
+  if(!controller.current) controller.current=new InstallController(transport.current,catalog.artifacts,saveHistory,setState,listHistory,()=>blockRef.current??null);
   useEffect(()=>{onBusy(state.busy||connecting||downloading);},[state.busy,connecting,downloading,onBusy]);
   useEffect(()=>{
     getFullBackup(model).then(setFullBackup).catch(onError);
@@ -62,6 +63,7 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
   const ready=state.phase==='ready',needsFactory=artifact.loaderFamily==='baudgirl'&&!factoryBytes;
   const transferStage=['initializing-data','entering-loader','writing','reconnecting','completed','interrupted'].includes(state.phase);
   return <section className="install-panel">
+    {approvalBlock&&<p className="notice" role="alert">{approvalBlock}</p>}
     <ol className="install-steps" aria-label="설치 단계"><li aria-current={!ready&&!transferStage?'step':undefined}><span>1</span>기기·파일</li><li aria-current={ready?'step':undefined}><span>2</span>최종 확인</li><li aria-current={transferStage?'step':undefined}><span>3</span>설치·응답</li></ol>
     <p className="hint hardware-disclosure">이 앱의 실제 USB 설치는 아직 검증되지 않았습니다.</p>
     {artifact.experimental&&<p className="notice"><strong>실험 포트 · 실기 미검증</strong><br/>3개 모델 빌드와 모의 플래시 검사는 통과했지만, 실제 부팅·오디오·패널·저장·복구는 확인하지 못했습니다.</p>}
@@ -77,7 +79,7 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
       <label className="file-label"><FileCheck2 size={20}/>{file?.name??(cached?'보관한 패키지를 불러왔습니다':'또는 내 컴퓨터의 .fwsc 파일 선택')}<input aria-label="설치 패키지 파일" type="file" accept=".fwsc" onChange={async e=>{const f=e.target.files?.[0];if(!f)return;try{packageEdited.current=true;if(f.size>2*1024*1024)throw new Error('패키지 파일은 2 MiB 이하이어야 합니다.');setFile(f);setBytes(new Uint8Array(await f.arrayBuffer()));setCached(false);}catch(err){onError(err);}}}/></label>
       {artifact.personalHelper&&<p className="hint">초기 음색 파일: {factoryBytes?'검증 준비됨':'도우미 다운로드에 포함됩니다'}. 초기화 중 끊긴 뒤 이미 +VA102로 돌아왔다면 중단 설치 재개를 선택해 데이터 준비만 이어갈 수 있습니다.</p>}
       <details><summary>고정된 SHA-256</summary><code className="hash">{artifact.sha256}</code></details>
-      <div className="button-row"><button className="button secondary" disabled={!bytes} onClick={cache}><Download size={16}/>{cached?'다시 검증·보관':'검증 후 오프라인 보관'}</button><button className="button" disabled={!identity||!bytes||needsFactory} onClick={prepare}>호환성·파일 검사 <ArrowRight size={16}/></button></div>
+      <div className="button-row"><button className="button secondary" disabled={!bytes} onClick={cache}><Download size={16}/>{cached?'다시 검증·보관':'검증 후 오프라인 보관'}</button><button className="button" disabled={!!approvalBlock||!identity||!bytes||needsFactory} onClick={prepare}>호환성·파일 검사 <ArrowRight size={16}/></button></div>
       {(!identity||!bytes||needsFactory)&&<p className="requirement-hint">검사 전 준비: {!identity&&!bytes?'MIDI 기기 연결과 패키지 파일 선택':!identity?'MIDI 기기 연결':!bytes?'패키지 파일 선택':'+VA 초기 음색 다운로드'}</p>}
     </fieldset>
     <div className={'install-status '+(state.phase==='interrupted'||state.phase==='failed'?'problem':'')} role="status"><strong>{state.phase==='completed'?'재연결 응답 확인':state.phase==='interrupted'?'중단됨 — 상태 확인 필요':state.phase==='failed'?'진행할 수 없습니다':ready?'설치 준비됨':locked?'기기와 통신 중':'설치 전 확인'}</strong><p>{state.message}</p>{state.requests>0&&<p>{state.requests.toLocaleString()}개 요청에 응답 · {state.phase==='writing'?'기록 단계':'준비 단계'}</p>}</div>
@@ -89,7 +91,7 @@ export function InstallPanel({artifact,model,onBusy,onError,onExternal,onBackups
       <label className="check-row"><input type="checkbox" checked={projects} onChange={e=>setProjects(e.target.checked)}/>현재 음색·프로젝트를 별도 보관했고 데이터 초기화 가능성을 확인했습니다.</label>
       {artifact.loaderFamily==='baudgirl'&&<label className="check-row"><input type="checkbox" checked={factoryReset} onChange={e=>setFactoryReset(e.target.checked)}/>백업을 보관했으며, 기존 음색 128개를 기본 음색으로 바꾸고 패턴 16개를 비우는 데 동의합니다.</label>}
       {artifact.experimental&&<label className="check-row"><input type="checkbox" checked={experimentalAcknowledged} onChange={e=>setExperimentalAcknowledged(e.target.checked)}/>실제 부팅·오디오·패널·저장·복구가 검증되지 않은 실험 포트임을 확인했습니다.</label>}
-      <button className="button primary-install" disabled={(artifact.experimental&&!experimentalAcknowledged)||!fullBackup||!recovery||!projects||locked||(artifact.loaderFamily==='baudgirl'&&!factoryReset)} onClick={start}>{resume?'같은 패키지로 재개':'이 기기에 설치 시작'} <ArrowRight size={17}/></button>
+      <button className="button primary-install" disabled={!!approvalBlock||(artifact.experimental&&!experimentalAcknowledged)||!fullBackup||!recovery||!projects||locked||(artifact.loaderFamily==='baudgirl'&&!factoryReset)} onClick={start}>{resume?'같은 패키지로 재개':'이 기기에 설치 시작'} <ArrowRight size={17}/></button>
       <button className="text-button" onClick={()=>void controller.current!.close().then(()=>setIdentity(null)).catch(onError)}>준비 단계로 돌아가기</button>
     </div>}
     <details className="technical-log"><summary><ChevronDown size={15}/>기술 로그</summary><pre>{logs.join('\n')||'아직 MIDI 통신이 없습니다.'}</pre><p className="hint">포트 이름이 포함될 수 있습니다. 외부 공유 전 확인하세요.</p></details>

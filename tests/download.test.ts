@@ -6,8 +6,8 @@ import { downloadPackage } from '../src/install/download';
 import { assertRoute } from '../src/install/policy';
 const targets=catalog.artifacts.filter(a=>a.method==='direct'&&a.loaderFamily==='felucca-ufw'&&a.status==='published'&&!a.experimental);
 afterEach(()=>vi.unstubAllGlobals());
-it('21개 모델별 공개 파일의 hash·identity·CRC·보호 영역이 카탈로그와 일치한다',async()=>{
-  expect(targets).toHaveLength(21);
+it('24개 모델별 공개 파일의 hash·identity·CRC·보호 영역이 카탈로그와 일치한다',async()=>{
+  expect(targets).toHaveLength(24);
   for(const a of targets){const b=new Uint8Array(readFileSync('.local/packages/'+a.filename));expect((await validatePackage(b,a)).identity).toBe(a.packageIdentity);}
 });
 it('추가한 펌웨어에서 기존 펌웨어로의 전환과 같은 파일 loader 재개를 허용한다',()=>{

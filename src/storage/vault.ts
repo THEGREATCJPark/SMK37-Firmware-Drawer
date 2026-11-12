@@ -11,7 +11,7 @@ export const BackupMetaSchema=z.object({
 });
 export type BackupMeta=z.infer<typeof BackupMetaSchema>;
 export interface Backup extends BackupMeta { bytes:Uint8Array }
-export const FullBackupSchema=z.object({sha256:z.string().regex(/^[a-f0-9]{64}$/),model:ModelSchema,verifiedByOwner:z.literal(true),reference:z.string().min(3),date:z.iso.datetime()});
+export const FullBackupSchema=z.object({verificationMethod:z.enum(['owner-record','local-dump-pair']).optional(),sha256:z.string().regex(/^[a-f0-9]{64}$/),model:ModelSchema,verifiedByOwner:z.literal(true),reference:z.string().min(3),date:z.iso.datetime()});
 export type FullBackupRecord=z.infer<typeof FullBackupSchema>;
 interface DrawerDB extends DBSchema {
   settings:{key:string;value:unknown};

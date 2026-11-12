@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:ui": "playwright test",
     "check": "npm test && npm run build && npm run test:ui",
-    "fixtures": "node scripts/fetch-fixtures.mjs"
+    "fixtures": "node scripts/fetch-fixtures.mjs",
+    "sync:upstream": "node scripts/sync-upstream.mjs --verify-attestations --discover-hub --previous-deployed"
   },
   "dependencies": {
     "idb": "^8.0.4",
